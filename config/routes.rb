@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'students/index'
-  get 'students/show'
-  get 'students/edit'
   root "home#index"
 
   devise_for :admins,
@@ -22,6 +19,12 @@ Rails.application.routes.draw do
     registrations: 'campanies/registrations'
   }
 
+    namespace :api, defaults: { format: :json } do
+    resources :students
+  end
+
   resources :students
+
+
 
 end

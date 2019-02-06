@@ -2,10 +2,11 @@
 
 import Vue from 'vue/dist/vue.esm'
 import Header from "../javascripts/components/layout/Header.vue"
-import Unko from "../javascripts/components/Unko.vue"
+import StundentShow from "../javascripts/components/StudentShow.vue"
+
 new Vue({
   components: {
    'navbar': Header,
-    Unko
+   'student-show': StundentShow
   },
 }).$mount('#app')

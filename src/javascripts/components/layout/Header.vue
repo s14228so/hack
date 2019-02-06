@@ -1,6 +1,10 @@
 <template>
   <div>
-    <h1>Headerだよん</h1>
+    <v-app>
+      <v-content>
+        <v-toolbar></v-toolbar>
+      </v-content>
+    </v-app>
   </div>
 </template>
 <script>

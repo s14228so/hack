@@ -11,7 +11,7 @@
         ></navbar-list>
         <v-list-tile @click="" v-show="!login">
           <v-list-tile-action>
-            <v-icon>home</v-icon>
+            <v-icon>open_in_new</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>
@@ -21,7 +21,7 @@
         </v-list-tile>
          <v-list-tile @click="" v-show="login">
           <v-list-tile-action>
-            <v-icon>home</v-icon>
+            <v-icon>exit_to_app</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>
@@ -58,11 +58,13 @@ import LogIn from "../devise/LogIn.vue"
       tags: [
         {
           path: "/home",
-          label: "Home"
+          label: "Home",
+          icon: "home"
         },
         {
           path: "/mypage",
-          label: "Mypage"
+          label: "Mypage",
+          icon: "person"
         },
       ]
     }),

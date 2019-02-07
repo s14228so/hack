@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Students::SessionsController < Devise::SessionsController
-     protect_from_forgery :except => [:destroy,:create]
+     protect_from_forgery :except => [:create,:destroy]
 
   # before_action :configure_sign_in_params, only: [:create]
 

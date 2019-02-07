@@ -20,7 +20,7 @@
         try{
           await axios.delete(`/api/students/sign_out`)
           await this.$router.go()
-          this.$router.push('/home')
+          this.$router.push('/login')
         } catch (error){
           console.log(error)
         }

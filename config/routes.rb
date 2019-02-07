@@ -3,11 +3,11 @@ Rails.application.routes.draw do
 
 
 
-authenticated :user do
-    # ログイン済みの場合のルート
-    users_route = 'home#index'
-    root users_route
-end
+# authenticated :user do
+#     # ログイン済みの場合のルート
+#     users_route = 'home#index'
+#     root users_route
+# end
 
   devise_for :admin,
   controllers: {
@@ -15,7 +15,8 @@ end
     passwords:     'admins/passwords',
     registrations: 'admins/registrations'
   }
-  devise_for :students, path: '', path_names: { sign_in: "login", sign_up: "/sign_up"},
+  devise_for :students,
+   # path: '', path_names: { sign_in: "/login", sign_up: "/sign_up"},
   controllers: {
     sessions:      'students/sessions',
     passwords:     'students/passwords',
@@ -36,8 +37,8 @@ end
 
   resources :students
 
-  get "mypage" => "students#show"
-  get "home" => "students#show"
-  get "login" => "students#show"
+  get "/mypage" => "students#show"
+  get "/home" => "students#show"
+  get "/login" => "students#show", as: :login_path
 
 end

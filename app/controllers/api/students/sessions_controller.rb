@@ -1,5 +1,5 @@
 class Api::Students::SessionsController < ApplicationController
-   protect_from_forgery :except => [:destroy]
+   protect_from_forgery :except => [:destroy,:create]
   def create
     @user = User.find_for_database_authentication(email: params[:email])
     return invalid_email unless @user

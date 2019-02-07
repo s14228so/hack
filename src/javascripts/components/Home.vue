@@ -37,7 +37,7 @@
                     color="primary"
                     dark
                   >
-                    <v-btn icon @click="reserveEvent(event.id)" v-show="event_filter">
+                    <v-btn icon @click="reseerveEvent(event.id)" v-show="event_filter">
                       <v-icon title="予約する">done</v-icon>
                     </v-btn>
                     <v-toolbar-title v-html="event.title"></v-toolbar-title>
@@ -79,8 +79,9 @@
       today: '2019-01-08',
       events: events,
       student: rails.student,
-      event_students: event_students,
-      event_filter: false
+      event_students: rails.event_students,
+      event_filter: true,
+      event_ids: rails.event_ids
     }),
     computed: {
       // convert the list of events into a map of lists keyed by date
@@ -91,7 +92,6 @@
       },
     },
     mounted(){
-      console.log(this.event_filter)
     },
     methods: {
       open (event) {
@@ -105,19 +105,14 @@
         }
       },
        eventFilter(event){
-        for (var item in this.event_students) {
-          var unko = this.event_students[item].event_id
-        }
-        if (unko !== event.id){
-          return this.event_filter = true
-        }
-        // for (key in this.event_students) {
-        //   alert('key:' + key + ' value:' + hash[key]);
-        // }
-        // if (this.event_students.includes(event)){
-        //    this.event_filter = true
-
-        // }
+          console.log(event.id)
+          if (this.event_ids.includes(event.id)){
+            this.event_filter = false
+          }
+          else{
+            this.event_filter = true
+          }
+          console.log(this.event_filter)
      }
     },
   }

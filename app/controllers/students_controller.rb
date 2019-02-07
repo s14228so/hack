@@ -7,6 +7,7 @@ class StudentsController < ApplicationController
     @students = Student.all
     @student = current_student
     @events = Event.all
+    @event_students = @student.event_students
   end
 
   def edit

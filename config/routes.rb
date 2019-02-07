@@ -33,6 +33,8 @@ Rails.application.routes.draw do
     resource :sign_out, only: [:destroy], controller: :sessions
     resource :sign_in, only: [:create], controller: :sessions # api/users/sign_in
   end
+  resources :events, only: [:index, :create]
+  resources :event_students, only: [:index, :create]
 end
 
   resources :students

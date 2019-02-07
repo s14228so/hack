@@ -4,6 +4,8 @@ rails.students = <%= raw @students.to_json %>;
 rails.student = <%= raw current_student.to_json %>;
 events = <%= raw @events.to_json %>;
 login = rails.student !== null
+ event_students = <%= raw @event_students.to_json %>;
+ console.log(event_students)
 </script>
 
 <div id="app">

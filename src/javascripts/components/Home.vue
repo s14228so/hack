@@ -18,6 +18,7 @@
                 v-model="event.open"
                 full-width
                 offset-x
+                :bind="event.id"
               >
                 <div
                   v-if="!event.time"
@@ -25,6 +26,7 @@
                   v-ripple
                   class="my-event"
                   v-html="event.title"
+                  @click="eventFilter(event)"
                 ></div>
                 <v-card
                   color="grey lighten-4"
@@ -35,8 +37,8 @@
                     color="primary"
                     dark
                   >
-                    <v-btn icon>
-                      <v-icon>edit</v-icon>
+                    <v-btn icon @click="reserveEvent(event.id)" v-show="event_filter">
+                      <v-icon title="予約する">done</v-icon>
                     </v-btn>
                     <v-toolbar-title v-html="event.title"></v-toolbar-title>
                     <v-spacer></v-spacer>
@@ -69,10 +71,16 @@
 </v-container>
 </template>
 <script>
+  import axios from "axios";
+  import 'babel-polyfill';
+
   export default {
     data: () => ({
       today: '2019-01-08',
-      events: events
+      events: events,
+      student: rails.student,
+      event_students: event_students,
+      event_filter: false
     }),
     computed: {
       // convert the list of events into a map of lists keyed by date
@@ -80,16 +88,38 @@
         const map = {}
         this.events.forEach(e => (map[e.date] = map[e.date] || []).push(e))
         return map
-      }
+      },
     },
     mounted(){
-      console.log(events[0].titler)
+      console.log(this.event_filter)
     },
     methods: {
       open (event) {
         alert(event.title)
-      }
-    }
+      },
+      async reserveEvent (id) {
+        try {
+          const response = await axios.post(`/api/event_students`, {event_id: id})
+        } catch (error) {
+          console.log(error)
+        }
+      },
+       eventFilter(event){
+        for (var item in this.event_students) {
+          var unko = this.event_students[item].event_id
+        }
+        if (unko !== event.id){
+          return this.event_filter = true
+        }
+        // for (key in this.event_students) {
+        //   alert('key:' + key + ' value:' + hash[key]);
+        // }
+        // if (this.event_students.includes(event)){
+        //    this.event_filter = true
+
+        // }
+     }
+    },
   }
 </script>
 

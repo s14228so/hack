@@ -37,7 +37,7 @@
                     color="primary"
                     dark
                   >
-                    <v-btn icon @click="reseerveEvent(event.id)" v-show="event_filter">
+                    <v-btn icon @click="reserveEvent(event.id)" v-show="event_filter">
                       <v-icon title="予約する">done</v-icon>
                     </v-btn>
                     <v-toolbar-title v-html="event.title"></v-toolbar-title>

@@ -41,6 +41,7 @@ end
 
   get "/mypage" => "students#show"
   get "/home" => "students#show"
+ get "/myhacks" => "students#show"
   get "/login" => "students#show", as: :login_path
 
 end

@@ -66,6 +66,11 @@ import LogIn from "../devise/LogIn.vue"
           label: "Mypage",
           icon: "person"
         },
+        {
+          path: "/myhacks",
+          label: "MyHacks",
+          icon: "computer"
+        },
       ]
     }),
     components: {

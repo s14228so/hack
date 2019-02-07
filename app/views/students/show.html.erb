@@ -1,7 +1,9 @@
 <script>
 rails = window.rails = {};
 rails.students = <%= raw @students.to_json %>;
-rails.student = <%= raw @student.to_json %>;
+rails.student = <%= raw current_student.to_json %>;
+login = rails.student == null
+console.log(login)
 </script>
 
 <div id="app">

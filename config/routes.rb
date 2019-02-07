@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
-  root "home#index"
+  root "students#show"
+
+
+
+authenticated :user do
+    # ログイン済みの場合のルート
+    users_route = 'home#index'
+    root users_route
+end
 
   devise_for :admin,
   controllers: {
@@ -19,15 +27,16 @@ Rails.application.routes.draw do
     registrations: 'campanies/registrations'
   }
 
-    namespace :api, defaults: { format: :json } do
-    resources :students
+  namespace :api, defaults: { format: :json } do
+    namespace :students do
+    resource :sign_out, only: [:destroy], controller: :sessions
+    resource :sign_in, only: [:create], controller: :sessions # api/users/sign_in
   end
+end
 
   resources :students
 
   get "mypage" => "students#show"
   get "home" => "students#show"
-
-
 
 end

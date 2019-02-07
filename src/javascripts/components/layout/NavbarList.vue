@@ -1,7 +1,7 @@
 <template>
   <div>
     <router-link :to="tag.path" class="block">
-        <v-list-tile @click="">
+        <v-list-tile @click="" v-show="!login">
           <v-list-tile-action>
             <v-icon>home</v-icon>
           </v-list-tile-action>
@@ -17,7 +17,7 @@
 
 <script>
   export default({
-    props: ["tag"],
+    props: ["tag","login"],
     mounted(){
       console.log(this.tag)
     }

@@ -7,28 +7,37 @@
       app
     >
       <v-list dense>
+    
+
+        <navbar-list v-for="tag in tags" :tag="tag" >
+        ></navbar-list>
+
+      <!-- <router-link to="/home" class="block">
         <v-list-tile @click="">
           <v-list-tile-action>
             <v-icon>home</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>
-              <router-link to="/home">Home
-              </router-link></v-list-tile-title>
+              Home
+           </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+       </router-link>
+        <router-link to="/mypage">
         <v-list-tile @click="">
           <v-list-tile-action>
             <v-icon>contact_mail</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>
-              <router-link to="/mypage">Mypage</router-link></v-list-tile-title>
+             Mypage</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+      </router-link> -->
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar color="indigo" dark fixed app>
+    <v-toolbar color="teal lighten-4" fixed app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>Hack</v-toolbar-title>
     </v-toolbar>
@@ -42,13 +51,25 @@
 </template>
 
 <script>
-  
+  import NavbarList from "../layout/NavbarList.vue"
 
  export default {
     data: () => ({
-      drawer: false
+      drawer: false,
+      tags: [
+        {
+          path: "/home",
+          label: "Home"
+        },
+        {
+          path: "/mypage",
+          label: "Mypage"
+        }
+      ]
     }),
-
+    components: {
+      NavbarList
+    },
     props: {
       source: String
     }

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root "home#index"
 
-  devise_for :admins,
+  devise_for :admin,
   controllers: {
     sessions:      'admins/sessions',
     passwords:     'admins/passwords',
@@ -24,6 +24,9 @@ Rails.application.routes.draw do
   end
 
   resources :students
+
+  get "mypage" => "students#show"
+  get "home" => "students#show"
 
 
 

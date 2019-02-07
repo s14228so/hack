@@ -1,11 +1,39 @@
 <template>
   <div>
-    <p>{{ student.nickname }}</p>
-    <p>{{ student.first_name }} {{student.last_name}}</p>
-    <p>{{ student.email }}</p>
-    <p>{{ student.university }}</p>
-    <p>{{ student.department }}</p>
-    <p>{{ student.grade }}年</p>
+    <v-container class="my-5">
+      <h1 class="subheading grey--text">マイページ</h1>
+        <v-layout row wrap mt-5>
+          <v-flex xs12 md4>
+             <v-card flat class="pa-5">
+               <v-img
+            src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
+            aspect-ratio="1.25"
+            ></v-img>
+            <div class="caption grey--text mt-3">
+              ユーザ名
+            </div>
+            <div>{{ student.nickname }}</div>
+            <div class="caption grey--text mt-3">
+              メールアドレス
+            </div>
+            <div>{{ student.email }}</div>
+               <div class="caption grey--text mt-3">
+              大学
+            </div>
+            <div>{{ student.university }}</div>
+             <div class="caption grey--text mt-3">
+              学部
+            </div>
+            <div>{{student.department}}</div>
+             <div class="caption grey--text mt-3">
+              学年
+            </div>
+            <div>{{ student.grade }}年</div>
+             </v-card>
+         </v-flex>
+        </v-layout>  
+   </v-container>
+  
   </div>
 </template>
 <script>
@@ -13,7 +41,8 @@
     name: "MyPage",
     data: function(){
       return {
-        student: rails.student
+        student: rails.student,
+        infos: ["ユーザ名","メールアドレス","大学","学部","学年"]
       }
     }
   })

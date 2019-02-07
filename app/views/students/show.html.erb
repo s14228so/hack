@@ -2,12 +2,9 @@
 rails = window.rails = {};
 rails.students = <%= raw @students.to_json %>;
 rails.student = <%= raw @student.to_json %>;
-console.log(rails.students);
-console.log(rails.student);
 </script>
 
 <div id="app">
   <navbar>
   </navbar>
-    <router-view></router-view>
 </div>

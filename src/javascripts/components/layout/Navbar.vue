@@ -9,7 +9,28 @@
       <v-list dense>
         <navbar-list v-for="tag in tags" :tag="tag" :login="login">
         ></navbar-list>
+        <v-list-tile @click="" v-show="!login">
+          <v-list-tile-action>
+            <v-icon>home</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>
+            <log-in></log-in>
+           </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+         <v-list-tile @click="" v-show="login">
+          <v-list-tile-action>
+            <v-icon>home</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>
+       
         <log-out></log-out>
+           </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
       </v-list>
     </v-navigation-drawer>
     <v-toolbar color="teal lighten-4" fixed app>
@@ -28,11 +49,12 @@
 <script>
   import NavbarList from "../layout/NavbarList.vue"
   import LogOut from "../devise/LogOut.vue"
+import LogIn from "../devise/LogIn.vue"
 
  export default {
     data: () => ({
       drawer: false,
-      login: !rails.login,
+      login: login,
       tags: [
         {
           path: "/home",
@@ -46,11 +68,15 @@
     }),
     components: {
       NavbarList,
-      LogOut
+      LogOut,
+      LogIn
     },
   }
 </script>
 
 <style scoped>
   @import '../../../style/students/header.scss'
+  a{
+    color: red;
+  }
 </style>

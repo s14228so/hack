@@ -38,5 +38,6 @@ end
 
   get "mypage" => "students#show"
   get "home" => "students#show"
+  get "login" => "students#show"
 
 end

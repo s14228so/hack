@@ -2,6 +2,7 @@ import Vue from 'vue/dist/vue.esm'
 import Router from 'vue-router'
 import MyPage from '../components/MyPage.vue'
 import Home from '../components/Home.vue'
+import LoginView from '../components/devise/LoginView.vue'
 
 Vue.use(Router)
 
@@ -19,6 +20,11 @@ export default new Router({
       name: 'Home',
       component: Home
     }, 
+    {
+      path: '/login',
+      name: 'LoginView',
+      component: LoginView
+    }
   ]
 })
 

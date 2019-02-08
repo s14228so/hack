@@ -2,6 +2,11 @@
   <div>
     <v-container>
       {{ event.title }}
+      <div v-for="student in students" class="mt-3">
+      <v-chip>
+      {{ student.nickname}}
+      </v-chip>
+      </div>
     </v-container>
  </div>
 </template>
@@ -13,7 +18,8 @@
   export default({
     data: function(){
       return{
-        event: {}
+        event: {},
+        students: join_students
         //リロードしたらもってこれなくなる。
       }
     },

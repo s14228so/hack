@@ -112,7 +112,6 @@
           else{
             this.event_filter = true
           }
-          console.log(this.event_filter)
      },
      openDetail(event){
         this.$router.push({name: "EventDetail", params: { event: event, id: event.id}});

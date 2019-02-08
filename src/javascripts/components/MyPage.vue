@@ -7,7 +7,7 @@
              <v-card flat class="pa-5">
            <v-avatar>
               <img
-                :src="blob_url" height="40"
+                :src="blob_url"
                 :alt="student.nickname"
               >
             </v-avatar>
@@ -68,7 +68,6 @@
       }
     },
     mounted: function(){
-      console.log(rails_blob_url(student.pic));
     }
   })
 </script>

@@ -21,4 +21,9 @@ class StudentsController < ApplicationController
 
   def edit
   end
+
+  def update
+    current_student.update(params.require(:student).permit(:image))
+    redirect_to current_student
+  end
 end

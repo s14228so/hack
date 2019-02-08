@@ -4,7 +4,7 @@ class Student < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
          has_many :event_students
-
+  has_one_attached :image
   # def login
   #   if @student.present?
   #      return true

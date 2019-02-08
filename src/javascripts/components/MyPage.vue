@@ -5,10 +5,13 @@
         <v-layout row wrap mt-5>
           <v-flex xs12 md4 v-show="!settingStatus">
              <v-card flat class="pa-5">
-               <v-img
-            src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
-            aspect-ratio="1.25"
-            ></v-img>
+           <v-avatar>
+              <img
+                :src="blob_url" height="40"
+                :alt="student.nickname"
+              >
+            </v-avatar>
+
             <div class="caption grey--text mt-3">
               ユーザ名
             </div>
@@ -29,7 +32,7 @@
               学年
             </div>
             <div>{{ student.grade }}年</div>
-             <v-icon class="icon-setting" @click="showSetting">filter_vintage</v-icon>
+             <v-icon class="icon-setting" @click="showSetting">edit</v-icon>
              </v-card>
          </v-flex>
           <v-flex md2 v-show="!settingStatus">
@@ -52,7 +55,8 @@
       return {
         student: rails.student,
         infos: ["ユーザ名","メールアドレス","大学","学部","学年"],
-        settingStatus: false
+        settingStatus: false,
+        blob_url: blob_url
       }
     },
     components:{
@@ -62,6 +66,9 @@
       showSetting: function(){
         this.settingStatus = true
       }
+    },
+    mounted: function(){
+      console.log(rails_blob_url(student.pic));
     }
   })
 </script>

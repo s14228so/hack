@@ -9,6 +9,10 @@ rails.event_students = <%= raw @event_students.to_json %>;
 rails.event_ids = <%= raw @event_ids.to_json %>;
  console.log(rails.event_students)
  console.log(rails.event_ids)
+ blob_url = <%= raw rails_blob_url(@student.image).to_json %>
+
+
+
 </script>
 
 <div id="app">
@@ -24,5 +28,5 @@ rails.event_ids = <%= raw @event_ids.to_json %>;
 <% end %>
 
 <% if current_student.image.attached? %>
-  <%= image_tag current_student.image,size: "40x40" %>
+  <%= image_tag current_student.image, size: "40x40" %>
   <% end %>

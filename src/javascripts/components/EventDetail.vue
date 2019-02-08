@@ -1,11 +1,7 @@
 <template>
   <div>
     <v-container>
-    <li v-for="event in events">
-    {{ event.title }}
-    {{ event.title }}
-    {{ event.title }}
-    </li>
+      {{ event.title }}
   </v-container>
  </div>
 </template>
@@ -15,14 +11,15 @@
   //axiosでindexのjsonから検索かける
 
   export default({
-    props: ["eventId"],
     data: function(){
       return{
-        events: events
+        event: this.$route.params.event
+        //リロードしたらもってこれなくなる。
       }
     },
     mounted(){
-      axios.get(`/api/event/${this.eventId}`)
+      // axios.get(`/api/events/${this.eventId}`)
+      console.log(this.event)
     }
   })
   

@@ -115,7 +115,8 @@
           console.log(this.event_filter)
      },
      openDetail(event){
-        this.$router.push({name: "EventDetail", params: { eventId: event.id}});
+        this.$router.push({name: "EventDetail", params: { event: event }});
+        // console.log(event)
      }
     },
   }

@@ -35,16 +35,16 @@ Rails.application.routes.draw do
     resource :sign_out, only: [:destroy], controller: :sessions
     resource :sign_in, only: [:create], controller: :sessions # api/users/sign_in
   end
-  resources :events, only: [:index, :create]
+  resources :events, only: [:index, :create, :show]
   resources :event_students, only: [:index, :create]
 end
 
   resources :students
-  resources :events
-
+  # resources :events
+  get "/event" => "events#show"
   get "/mypage" => "students#show"
   get "/home" => "students#show"
- get "/myhacks" => "students#show"
+  get "/myhacks" => "students#show"
   get "/login" => "students#show", as: :login_path
   
 

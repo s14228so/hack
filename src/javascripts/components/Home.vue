@@ -115,7 +115,7 @@
           console.log(this.event_filter)
      },
      openDetail(event){
-      window.location.href = `/events/${event.id}`
+        this.$router.push({name: "EventDetail", params: { eventId: event.id}});
      }
     },
   }

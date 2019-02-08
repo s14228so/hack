@@ -4,6 +4,7 @@ import MyPage from '../components/MyPage.vue'
 import Home from '../components/Home.vue'
 import LoginView from '../components/devise/LoginView.vue'
 import MyHacks from '../components/MyHacks.vue'
+import EventDetail from '../components/EventDetail.vue'
 
 Vue.use(Router)
 
@@ -11,11 +12,6 @@ export default new Router({
   hashbang: false,
   mode: 'history',
   routes: [
-    {
-      path: "/",
-      name: "Home",
-      component: Home
-    },
     {
       path: '/mypage',
       name: 'MyPage',
@@ -35,6 +31,11 @@ export default new Router({
       path: '/myhacks',
       name: 'MyHacks',
       component: MyHacks
+    },
+    {
+      path: '/event',
+      name: 'EventDetail',
+      component: EventDetail
     }
   ]
 })

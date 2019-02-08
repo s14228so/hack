@@ -42,7 +42,10 @@
   </div>
 </template>
 <script>
+    import axios from "axios";
+  import 'babel-polyfill';
   import Setting from "../components/Setting.vue"
+
   export default({
     name: "MyPage",
     data: function(){

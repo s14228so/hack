@@ -1,7 +1,7 @@
 <template>
   <v-container>
   <v-layout>
-    <v-flex>
+    <v-flex xs8>
       <v-sheet height="500">
         <v-calendar
           :now="today"
@@ -30,7 +30,7 @@
                 ></div>
                 <v-card
                   color="grey lighten-4"
-                  min-width="350px"
+                  width="400px"
                   flat
                 >
                   <v-toolbar

@@ -17,7 +17,8 @@
         //リロードしたらもってこれなくなる。
       }
     },
-   created:  async function() {
+    props: ["event"],
+   mounted:  async function() {
       const res = await axios.get(`/api/events/${this.$route.params.id}`)
       if (res.status !== 200) { process.exit() }
       console.log(res.data)

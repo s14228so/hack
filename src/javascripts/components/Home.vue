@@ -46,7 +46,7 @@
                       <v-icon>favorite</v-icon>
                     </v-btn>
                     <v-btn icon>
-                      <v-icon>more_vert</v-icon>
+                      <v-icon @click="openDetail(event)">open_in_new</v-icon>
                     </v-btn>
                   </v-toolbar>
                   <v-card-title primary-title>
@@ -113,6 +113,9 @@
             this.event_filter = true
           }
           console.log(this.event_filter)
+     },
+     openDetail(event){
+      window.location.href = `/events/${event.id}`
      }
     },
   }

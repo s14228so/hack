@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'events/show'
+  get 'events/indx'
   root "students#show"
 
 
@@ -38,6 +40,7 @@ Rails.application.routes.draw do
 end
 
   resources :students
+  resources :events
 
   get "/mypage" => "students#show"
   get "/home" => "students#show"

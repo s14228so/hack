@@ -41,7 +41,7 @@ end
 
   resources :students
   # resources :events
-  get "/event" => "events#show"
+  get "/event/:id" => "events#show"
   get "/mypage" => "students#show"
   get "/home" => "students#show"
   get "/myhacks" => "students#show"

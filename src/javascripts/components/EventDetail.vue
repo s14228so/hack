@@ -2,7 +2,7 @@
   <div>
     <v-container>
       {{ event.title }}
-  </v-container>
+    </v-container>
  </div>
 </template>
 <script>
@@ -13,15 +13,21 @@
   export default({
     data: function(){
       return{
-        event: this.$route.params.event
+        event: {}
         //リロードしたらもってこれなくなる。
       }
     },
-    mounted(){
-      // axios.get(`/api/events/${this.eventId}`)
-      console.log(this.event)
-    }
+   created:  async function() {
+      const res = await axios.get(`/api/events/${this.$route.params.id}`)
+      if (res.status !== 200) { process.exit() }
+      console.log(res.data)
+      this.event = res.data.event
+     }
   })
+
+
+
+
   
 </script>
 <style scoped>

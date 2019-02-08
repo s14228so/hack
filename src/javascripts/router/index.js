@@ -33,7 +33,7 @@ export default new Router({
       component: MyHacks
     },
     {
-      path: '/event',
+      path: '/event/:id',
       name: 'EventDetail',
       component: EventDetail
     }

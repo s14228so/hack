@@ -18,17 +18,18 @@
   export default({
     data: function(){
       return{
-        event: {},
         students: join_students
         //リロードしたらもってこれなくなる。
+
       }
     },
     props: ["event"],
    mounted:  async function() {
       const res = await axios.get(`/api/events/${this.$route.params.id}`)
       if (res.status !== 200) { process.exit() }
-      console.log(res.data)
       this.event = res.data.event
+    //これだとカレンダー側からしか呼び出せていない
+
      }
   })
 

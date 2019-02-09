@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'events/show'
-  get 'events/indx'
   root "students#show"
 
 

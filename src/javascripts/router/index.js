@@ -5,6 +5,7 @@ import Home from '../components/Home.vue'
 import LoginView from '../components/devise/LoginView.vue'
 import MyHacks from '../components/MyHacks.vue'
 import EventDetail from '../components/EventDetail.vue'
+import Team from '../components/Team'
 
 Vue.use(Router)
 
@@ -36,6 +37,11 @@ export default new Router({
       path: '/event/:id',
       name: 'EventDetail',
       component: EventDetail
+    },
+    {
+      path: '/team',
+      name: 'Team',
+      component: Team
     }
   ]
 })

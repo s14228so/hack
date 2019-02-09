@@ -42,6 +42,7 @@ end
   get "/event/:id" => "events#show"
   get "/mypage" => "students#show"
   get "/home" => "students#show"
+  get "/team" => "teams#show"
   get "/myhacks" => "students#show"
   get "/login" => "students#show", as: :login_path
   

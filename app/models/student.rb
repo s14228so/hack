@@ -12,4 +12,5 @@ class Student < ApplicationRecord
   #      return false
   #   end
   # end
+  has_many :student_teams
 end

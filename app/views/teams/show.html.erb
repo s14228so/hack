@@ -1,2 +1,17 @@
-<h1>Teams#show</h1>
-<p>Find me in app/views/teams/show.html.erb</p>
+<div id="app">
+  <navbar />
+</div>
+<script>
+  rails = window.rails = {};
+rails.students = <%= raw @students.to_json %>;
+rails.student = <%= raw @student.to_json %>;
+events = <%= raw @events.to_json %>;
+login = rails.student !== null
+my_events = <%= raw @my_events.to_json %>;
+rails.event_students = <%= raw @event_students.to_json %>;
+rails.event_ids = <%= raw @event_ids.to_json %>;
+ console.log(rails.event_students)
+ console.log(rails.event_ids)
+ blob_url = <%= raw rails_blob_url(@student.image).to_json %>
+
+</script>

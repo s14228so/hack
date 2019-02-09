@@ -74,7 +74,7 @@ import LogIn from "../devise/LogIn.vue"
         {
           path: "/team",
           label: "Team",
-          icon: "team"
+          icon: "folder"
         },
       ]
     }),

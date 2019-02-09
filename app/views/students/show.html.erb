@@ -10,11 +10,11 @@ rails.event_ids = <%= raw @event_ids.to_json %>;
  console.log(rails.event_students)
  console.log(rails.event_ids)
 
- blob_url = '<%if @student.image.attached? %><%= raw rails_blob_url(@student.image).to_json %><% end %>'
+blob_url = '<%if @student.image.attached? %><%= raw rails_blob_url(@student.image).to_json %><% end %>'
 
 join_students = <%= raw @join_students.to_json %>
 
-
+console.log(blob_url)
 
 </script>
 

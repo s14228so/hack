@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-
+ protect_from_forgery :except => [:index,:create, :show]
   def index
   end
 

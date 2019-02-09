@@ -13,4 +13,5 @@ class Student < ApplicationRecord
   #   end
   # end
   has_many :student_teams
+  # delegate :image, to: :image, allow_nil: true
 end

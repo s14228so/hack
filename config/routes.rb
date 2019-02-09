@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     registrations: 'admins/registrations'
   }
   devise_for :students,
-   # path: '', path_names: { sign_in: "/login", sign_up: "/sign_up"},
+    path: '', path_names: { sign_in: "/login", sign_up: "/sign_up"},
   controllers: {
     sessions:      'students/sessions',
     passwords:     'students/passwords',

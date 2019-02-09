@@ -7,7 +7,7 @@
       </v-chip>
     </div>
     <div v-show="detailStatus">
-      <event-detail :event="event"></event-detail>
+      <event-detail :event="hack"></event-detail>
     </div>
 </v-container>
 </template>
@@ -17,7 +17,7 @@
   export default({
     data: function(){
       return{
-      event: {},
+      hack: {},
       events: my_events,
       detailStatus: false
       }
@@ -31,7 +31,7 @@
     methods: {
       showDetail(event){
         this.detailStatus = true
-        this.event = event
+        this.hack = event
       }
     }
   })

@@ -23,6 +23,6 @@ class StudentsController < ApplicationController
 
   def update
     current_student.update(params.require(:student).permit(:image))
-    redirect_to current_student
+    redirect_to "/mypage"
   end
 end

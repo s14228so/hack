@@ -1,6 +1,6 @@
 <template>
   <div>
-    asdwdmkw
+
   </div>
 </template>
 <script>

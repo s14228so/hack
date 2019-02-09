@@ -10,7 +10,7 @@ rails.event_ids = <%= raw @event_ids.to_json %>;
  console.log(rails.event_students)
  console.log(rails.event_ids)
 
-blob_url = <%if @student.image.attached? %><%= raw rails_blob_url(@student.image).to_json %><% else %><%= raw asset_url("no-image.jpeg").to_json%><% end %>
+blob_url = <%if @student.images.attached? %><%= raw rails_blob_url(@student.images.last).to_json %><% else %><%= raw asset_url("no-image.jpeg").to_json%><% end %>
 
 join_students = <%= raw @join_students.to_json %>
 
@@ -23,9 +23,5 @@ console.log(blob_url)
   </navbar>
 
 </div>
-<% if !current_student.image.attached? %>
-  <%= form_with model: current_student, local: true do |f| %>
-<%= f.file_field :image %><br>
-<%= f.submit %>
-<% end %>
-<% end %>
+
+

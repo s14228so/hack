@@ -40,8 +40,25 @@
          <v-flex xs12 md4 v-show="settingStatus">
           <setting-comp></setting-comp>
          </v-flex>
-        </v-layout>  
+        </v-layout>
+       <v-form enctype="multipart/form-data" action="/students/9" accept-charset="UTF-8" method="post">
+        <input name="utf8" type="hidden" value="✓">
+        <input type="hidden" name="_method" value="patch">
+        <input type="hidden" name="authenticity_token" value="jmIl112dGCbGMDRHjS54MetsksXB8mUFNX4tiF47/tPNr+eS4h1sBpHIAnHY90mPePfUAkd9Mxt7XPTs7pBCpg==">
+         <input multiple="multiple" type="file" name="student[images][]" id="student_images" @change="onFileChange"><br>
+      <div v-if="image">
+          <img :src="image" width="50" height="50"/>
+            <button @click="removeImage">Remove image</button>
+      </div>
+
+  <input type="submit" name="commit" value="Update Student" data-disable-with="Update Student">
+</v-form>
+
+         
+      <!-- https://codepen.io/Atinux/pen/qOvawK -->
+  
    </v-container>
+
   </div>
 </template>
 <script>
@@ -56,7 +73,8 @@
         student: rails.student,
         infos: ["ユーザ名","メールアドレス","大学","学部","学年"],
         settingStatus: false,
-        blob_url: blob_url
+        blob_url: blob_url,
+        image: ''
       }
     },
     components:{
@@ -65,7 +83,26 @@
     methods: {
       showSetting: function(){
         this.settingStatus = true
-      }
+      },
+      onFileChange(e) {
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length)
+        return;
+      this.createImage(files[0]);
+    },
+    createImage(file) {
+      var image = new Image();
+      var reader = new FileReader();
+      var vm = this;
+
+      reader.onload = (e) => {
+        vm.image = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    },
+    removeImage: function (e) {
+      this.image = '';
+    }
     },
     mounted: function(){
     }

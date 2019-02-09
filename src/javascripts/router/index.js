@@ -1,11 +1,13 @@
 import Vue from 'vue/dist/vue.esm'
 import Router from 'vue-router'
-import MyPage from '../components/MyPage.vue'
-import Home from '../components/Home.vue'
-import LoginView from '../components/devise/LoginView.vue'
-import MyHacks from '../components/MyHacks.vue'
-import EventDetail from '../components/EventDetail.vue'
+import MyPage from '../components/MyPage'
+import Home from '../components/Home'
+import LoginView from '../components/devise/LoginView'
+import MyHacks from '../components/MyHacks'
+import EventDetail from '../components/EventDetail'
 import Team from '../components/Team'
+import SignUp from '../components/devise/SignUp'
+import Root from '../components/Root'
 
 Vue.use(Router)
 
@@ -42,6 +44,16 @@ export default new Router({
       path: '/team',
       name: 'Team',
       component: Team
+    },
+    {
+      path: '/sign_up',
+      name: 'SignUp',
+      component: SignUp
+    },
+    {
+      path: "/",
+      name: "Root",
+      component: Root
     }
   ]
 })

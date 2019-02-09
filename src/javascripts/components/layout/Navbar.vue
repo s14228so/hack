@@ -56,9 +56,14 @@ import LogIn from "../devise/LogIn.vue"
       drawer: false,
       login: login,
       tags: [
+         {
+          path: "/",
+          label: "Home",
+          icon: "home"
+        },
         {
           path: "/home",
-          label: "Home",
+          label: "Calendar",
           icon: "home"
         },
         {

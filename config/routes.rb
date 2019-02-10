@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root "students#show"
 
-#test
+#test__
 
 # authenticated :user do
 #     # ログイン済みの場合のルート

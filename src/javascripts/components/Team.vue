@@ -1,11 +1,25 @@
 <template>
-  
+  <div>
+    <team-member :teams="parent">
+      <div class="come"></div>
+    </team-member>
+  </div>
 </template>
 <script>
-  export default({
-    
-  })
+import TeamMember from "./TeamMember";
+export default {
+  components: {
+    TeamMember
+  },
+  data() {
+    return {
+      parent: teams
+    };
+  },
+  mounted() {
+    console.log(this.parent);
+  }
+};
 </script>
-<style>
-  
+<style scoped>
 </style>

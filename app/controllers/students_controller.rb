@@ -1,5 +1,6 @@
 class StudentsController < ApplicationController
  protect_from_forgery :except => [:index,:create, :show]
+ before_action :authenticate_student!
   def index
   end
 

@@ -16,9 +16,7 @@ export default {
       parent: teams
     };
   },
-  mounted() {
-    console.log(this.parent);
-  }
+  mounted() {}
 };
 </script>
 <style scoped>

@@ -13,19 +13,30 @@
 </template>
 
 <script>
+import axios from "axios";
+import "babel-polyfill";
 import EventDetail from "../components/EventDetail.vue";
 export default {
   data: function() {
     return {
       hack: {},
-      events: my_events,
+      events: [],
       detailStatus: false
     };
   },
   components: {
     EventDetail
   },
-  mounted: function() {},
+  mounted: async function() {
+    const res = await axios.get(`/api/events/myhacks`);
+    if (res.status !== 200) {
+      process.exit();
+    }
+    this.events = res.data.array;
+    console.log(res.data.array);
+    //これだとカレンダー側からしか呼び出せていない
+  },
+
   methods: {
     showDetail(event) {
       this.detailStatus = true;

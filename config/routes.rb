@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   resources :students, only: [:index]
   resources :events, only: [:index, :create, :show] do
      get 'myhacks', on: :collection
+     get 'join_students', on: :member
   end
   resources :event_students, only: [:index, :create]
 end

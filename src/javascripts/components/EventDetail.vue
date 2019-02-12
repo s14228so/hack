@@ -1,9 +1,11 @@
 <template>
   <div>
-    <v-container>
-      {{ hack.title }}
-      <div v-for="student in students" class="mt-3">
-        <v-chip>{{ student.nickname}}</v-chip>
+    <v-container mt-5>
+      <div v-for="event in events" class="mt-2">
+        <v-chip @click="childDetail(event)">
+          {{ event.date }}
+          {{ event.title }}
+        </v-chip>
       </div>
     </v-container>
   </div>
@@ -13,14 +15,20 @@ import axios from "axios";
 import "babel-polyfill";
 
 export default {
-  props: ["hack"],
+  props: ["events"],
   data: function() {
     return {
       students: []
     };
   },
-  mounted() {
-    console.log(this.hack.title);
+  mounted() {},
+  methods: {
+    childDetail: function(event) {
+      // vm.$emitでカスタムイベントfavを発火させる
+      // 第二引数のデータはfavで指定しているコールバックに渡される
+      this.$emit("rand", event);
+      console.log("子供です");
+    }
   }
 };
 </script>

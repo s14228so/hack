@@ -1,13 +1,11 @@
 <template>
-  <v-container mt-5>
-    <div v-for="event in events" class="mt-2">
-      <v-chip @click="showDetail(event)">
-        {{ event.date }}
-        {{ event.title }}
-      </v-chip>
-    </div>
+  <v-container>
+    <event-detail @rand="showDetail" :events="events"></event-detail>
     <div v-show="detailStatus">
-      <event-detail :hack="hack"></event-detail>
+      {{event.title}}
+      <div v-for="student in students" class="mt-3">
+        <v-chip>{{ student.nickname}}</v-chip>
+      </div>
     </div>
   </v-container>
 </template>
@@ -21,7 +19,9 @@ export default {
     return {
       hack: "",
       events: [],
-      detailStatus: false
+      detailStatus: true,
+      students: [],
+      event: {}
     };
   },
   components: {
@@ -38,9 +38,15 @@ export default {
   },
 
   methods: {
-    showDetail(event) {
-      this.detailStatus = true;
-      this.hack = event;
+    async showDetail(event) {
+      this.detailStatus = !this.detailStatus;
+      this.event = event;
+      console.log("親です");
+      const res = await axios.get(`/api/events/${event.id}/join_students`);
+      if (res.status !== 200) {
+        process.exit();
+      }
+      this.students = res.data.array;
     }
   }
 };

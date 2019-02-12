@@ -40,7 +40,9 @@ Rails.application.routes.draw do
   get "/student" => "students#show"
   get "/myteams" => "teams#show"
   resources :students, only: [:index]
-  resources :events, only: [:index, :create, :show]
+  resources :events, only: [:index, :create, :show] do
+     get 'myhacks', on: :collection
+  end
   resources :event_students, only: [:index, :create]
 end
 

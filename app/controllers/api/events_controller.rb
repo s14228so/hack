@@ -8,4 +8,9 @@ class Api::EventsController < ApplicationController
     @event = Event.find(params[:id])
     render "show", formats: "json", handlers: "jbuilder"
   end
+
+  def myhacks
+    @myhacks = current_student.events
+    render "myhacks", formats: "json", handlers: "jbuilder"
+  end
 end

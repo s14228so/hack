@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-container>
-      {{ event.title }}
+      {{ hack.title }}
       <div v-for="student in students" class="mt-3">
         <v-chip>{{ student.nickname}}</v-chip>
       </div>
@@ -13,21 +13,14 @@ import axios from "axios";
 import "babel-polyfill";
 
 export default {
+  props: ["hack"],
   data: function() {
     return {
       students: []
-      //リロードしたらもってこれなくなる。
     };
   },
-  props: ["event"],
-  mounted: async function() {
-    const res = await axios.get(`/api/jo/${$route.params.id}`);
-    if (res.status !== 200) {
-      process.exit();
-    }
-    this.event = res.data.event;
-    //これだとカレンダー側からしか呼び出せていない
-    console.log(this.event);
+  mounted() {
+    console.log(this.hack.title);
   }
 };
 </script>

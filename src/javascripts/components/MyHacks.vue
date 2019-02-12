@@ -7,7 +7,7 @@
       </v-chip>
     </div>
     <div v-show="detailStatus">
-      <event-detail :event="hack"></event-detail>
+      <event-detail :hack="hack"></event-detail>
     </div>
   </v-container>
 </template>
@@ -19,7 +19,7 @@ import EventDetail from "../components/EventDetail.vue";
 export default {
   data: function() {
     return {
-      hack: {},
+      hack: "",
       events: [],
       detailStatus: false
     };
@@ -33,7 +33,7 @@ export default {
       process.exit();
     }
     this.events = res.data.array;
-    console.log(res.data.array);
+
     //これだとカレンダー側からしか呼び出せていない
   },
 

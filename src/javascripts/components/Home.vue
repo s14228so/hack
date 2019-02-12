@@ -1,8 +1,7 @@
 <template>
-<v-container>
-    Home.vue
-</v-container>
-<template>
+  <v-container>Home.vue</v-container>
+</template>
+
     
 
 
@@ -10,5 +9,5 @@
 export default {};
 </script>
 
-<style lang="scss" scoped>
+<style>
 </style>

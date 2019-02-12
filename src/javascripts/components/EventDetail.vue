@@ -22,7 +22,7 @@ export default {
   },
   props: ["event"],
   mounted: async function() {
-    const res = await axios.get(`/api/events/${this.$route.params.id}`);
+    const res = await axios.get(`/api/events/${$route.params.id}`);
     if (res.status !== 200) {
       process.exit();
     }

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :api do
+    get 'teams/index'
+    get 'teams/show'
+  end
   root "students#show"
 
 #test__
@@ -29,10 +33,13 @@ Rails.application.routes.draw do
   }
 
   namespace :api, defaults: { format: :json } do
-    namespace :students do
+  namespace :students do
     resource :sign_out, only: [:destroy], controller: :sessions
     resource :sign_in, only: [:create], controller: :sessions # api/users/sign_in
   end
+  get "/student" => "students#show"
+  get "/myteams" => "teams#show"
+  resources :students, only: [:index]
   resources :events, only: [:index, :create, :show]
   resources :event_students, only: [:index, :create]
 end
@@ -41,10 +48,10 @@ end
   # resources :events
   get "/event/:id" => "events#show"
   get "/mypage" => "students#show"
-  get "/home" => "students#show"
   get "/team" => "teams#show"
   get "/myhacks" => "students#show"
   get "/login" => "students#show", as: :login_path
+  get "/calendar" => "students#show"
   
 
 end

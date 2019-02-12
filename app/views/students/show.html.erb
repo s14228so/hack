@@ -4,23 +4,15 @@ rails.students = <%= raw @students.to_json %>;
 rails.student = <%= raw @student.to_json %>;
 events = <%= raw @events.to_json %>;
 login = rails.student !== null
-my_events = <%= raw @my_events.to_json %>;
-rails.event_students = <%= raw @event_students.to_json %>;
-rails.event_ids = <%= raw @event_ids.to_json %>;
- console.log(rails.event_students)
- console.log(rails.event_ids)
 
-blob_url = <%if @student.images.attached? %><%= raw rails_blob_url(@student.images.last).to_json %><% else %><%= raw asset_url("no-image.jpeg").to_json%><% end %>
 
-join_students = <%= raw @join_students.to_json %>
-
-console.log(blob_url)
 
 </script>
 
 <div id="app">
   <navbar>
   </navbar>
+
 
 </div>
 

@@ -58,7 +58,7 @@ import "babel-polyfill";
 export default {
   data: () => ({
     today: "2019-01-08",
-    events: events,
+    events: [],
     student: rails.student,
     event_students: rails.event_students,
     event_filter: true,
@@ -72,7 +72,9 @@ export default {
       return map;
     }
   },
-  mounted() {},
+  mounted() {
+    this.events = events;
+  },
   methods: {
     open(event) {
       alert(event.title);
@@ -102,6 +104,4 @@ export default {
     }
   }
 };
-</script>
-
 </script>

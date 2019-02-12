@@ -1,13 +1,13 @@
 import Vue from "vue/dist/vue.esm";
 import Router from "vue-router";
 import MyPage from "../components/MyPage";
-import Calendar from "../components/Calenadar";
+import Calendar from "../components/Calendar";
 import LoginView from "../components/devise/LoginView";
 import MyHacks from "../components/MyHacks";
 import EventDetail from "../components/EventDetail";
 import Team from "../components/Team";
 import SignUp from "../components/devise/SignUp";
-
+import Home from "../components/Home";
 Vue.use(Router);
 
 export default new Router({
@@ -20,7 +20,12 @@ export default new Router({
       component: Home
     },
     {
-      path: "/calenadar",
+      path: "/mypage",
+      name: "MyPage",
+      component: MyPage
+    },
+    {
+      path: "/calendar",
       name: "Calendar",
       component: Calendar
     },

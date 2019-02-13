@@ -27,7 +27,6 @@ export default {
       // vm.$emitでカスタムイベントfavを発火させる
       // 第二引数のデータはfavで指定しているコールバックに渡される
       this.$emit("rand", event);
-      console.log("子供です");
     }
   }
 };

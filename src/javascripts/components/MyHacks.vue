@@ -19,7 +19,7 @@ export default {
     return {
       hack: "",
       events: [],
-      detailStatus: true,
+      detailStatus: false,
       students: [],
       event: {}
     };

@@ -1,3 +1,8 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  devise_for :student, only: []
+
+  namespace :v1, defaults: { format: :json } do
+    resource :login, only: [:create], controller: :sessions
+    resources :students, only: [:index , :create]
+  end
 end

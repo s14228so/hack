@@ -21,3 +21,5 @@ class Student < ApplicationRecord
   
   # delegate :image, to: :image, allow_nil: true
 end
+
+

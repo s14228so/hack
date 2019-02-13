@@ -1,5 +1,5 @@
 class Api::StudentsController < ApplicationController
-  protect_from_forgery :except => [:index,:create, :show]
+  protect_from_forgery :except => [:index, :create, :show]
   def index
     @students = Student.all
     render "index", formats: "json", handlers: "jbuilder"

@@ -15,4 +15,15 @@
     <%= yield %>
       <%= javascript_pack_tag 'application' %>
   </body>
+  <script>
+  fetch('http://your-api-server.net', {
+  mode: 'cors',
+  credentials: 'include',
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  }
+})
+.then((res) => ...)
+  </script>
 </html>

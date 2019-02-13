@@ -3,7 +3,6 @@
     <v-layout row wrap>
       <v-flex xs6>
         <h2>Log in</h2>
-
         <template>
   <form>
     <v-text-field
@@ -42,7 +41,8 @@ export default {
     return{
       email: "",
       password: "",
-      accessToken: ""
+      accessToken: "",
+      currentStudent: {}
     }
   },
   methods: {
@@ -57,8 +57,16 @@ export default {
         const response = await axios.post(`http://localhost:5000/v1/login`, {
           email: this.email, password: this.password
         });
-        await this.$router.go()
-        this.$router.push("/")
+      
+        // await this.$router.go()
+        // this.$router.push("/")
+        this.currentStudent = response.data;
+          console.log(this.currentStudent);
+        this.$router.push({
+        name: "index",
+        params: { currentStudent: this.currentStudent }
+      });
+
       } catch (error) {
         console.log(error);
       }

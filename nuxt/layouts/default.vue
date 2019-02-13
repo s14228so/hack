@@ -2,6 +2,7 @@
   <v-app dark>
     <v-content>
       <v-container>
+        <!-- <navbar></navbar> -->
         <nuxt />
       </v-container>
     </v-content>
@@ -16,6 +17,7 @@
 </template>
 
 <script>
+  import Navbar from "../components/layout/Navbar.vue"
 export default {
   data() {
     return {
@@ -39,6 +41,9 @@ export default {
       rightDrawer: false,
       title: 'Vuetify.js'
     }
+  },
+  components: {
+    Navbar
   }
 }
 </script>

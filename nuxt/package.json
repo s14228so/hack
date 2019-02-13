@@ -1,0 +1,24 @@
+{
+  "name": "nuxt",
+  "version": "1.0.0",
+  "description": "hack nuxt ",
+  "author": "satoshi ono",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "cross-env": "^5.2.0",
+    "nuxt": "^2.4.0",
+    "vuetify": "^1.5.0",
+    "vuetify-loader": "^1.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2"
+  }
+}

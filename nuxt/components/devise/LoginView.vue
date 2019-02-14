@@ -45,6 +45,9 @@ export default {
       currentStudent: {}
     }
   },
+  mounted(){
+    console.log(localStorage)
+  },
   methods: {
     clear () {
         this.email = ''
@@ -57,14 +60,19 @@ export default {
         const response = await axios.post(`http://localhost:5000/v1/login`, {
           email: this.email, password: this.password
         });
-      
+        
         // await this.$router.go()
         // this.$router.push("/")
         this.currentStudent = response.data;
-          console.log(this.currentStudent);
+        var data = [];
+        data.push(response.data)
+        localStorage.setItem('currentStudent', JSON.stringify(data));
+
+         localStorage.setItem('email', response.data.email);
+          // console.log(this.currentStudent);
         this.$router.push({
         name: "index",
-        params: { currentStudent: this.currentStudent }
+        // params: { currentStudent: this.currentStudent }
       });
 
       } catch (error) {

@@ -3,6 +3,14 @@ const pkg = require('./package')
 
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 
+
+
+export default {
+  router: {
+    mode: 'history'
+  }
+}
+
 module.exports = {
   mode: 'spa',
 

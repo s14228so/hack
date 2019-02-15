@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{ currentStudent.email }}
+    {{currentStudent.email }}
     {{currentStudent.nickname}}
     {{currentStudent.address}}
     {{currentStudent.univeristy}}

@@ -109,7 +109,10 @@ export default {
     }
   },
   mounted: async function() {
-    const res = await axios.get(`http://localhost:5000/api/students`);
+    var data = localStorage.getItem("currentStudent");
+    data = JSON.parse(data);
+    console.log(data[0].access_token);
+    const res = await axios.get(`http://localhost:5000/api/students`,params: {Authorization: data[0].access_token});
     if (res.status !== 200) {
       process.exit();
     }

@@ -15,7 +15,6 @@ export default {
   mounted: async function() {
     var data = localStorage.getItem("currentStudent");
     data = JSON.parse(data);
-    console.log(data[0].access_token);
     const res = await axios.get(`http://localhost:5000/v1/students`, {
       headers: { Authorization: data[0].access_token }
     });
@@ -23,7 +22,6 @@ export default {
       process.exit();
     }
     this.students = res.data;
-    console.log(this.students);
   }
 };
 </script>

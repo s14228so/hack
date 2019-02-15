@@ -4,77 +4,82 @@
       <v-flex xs6>
         <h2>Log in</h2>
         <template>
-  <form>
-    <v-text-field
-      v-model="email"
-      :counter="10"
-      label="email"
-      required
-    ></v-text-field>
-    <v-text-field
-      v-model="password"
-      label="Password"
-      required
-    ></v-text-field>
-    <p>{{email}}</p>
-    <p>{{password}}</p>
-    <v-checkbox
-      label="Do you agree?"
-      required
-    ></v-checkbox>
-
-    <v-btn @click="submit">submit</v-btn>
-    <v-btn @click="clear">clear</v-btn>
-    <v-btn @click="index">index</v-btn>
-  </form>
+          <v-form v-model="valid">
+            <v-text-field required :rules="emailRules" v-model="email" :counter="20" label="email"></v-text-field>
+            <v-text-field
+              required
+              :rules="passwordRules"
+              v-model="password"
+              :counter="20"
+              label="Password"
+            ></v-text-field>
+            <p>{{email}}</p>
+            <p>{{password}}</p>
+            <v-checkbox label="Do you agree?" required></v-checkbox>
+            <v-btn @click="submit">submit</v-btn>
+            <v-btn @click="clear">clear</v-btn>
+          </v-form>
+        </template>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 <script>
-  import axios from "axios";
-  import "babel-polyfill";
-  // curl localhost:3000/v1/login --data 'email=user@example.com&password=mypass'
+import axios from "axios";
+import "babel-polyfill";
+// curl localhost:3000/v1/login --data 'email=user@example.com&password=mypass'
 export default {
-  data(){
-    return{
+  data() {
+    return {
+      valid: false,
       email: "",
       password: "",
       accessToken: "",
-      currentStudent: {}
-    }
+      currentStudent: {},
+      emailRules: [
+        v => !!v || "Email is required",
+        v => /.+@.+/.test(v) || "Email must be valid"
+      ],
+      passwordRules: [
+        v => !!v || "Password is required",
+        v => v.length >= 5 || "Name must be more than 6 characters"
+      ]
+    };
   },
-  mounted(){
-    console.log(localStorage)
+  mounted() {
+    console.log(localStorage);
   },
   methods: {
-    clear () {
-        this.email = ''
-        this.password = ''
-        this.select = null
-        this.checkbox = false
+    clear() {
+      this.email = "";
+      this.password = "";
+      this.select = null;
+      this.checkbox = false;
     },
     async submit() {
       try {
         const response = await axios.post(`http://localhost:5000/v1/login`, {
-          email: this.email, password: this.password
+          email: this.email,
+          password: this.password
         });
-        
+
         // await this.$router.go()
         // this.$router.push("/")
         this.currentStudent = response.data;
         var data = [];
-        data.push(response.data)
-        localStorage.setItem('currentStudent', JSON.stringify(data));
+        data.push(response.data);
+        localStorage.setItem("currentStudent", JSON.stringify(data));
 
-         localStorage.setItem('email', response.data.email);
-          // console.log(this.currentStudent);
+        localStorage.setItem("email", response.data.email);
+        // console.log(this.currentStudent);
         this.$router.push({
-        name: "index",
-        // params: { currentStudent: this.currentStudent }
-      });
-
+          name: "index"
+          // params: { currentStudent: this.currentStudent }
+        });
       } catch (error) {
         console.log(error);
       }
@@ -85,7 +90,7 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    },
+    }
   }
 };
 </script>

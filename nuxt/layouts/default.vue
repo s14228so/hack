@@ -3,21 +3,18 @@
     <v-content>
       <v-container>
         <!-- <navbar></navbar> -->
-        <nuxt />
+        <nuxt/>
       </v-container>
     </v-content>
 
-    <v-footer
-      :fixed="fixed"
-      app
-    >
+    <v-footer :fixed="fixed" app>
       <span>&copy; 2019</span>
     </v-footer>
   </v-app>
 </template>
 
 <script>
-  import Navbar from "../components/layout/Navbar.vue"
+import Navbar from "../components/layout/Navbar.vue";
 export default {
   data() {
     return {
@@ -26,24 +23,29 @@ export default {
       fixed: false,
       items: [
         {
-          icon: 'apps',
-          title: 'Welcome',
-          to: '/'
+          icon: "apps",
+          title: "Welcome",
+          to: "/"
         },
         {
-          icon: 'bubble_chart',
-          title: 'Inspire',
-          to: '/inspire'
+          icon: "bubble_chart",
+          title: "Inspire",
+          to: "/inspire"
         }
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js'
-    }
+      title: "Vuetify.js"
+    };
   },
   components: {
     Navbar
+  },
+  mounted() {
+    var data = localStorage.getItem("currentStudent");
+    data = JSON.parse(data);
+    console.log(`ログインしているユーザは${data[0].email}です`);
   }
-}
+};
 </script>

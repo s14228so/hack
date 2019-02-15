@@ -4,26 +4,31 @@
       <v-flex xs6>
         <h2>Log in</h2>
         <template>
-          <v-form v-model="valid">
-            <v-text-field required :rules="emailRules" v-model="email" :counter="20" label="email"></v-text-field>
+          <form v-model="valid" @submit.prevent="submit">
+            <v-text-field
+              required
+              :rules="emailRules"
+              v-model="email"
+              :counter="20"
+              label="email"
+              name="email"
+            ></v-text-field>
             <v-text-field
               required
               :rules="passwordRules"
               v-model="password"
               :counter="20"
+              name="password"
               label="Password"
             ></v-text-field>
             <p>{{email}}</p>
             <p>{{password}}</p>
             <v-checkbox label="Do you agree?" required></v-checkbox>
-            <v-btn @click="submit">submit</v-btn>
+            <!-- <input type="submit" @click="submit"> -->
+            <input type="submit">
             <v-btn @click="clear">clear</v-btn>
-          </v-form>
+          </form>
         </template>
-      </v-flex>
-    </v-layout>
-  </v-container>
-</template>
       </v-flex>
     </v-layout>
   </v-container>

@@ -1,6 +1,6 @@
-class ApplicationController < ActionController::API
+class ApplicationController < ActionController::Base
   include AbstractController::Translation
-    # protect_from_forgery with: :null_session 
+     protect_from_forgery with: :null_session 
   before_action :authenticate_student_from_token!
 
   respond_to :json

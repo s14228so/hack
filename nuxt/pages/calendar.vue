@@ -77,7 +77,7 @@ export default {
     data = JSON.parse(data);
     console.log(data[0].access_token);
     try {
-      const response = await axios.get(`http://localhost:5000/api/events`, {
+      const response = await axios.get(`http://localhost:5000/v1/events`, {
         headers: { Authorization: data[0].access_token }
       });
       this.events = response.data;

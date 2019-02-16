@@ -55,9 +55,7 @@ export default {
       ]
     };
   },
-  mounted() {
-    console.log(localStorage);
-  },
+  mounted() {},
   methods: {
     clear() {
       this.email = "";
@@ -78,7 +76,6 @@ export default {
         var data = [];
         data.push(response.data);
         localStorage.setItem("currentStudent", JSON.stringify(data));
-
         localStorage.setItem("email", response.data.email);
         // console.log(this.currentStudent);
         this.$router.push({

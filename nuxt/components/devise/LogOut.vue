@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button type="submit" @click="destroyUserSession" class="white black--text">Log Out</button>
+    <button type="submit" @click="destroyUserSession" class="black--text">Log Out</button>
   </div>
 </template>
 <script>
@@ -12,7 +12,7 @@ export default {
       token: ""
     };
   },
-  mouted() {
+  mounted() {
     var data = localStorage.getItem("currentStudent");
     data = JSON.parse(data);
     this.token = data[0].access_token;
@@ -21,10 +21,15 @@ export default {
   methods: {
     async destroyUserSession() {
       try {
-        await axios.delete(`http://localhost:5000/v1/logout`, {
-          access_token: this.token
+        const response = await axios.delete(`http://localhost:5000/v1/logout`, {
+          params: { access_token: this.token }
         });
-        this.$router.push("/login");
+        this.token = "";
+        data = "";
+        this.$router.push({
+          name: "login"
+          // params: { currentStudent: this.currentStudent }
+        });
       } catch (error) {
         console.log(error);
       }

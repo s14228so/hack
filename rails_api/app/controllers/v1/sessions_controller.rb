@@ -15,6 +15,13 @@ module V1
       end
     end
 
+    def destroy
+      @student = Student.find_for_database_authentication(access_token: params[:access_token])
+      sign_out @student
+      @student.access_token = ""
+      @student.save!
+    end
+
     private
 
     def invalid_email

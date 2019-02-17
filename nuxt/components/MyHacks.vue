@@ -47,7 +47,9 @@ export default {
       this.detailStatus = !this.detailStatus;
       this.event = event;
       console.log("親です");
-      const res = await axios.get(`/api/events/${event.id}/join_students`);
+      const res = await axios.get(
+        `http://localhost:5000/v1/events/${event.id}/join_students`
+      );
       if (res.status !== 200) {
         process.exit();
       }

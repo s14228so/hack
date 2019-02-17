@@ -18,6 +18,7 @@ module V1
   def join_students
     @event = Event.find(params[:id])
     @join_students = @event.students
+    render json: @join_students, each_serializer: V1::JoinStudentsSerializer
   end
 end
 end

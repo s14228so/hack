@@ -19,11 +19,11 @@
                     v-ripple
                     class="my-event"
                     v-html="event.title"
-                    @click="eventFilter(event)"
+                    @click.once="eventFilter(event)"
                   ></div>
                   <v-card color="grey lighten-4" width="400px" flat>
                     <v-toolbar color="primary" dark>
-                      <v-btn icon @click="reserveEvent(event.id)" v-show="event_filter">
+                      <v-btn icon @click="reserveEvent(event.id)" v-show="event.event_filter">
                         <v-icon title="予約する">done</v-icon>
                       </v-btn>
                       <v-toolbar-title v-html="event.title"></v-toolbar-title>
@@ -59,10 +59,8 @@ export default {
   data: () => ({
     today: "2019-01-10",
     events: [],
-    // student: rails.student,
-    // event_students: rails.event_students,
-    eventIds: [],
-    event_filter: false
+    currentId: "",
+    eventIds: []
   }),
   computed: {
     // convert the list of events into a map of lists keyed by date
@@ -72,19 +70,11 @@ export default {
       return map;
       // console.log(this.eventsMap);
     }
-    // eventIds() {
-    //   this.events.forEach(function(value) {
-    //     return vulue.id;
-    //   });
-    // }
   },
   async created() {
-    // console.log(this.eventsMap);
-    // console.log(this.events);
-
     var data = localStorage.getItem("currentStudent");
     data = JSON.parse(data);
-    console.log(data[0].access_token);
+    this.currentId = data[0].student_id;
     try {
       const response = await axios.get(`http://localhost:5000/v1/events`, {
         headers: { Authorization: data[0].access_token }
@@ -93,11 +83,18 @@ export default {
     } catch (error) {
       console.log(error);
     }
-    var array = [];
-    this.events.forEach(function(value) {
-      array.push(value.id);
+    let response = await axios.get(
+      `http://localhost:5000/v1/students/${this.currentId}/current`,
+      {
+        headers: { Authorization: data[0].access_token }
+      }
+    );
+    console.log(response.data);
+    var arrayIds = [];
+    response.data.forEach(function(data) {
+      arrayIds.push(data.id);
     });
-    this.eventIds = array;
+    this.eventIds = arrayIds;
     console.log(this.eventIds);
   },
   methods: {
@@ -105,11 +102,14 @@ export default {
       alert(event.title);
     },
     async reserveEvent(id) {
+      var data = localStorage.getItem("currentStudent");
+      data = JSON.parse(data);
       try {
         const response = await axios.post(
           `http://localhost:5000/v1/event_students`,
           {
-            event_id: id
+            event_id: id,
+            headers: { Authorization: data[0].access_token }
           }
         );
       } catch (error) {
@@ -118,9 +118,9 @@ export default {
     },
     eventFilter(event) {
       if (this.eventIds.includes(event.id)) {
-        this.event_filter = false;
+        return (event.event_filter = false);
       } else {
-        this.event_filter = true;
+        return (event.event_filter = true);
       }
     },
     openDetail(event) {

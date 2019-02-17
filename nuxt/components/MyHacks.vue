@@ -4,7 +4,7 @@
     <div v-show="detailStatus">
       {{event.title}}
       <div v-for="student in students" class="mt-3">
-        <v-chip>{{ student.nickname}}</v-chip>
+        <v-chip>{{ student.email }}</v-chip>
       </div>
     </div>
   </v-container>
@@ -58,7 +58,7 @@ export default {
       if (res.status !== 200) {
         process.exit();
       }
-      this.students = res.data.array;
+      this.students = res.data;
       console.log(this.students);
     }
   }

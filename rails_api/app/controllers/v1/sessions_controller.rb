@@ -1,9 +1,12 @@
 module V1
   class SessionsController < ApplicationController
+       protect_from_forgery with: :null_session 
     skip_before_action :authenticate_student_from_token!
+ 
 
     # POST /v1/login
     def create
+      # response.headers['X-CSRF-Token'] = form_authenticity_token
       @student = Student.find_for_database_authentication(email: params[:email])
       return invalid_email unless @student
 
@@ -34,6 +37,7 @@ module V1
       warden.custom_failure!
       render json: { error: t('invalid_password') }
     end
+    
   end
 end
 

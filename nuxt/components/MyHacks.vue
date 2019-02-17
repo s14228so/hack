@@ -1,12 +1,12 @@
 <template>
   <v-container>
     <event-detail @rand="showDetail" :events="events"></event-detail>
-    <div v-show="detailStatus">
+    <!-- <div v-show="detailStatus">
       {{event.title}}
       <div v-for="student in students" class="mt-3">
         <v-chip>{{ student.nickname}}</v-chip>
       </div>
-    </div>
+    </div>-->
   </v-container>
 </template>
 
@@ -20,7 +20,7 @@ export default {
       hack: "",
       events: [],
       detailStatus: false,
-      students: [],
+      // students: [],
       event: {}
     };
   },
@@ -28,11 +28,16 @@ export default {
     EventDetail
   },
   mounted: async function() {
-    const res = await axios.get(`/api/events/myhacks`);
+    var data = localStorage.getItem("currentStudent");
+    data = JSON.parse(data);
+    const res = await axios.get(`http://localhost:5000/v1/events/myhacks`, {
+      headers: { Authorization: data[0].access_token }
+    });
     if (res.status !== 200) {
       process.exit();
     }
-    this.events = res.data.array;
+    this.events = res.data;
+    console.log(res.data);
 
     //これだとカレンダー側からしか呼び出せていない
   },

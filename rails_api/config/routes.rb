@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     resource :login, only: [:create], controller: :sessions
     resource :logout, only: [:destroy], controller: :sessions
     resources :students, only: [:index , :create]
-    resources :events, only: [:index , :create]
+    resources :events, only: [:index , :create] do
+      get 'myhacks', on: :collection
+    end
   end
 
  namespace :api, defaults: { format: :json } do
@@ -13,7 +15,7 @@ Rails.application.routes.draw do
     get "/myteams" => "teams#show"
     resources :students, only: [:index]
     resources :events, only: [:index, :create, :show] do
-       get 'myhacks', on: :collection
+       
        get 'join_students', on: :member
     end
     resources :event_students, only: [:index, :create]

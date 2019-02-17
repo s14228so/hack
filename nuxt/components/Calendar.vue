@@ -62,7 +62,7 @@ export default {
     // student: rails.student,
     // event_students: rails.event_students,
     event_filter: false,
-    event_ids: false
+    event_ids: fasle
     // event_ids: rails.event_ids
   }),
   computed: {

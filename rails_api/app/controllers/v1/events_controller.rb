@@ -12,7 +12,7 @@ module V1
 
   def myhacks
     @myhacks = current_student.events
-    render json: @myhacks, each_serializer:: V1::MyHacksSerializer
+    render json: @myhacks, each_serializer: V1::MyHacksSerializer
   end
 
   def join_students

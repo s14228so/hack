@@ -12,6 +12,8 @@ module V1
 
       if @student.valid_password?(params[:password])
         sign_in :student, @student
+        @student.access_token = "#{@student.id}:#{Devise.friendly_token}"
+        @student.save!
         render json: @student, serializer: SessionSerializer, root: nil
       else
         invalid_password
@@ -37,7 +39,6 @@ module V1
       warden.custom_failure!
       render json: { error: t('invalid_password') }
     end
-    
   end
 end
 

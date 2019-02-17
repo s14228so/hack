@@ -4,6 +4,7 @@ module V1
   def index
      render json: Event.all, each_serializer: V1::EventSerializer
   end
+
   def show
     @event = Event.find(params[:id])
     render "show", formats: "json", handlers: "jbuilder"
@@ -11,7 +12,7 @@ module V1
 
   def myhacks
     @myhacks = current_student.events
-    render "myhacks", formats: "json", handlers: "jbuilder"
+    render json: @myhacks, each_serializer:: V1::MyHacksSerializer
   end
 
   def join_students

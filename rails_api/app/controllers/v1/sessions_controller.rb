@@ -19,6 +19,7 @@ module V1
       @student = Student.find_for_database_authentication(access_token: params[:access_token])
       sign_out @student
       @student.access_token = ""
+      render json: @student, serializer: SessionSerializer, root: nil
       @student.save!
     end
 

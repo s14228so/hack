@@ -61,9 +61,8 @@ export default {
     events: [],
     // student: rails.student,
     // event_students: rails.event_students,
-    event_filter: false,
-    event_ids: fasle
-    // event_ids: rails.event_ids
+    eventIds: [],
+    event_filter: false
   }),
   computed: {
     // convert the list of events into a map of lists keyed by date
@@ -71,13 +70,18 @@ export default {
       const map = {};
       this.events.forEach(e => (map[e.date] = map[e.date] || []).push(e));
       return map;
-
       // console.log(this.eventsMap);
     }
+    // eventIds() {
+    //   this.events.forEach(function(value) {
+    //     return vulue.id;
+    //   });
+    // }
   },
   async created() {
     // console.log(this.eventsMap);
     // console.log(this.events);
+
     var data = localStorage.getItem("currentStudent");
     data = JSON.parse(data);
     console.log(data[0].access_token);
@@ -86,10 +90,15 @@ export default {
         headers: { Authorization: data[0].access_token }
       });
       this.events = response.data;
-      console.log(this.events);
     } catch (error) {
       console.log(error);
     }
+    var array = [];
+    this.events.forEach(function(value) {
+      array.push(value.id);
+    });
+    this.eventIds = array;
+    console.log(this.eventIds);
   },
   methods: {
     open(event) {
@@ -108,7 +117,7 @@ export default {
       }
     },
     eventFilter(event) {
-      if (this.event_ids.includes(event.id)) {
+      if (this.eventIds.includes(event.id)) {
         this.event_filter = false;
       } else {
         this.event_filter = true;

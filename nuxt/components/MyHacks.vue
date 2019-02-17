@@ -1,12 +1,12 @@
 <template>
   <v-container>
     <event-detail @rand="showDetail" :events="events"></event-detail>
-    <!-- <div v-show="detailStatus">
+    <div v-show="detailStatus">
       {{event.title}}
       <div v-for="student in students" class="mt-3">
         <v-chip>{{ student.nickname}}</v-chip>
       </div>
-    </div>-->
+    </div>
   </v-container>
 </template>
 
@@ -20,7 +20,7 @@ export default {
       hack: "",
       events: [],
       detailStatus: false,
-      // students: [],
+      students: [],
       event: {}
     };
   },
@@ -44,16 +44,22 @@ export default {
 
   methods: {
     async showDetail(event) {
+      var data = localStorage.getItem("currentStudent");
+      data = JSON.parse(data);
       this.detailStatus = !this.detailStatus;
       this.event = event;
       console.log("親です");
       const res = await axios.get(
-        `http://localhost:5000/v1/events/${event.id}/join_students`
+        `http://localhost:5000/v1/events/${event.id}/join_students`,
+        {
+          headers: { Authorization: data[0].access_token }
+        }
       );
       if (res.status !== 200) {
         process.exit();
       }
       this.students = res.data.array;
+      console.log(this.students);
     }
   }
 };

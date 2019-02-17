@@ -57,12 +57,12 @@ import "babel-polyfill";
 
 export default {
   data: () => ({
-    today: "2019-01-08",
+    today: "2019-01-015",
     events: [],
-    student: rails.student,
-    event_students: rails.event_students,
-    event_filter: true,
-    event_ids: rails.event_ids
+    // student: rails.student,
+    // event_students: rails.event_students,
+    event_filter: true
+    // event_ids: rails.event_ids
   }),
   computed: {
     // convert the list of events into a map of lists keyed by date
@@ -72,8 +72,19 @@ export default {
       return map;
     }
   },
-  mounted() {
-    this.events = events;
+  async mounted() {
+    var data = localStorage.getItem("currentStudent");
+    data = JSON.parse(data);
+    console.log(data[0].access_token);
+    try {
+      const response = await axios.get(`http://localhost:5000/v1/events`, {
+        headers: { Authorization: data[0].access_token }
+      });
+      this.events = response.data;
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   },
   methods: {
     open(event) {
@@ -81,9 +92,12 @@ export default {
     },
     async reserveEvent(id) {
       try {
-        const response = await axios.post(`/api/event_students`, {
-          event_id: id
-        });
+        const response = await axios.post(
+          `http://localhost:5000/api/event_students`,
+          {
+            event_id: id
+          }
+        );
       } catch (error) {
         console.log(error);
       }

@@ -1,5 +1,6 @@
 module V1
   class StudentsController < ApplicationController
+    protect_from_forgery with: :null_session 
     skip_before_action :authenticate_student_from_token!, only: [:create, :update]
 
 
@@ -35,7 +36,7 @@ module V1
     private
 
     def student_params
-      params.require(:student).permit(:email, :password, :nickname, :university, :department, :address, :phone_numebr, :last_name, :first_name, :images )
+      params.permit(:email, :password, :nickname, :university, :department, :address, :phone_numebr, :last_name, :first_name, :images )
     end
   end
 end

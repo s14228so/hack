@@ -4,7 +4,7 @@
     <div v-show="detailStatus">
       {{event.title}}
       <div v-for="student in students" class="mt-3">
-        <v-chip>{{ student.nickname}}</v-chip>
+        <v-chip>{{ student.email }}</v-chip>
       </div>
     </div>
   </v-container>
@@ -28,25 +28,39 @@ export default {
     EventDetail
   },
   mounted: async function() {
-    const res = await axios.get(`/api/events/myhacks`);
+    if(localStorage){
+    var data = localStorage.getItem("currentStudent");
+    data = JSON.parse(data);
+  }
+    const res = await axios.get(`http://localhost:5000/v1/events/myhacks`, {
+      headers: { Authorization: data[0].access_token }
+    });
     if (res.status !== 200) {
       process.exit();
     }
-    this.events = res.data.array;
+    this.events = res.data;
 
     //これだとカレンダー側からしか呼び出せていない
   },
 
   methods: {
     async showDetail(event) {
+      var data = localStorage.getItem("currentStudent");
+      data = JSON.parse(data);
       this.detailStatus = !this.detailStatus;
       this.event = event;
       console.log("親です");
-      const res = await axios.get(`/api/events/${event.id}/join_students`);
+      const res = await axios.get(
+        `http://localhost:5000/v1/events/${event.id}/join_students`,
+        {
+          headers: { Authorization: data[0].access_token }
+        }
+      );
       if (res.status !== 200) {
         process.exit();
       }
-      this.students = res.data.array;
+      this.students = res.data;
+      console.log(this.students);
     }
   }
 };

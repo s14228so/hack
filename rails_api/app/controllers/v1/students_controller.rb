@@ -7,6 +7,10 @@ module V1
       render json: Student.all, each_serializer: V1::StudentSerializer
     end
 
+    def current
+      render json: current_student.events, each_serializer: V1::CurrentEventsSerializer
+    end
+
     # POST
     # Create an user
     def create

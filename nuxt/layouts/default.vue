@@ -21,6 +21,7 @@ export default {
       clipped: false,
       drawer: false,
       fixed: false,
+      login: false,
       items: [
         {
           icon: "apps",
@@ -42,10 +43,6 @@ export default {
   components: {
     Navbar
   },
-  mounted() {
-    var data = localStorage.getItem("currentStudent");
-    data = JSON.parse(data);
-    console.log(`ログインしているユーザは${data[0].email}です`);
-  }
+  methods: {}
 };
 </script>

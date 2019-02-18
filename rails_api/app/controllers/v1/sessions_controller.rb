@@ -1,14 +1,19 @@
 module V1
   class SessionsController < ApplicationController
+       protect_from_forgery with: :null_session 
     skip_before_action :authenticate_student_from_token!
+ 
 
     # POST /v1/login
     def create
+      # response.headers['X-CSRF-Token'] = form_authenticity_token
       @student = Student.find_for_database_authentication(email: params[:email])
       return invalid_email unless @student
 
       if @student.valid_password?(params[:password])
         sign_in :student, @student
+        @student.access_token = "#{@student.id}:#{Devise.friendly_token}"
+        @student.save!
         render json: @student, serializer: SessionSerializer, root: nil
       else
         invalid_password
@@ -19,6 +24,7 @@ module V1
       @student = Student.find_for_database_authentication(access_token: params[:access_token])
       sign_out @student
       @student.access_token = ""
+      render json: @student, serializer: SessionSerializer, root: nil
       @student.save!
     end
 

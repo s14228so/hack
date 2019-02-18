@@ -2,7 +2,7 @@
   <v-app dark>
     <v-content>
       <v-container>
-        <navbar :login="login"></navbar>
+        <navbar></navbar>
         <nuxt/>
       </v-container>
     </v-content>
@@ -42,18 +42,6 @@ export default {
   },
   components: {
     Navbar
-  },
-    async mounted() {
-    if (localStorage.currentStudent){
-      var data = localStorage.getItem("currentStudent");
-      data = JSON.parse(data);
-      if (data) {
-        this.login = true;
-      }
-    }
-    else {
-      this.login = false;
-    }
   }
 };
 </script>

@@ -44,9 +44,9 @@ import LogOut from "../devise/LogOut.vue";
 import LogIn from "../devise/LogIn.vue";
 
 export default {
-  props: ["login"],
   data: () => ({
     drawer: false,
+    login: "",
     tags: [
       {
         path: "/",
@@ -80,20 +80,24 @@ export default {
     LogOut,
     LogIn
   },
-  mounted() {
-    if(localStorage.currentStudent){
-    var data = localStorage.getItem("currentStudent");
-    data = JSON.parse(data);
-    this.token = data[0].access_token;
-    console.log(this.token);
+  async mounted() {
+    if (localStorage.currentStudent){
+      var data = localStorage.getItem("currentStudent");
+      data = JSON.parse(data);
+        this.login = true;
+    }
+    else {
+      this.login = false;
     }
   },
+
   methods: {
      async signOut() {
       try {
         const response = await axios.delete(`http://localhost:5000/v1/logout`, {
           params: { access_token: this.token }
-        });
+        }); 
+        this.login = false;
         localStorage.clear();
         this.$router.push({
           name: "login"

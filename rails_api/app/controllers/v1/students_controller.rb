@@ -23,10 +23,19 @@ module V1
       end
     end
 
+    def update
+      @student = current_student
+      if @student.update student_params
+        render json: @student, serializer: V1::StudentSerializer
+      else
+        render json: { error: t('student_create_error') }, status: :unprocessable_entity
+      end
+    end
+
     private
 
     def student_params
-      params.require(:student).permit(:email, :password, :nickname, :university)
+      params.require(:student).permit(:email, :password, :nickname, :university, :department, :address, :phone_numebr, :last_name, :first_name)
     end
   end
 end

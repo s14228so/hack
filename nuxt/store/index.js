@@ -4,13 +4,11 @@ import createPersistedState from "vuex-persistedstate";
 const createStore = () => {
   return new Vuex.Store({
     state: () => ({
-      login: true,
-      currentStudent: {}
+      login: true
     }),
     mutations: {
       login(state) {
         state.login = true;
-        state.currentStudent = currentStudent;
       },
       logout(state) {
         state.login = false;

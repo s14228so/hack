@@ -1,6 +1,6 @@
 module V1
   class StudentsController < ApplicationController
-    skip_before_action :authenticate_student_from_token!, only: [:create]
+    skip_before_action :authenticate_student_from_token!, only: [:create, :update]
 
 
     def index
@@ -24,8 +24,8 @@ module V1
     end
 
     def update
-      @student = current_student
-      if @student.update student_params
+      @student = Student.find(params[:id])
+      if @student.update(student_params)
         render json: @student, serializer: V1::StudentSerializer
       else
         render json: { error: t('student_create_error') }, status: :unprocessable_entity
@@ -35,7 +35,7 @@ module V1
     private
 
     def student_params
-      params.permit(:email, :password, :nickname, :university, :department, :address, :phone_numebr, :last_name, :first_name, :images )
+      params.require(:student).permit(:email, :password, :nickname, :university, :department, :address, :phone_numebr, :last_name, :first_name, :images )
     end
   end
 end

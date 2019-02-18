@@ -2,45 +2,43 @@
   <div>
     <h5>ユーザー情報編集</h5>
     <form @submit.prevent="update">
-      <v-text-field
-        required
-        :rules="emailRules"
-        v-model="email"
-        :counter="20"
-        label="email"
-        name="email"
-      ></v-text-field>
-      <v-text-field
-        required
-        :rules="passwordRules"
-        v-model="password"
-        :counter="20"
-        name="password"
-        label="Password"
-      ></v-text-field>
-      <p>{{email}}</p>
-      <p>{{password}}</p>
-      <v-checkbox label="Do you agree?" required></v-checkbox>
-      <!-- <input type="submit" @click="submit"> -->
+      <v-text-field v-model="email" label="email"></v-text-field>
       <input type="submit">
-      <v-btn @click="clear">clear</v-btn>
     </form>
   </div>
 </template>
 <script>
+import axios from "axios";
+import "babel-polyfill";
 export default {
   data() {
-    return {};
+    return {
+      token: "",
+      id: "",
+      email: ""
+    };
   },
-  computed() {
-    token: {
-    }
+  mounted() {
+    var data = localStorage.getItem("currentStudent");
+    data = JSON.parse(data);
+    this.token = data[0].access_token;
+    this.id = data[0].student_id;
   },
   methods: {
     async update() {
-      const responce = await axios.post(
-        "http://localhost:5000/v1/students/${id}/"
-      );
+      try {
+        const responce = await axios.put(
+          `http://localhost:5000/v1/students/${this.id}`,
+          {
+            email: this.email
+          }
+        );
+        this.$router.push({
+          name: "index"
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 };

@@ -3,8 +3,8 @@
   <div>
     <v-navigation-drawer fixed v-model="drawer" app class="blue-grey lighten-4">
       <v-list dense>
-        <navbar-list v-for="tag in tags" :tag="tag" :login="login">></navbar-list>
-        <v-list-tile @click v-show="!login">
+        <navbar-list v-for="tag in tags" :tag="tag" :login="login"></navbar-list>
+        <v-list-tile v-show="!login">
           <v-list-tile-action>
             <v-icon>open_in_new</v-icon>
           </v-list-tile-action>
@@ -14,7 +14,7 @@
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click v-show="login">
+        <v-list-tile v-show="login">
           <v-list-tile-action>
             <v-icon>exit_to_app</v-icon>
           </v-list-tile-action>
@@ -45,8 +45,9 @@ import LogIn from "../devise/LogIn.vue";
 
 export default {
   data: () => ({
-    drawer: false,
     login: "",
+    drawer: false,
+    token: "",
     tags: [
       {
         path: "/",
@@ -80,24 +81,24 @@ export default {
     LogOut,
     LogIn
   },
-  async mounted() {
-    if (localStorage.currentStudent){
+  mounted() {
+    if (localStorage.currentStudent) {
       var data = localStorage.getItem("currentStudent");
       data = JSON.parse(data);
-        this.login = true;
+      this.token = data[0].access_token;
     }
-    else {
-      this.login = false;
-    }
+    var local = localStorage.getItem("login");
+    local = JSON.parse(local);
+    this.login = local["login"];
   },
   methods: {
-     async signOut() {
+    async signOut() {
       try {
         const response = await axios.delete(`http://localhost:5000/v1/logout`, {
           params: { access_token: this.token }
-        }); 
-        this.login = false;
-        localStorage.clear();
+        });
+        this.$store.commit("logout");
+        localStorage.removeItem("currentStudent");
         this.$router.push({
           name: "login"
           // params: { currentStudent: this.currentStudent }

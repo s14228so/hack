@@ -90,7 +90,6 @@ export default {
       this.login = false;
     }
   },
-
   methods: {
      async signOut() {
       try {

@@ -80,6 +80,14 @@ export default {
     LogOut,
     LogIn
   },
+  mounted() {
+    if(localStorage.currentStudent){
+    var data = localStorage.getItem("currentStudent");
+    data = JSON.parse(data);
+    this.token = data[0].access_token;
+    console.log(this.token);
+    }
+  },
   methods: {
      async signOut() {
       try {

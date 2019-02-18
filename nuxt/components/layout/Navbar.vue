@@ -80,11 +80,14 @@ export default {
     LogIn
   },
   async mounted() {
+    if (localStorage.currentStudent){
     var data = localStorage.getItem("currentStudent");
     data = JSON.parse(data);
-    if (data[0].access_token) {
+    if (data) {
       this.login = true;
     }
+    }
+
   }
 };
 </script>

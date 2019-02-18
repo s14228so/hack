@@ -6,7 +6,7 @@
         <v-flex xs12 md4 v-show="!settingStatus">
           <v-card flat class="pa-5">
             <v-avatar>
-              <img :src="blob" :alt="student.nickname">
+              <img :src="blob">
             </v-avatar>
 
             <div class="caption grey--text mt-3">ユーザ名</div>
@@ -109,21 +109,11 @@ export default {
     }
   },
   mounted: async function() {
+  if(localStorage){
     var data = localStorage.getItem("currentStudent");
     data = JSON.parse(data);
-    console.log(data[0].access_token);
-    const res = await axios.get(`http://localhost:5000/v1/students`, {
-      headers: { Authorization: data[0].access_token }
-    });
-    if (res.status !== 200) {
-      process.exit();
-    }
-    this.student = res.data.student;
-    this.blob = res.data.image;
-    //これだとカレンダー側からしか呼び出せていない
-    console.log(res.data);
-
-    //current_studentが呼び出せてない
+  }
+  this.student = data[0]
   }
 };
 </script>

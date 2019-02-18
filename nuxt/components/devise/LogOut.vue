@@ -13,10 +13,12 @@ export default {
     };
   },
   mounted() {
+    if(localStorage.currentStudent){
     var data = localStorage.getItem("currentStudent");
     data = JSON.parse(data);
     this.token = data[0].access_token;
     console.log(this.token);
+    }
   },
   methods: {
     async destroyUserSession() {
@@ -24,8 +26,7 @@ export default {
         const response = await axios.delete(`http://localhost:5000/v1/logout`, {
           params: { access_token: this.token }
         });
-        this.token = "";
-        data = "";
+        localStorage.clear();
         this.$router.push({
           name: "login"
           // params: { currentStudent: this.currentStudent }

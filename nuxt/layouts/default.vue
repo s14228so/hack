@@ -45,7 +45,7 @@ export default {
   mounted() {
     var data = localStorage.getItem("currentStudent");
     data = JSON.parse(data);
-    console.log(`ログインしているユーザは${data[0].email}です`);
+    // console.log(`ログインしているユーザは${data[0].email}です`);
   }
 };
 </script>

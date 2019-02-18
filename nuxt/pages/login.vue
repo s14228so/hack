@@ -77,9 +77,9 @@ export default {
         var data = [];
         data.push(response.data);
         localStorage.setItem("currentStudent", JSON.stringify(data));
-        localStorage.setItem("email", response.data.email);
         // console.log(this.currentStudent);
-        this.$store.commit("login");
+        this.$store.commit("login", this.currentStudent);
+        this.$store.state.currentStudent = response.data;
         this.$router.push({
           name: "index"
           // params: { currentStudent: this.currentStudent }

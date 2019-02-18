@@ -3,8 +3,8 @@
   <div>
     <v-navigation-drawer fixed v-model="drawer" app class="blue-grey lighten-4">
       <v-list dense>
-        <navbar-list v-for="tag in tags" :tag="tag" :login="login"></navbar-list>
-        <v-list-tile v-show="!login">
+        <navbar-list v-for="tag in tags" :tag="tag" :key="tag.label"></navbar-list>
+        <v-list-tile v-show="!this.$store.state.login">
           <v-list-tile-action>
             <v-icon>open_in_new</v-icon>
           </v-list-tile-action>
@@ -14,7 +14,7 @@
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile v-show="login">
+        <v-list-tile v-show="this.$store.state.login">
           <v-list-tile-action>
             <v-icon>exit_to_app</v-icon>
           </v-list-tile-action>

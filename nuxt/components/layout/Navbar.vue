@@ -20,7 +20,7 @@
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>
-              <log-out></log-out>
+              <log-out @destroyUserSession="signOut"></log-out>
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
@@ -37,15 +37,16 @@
 </template>
 
 <script>
+import axios from "axios";
+import "babel-polyfill";
 import NavbarList from "../layout/NavbarList.vue";
 import LogOut from "../devise/LogOut.vue";
 import LogIn from "../devise/LogIn.vue";
 
 export default {
+  props: ["login"],
   data: () => ({
     drawer: false,
-    login: false,
-
     tags: [
       {
         path: "/",
@@ -79,15 +80,21 @@ export default {
     LogOut,
     LogIn
   },
-  async mounted() {
-    if (localStorage.currentStudent){
-    var data = localStorage.getItem("currentStudent");
-    data = JSON.parse(data);
-    if (data) {
-      this.login = true;
+  methods: {
+     async signOut() {
+      try {
+        const response = await axios.delete(`http://localhost:5000/v1/logout`, {
+          params: { access_token: this.token }
+        });
+        localStorage.clear();
+        this.$router.push({
+          name: "login"
+          // params: { currentStudent: this.currentStudent }
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
-    }
-
   }
 };
 </script>

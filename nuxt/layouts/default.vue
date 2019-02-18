@@ -2,7 +2,7 @@
   <v-app dark>
     <v-content>
       <v-container>
-        <navbar></navbar>
+        <navbar :login="login"></navbar>
         <nuxt/>
       </v-container>
     </v-content>
@@ -21,6 +21,7 @@ export default {
       clipped: false,
       drawer: false,
       fixed: false,
+      login: false,
       items: [
         {
           icon: "apps",
@@ -42,10 +43,17 @@ export default {
   components: {
     Navbar
   },
-  mounted() {
-    var data = localStorage.getItem("currentStudent");
-    data = JSON.parse(data);
-    // console.log(`ログインしているユーザは${data[0].email}です`);
+    async mounted() {
+    if (localStorage.currentStudent){
+      var data = localStorage.getItem("currentStudent");
+      data = JSON.parse(data);
+      if (data) {
+        this.login = true;
+      }
+    }
+    else {
+      this.login = false;
+    }
   }
 };
 </script>

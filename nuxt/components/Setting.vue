@@ -12,6 +12,8 @@
       <v-text-field v-model="phone" label="phone_number"></v-text-field>
       <v-text-field v-model="firstName" label="first_name"></v-text-field>
       <v-text-field v-model="lastName" label="last_name"></v-text-field>
+      <v-text-field v-model="university" label="university"></v-text-field>
+      <v-text-field v-model="department" label="department"></v-text-field>
 
       <input type="submit">
     </form>
@@ -35,7 +37,9 @@ export default {
       phone: "",
       firstName: "",
       lastName: "",
-      images: []
+      images: [],
+      university: "",
+      department: ""
     };
   },
   mounted() {
@@ -60,7 +64,9 @@ export default {
             university: this.university,
             last_name: this.lastName,
             first_name: this.firstName,
-            department: this.department
+            department: this.department,
+            department: this.department,
+            university: this.university
           }
         );
         this.$router.push({

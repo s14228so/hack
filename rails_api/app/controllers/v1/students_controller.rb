@@ -36,7 +36,7 @@ module V1
     private
 
     def student_params
-      params.permit(:email, :password, :nickname, :university, :department, :address, :phone_numebr, :last_name, :first_name, :images )
+      params.permit(:email, :password, :university, :department, :nickname, :university, :department, :address, :phone_numebr, :last_name, :first_name, :images )
     end
   end
 end

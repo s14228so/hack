@@ -71,7 +71,10 @@ export default {
           }
         );
         const res = await axios.get(
-          `http://localhost:5000/v1/students/${this.id}`
+          `http://localhost:5000/v1/students/${this.id}`,
+          {
+            headers: { Authorization: this.token }
+          }
         );
         var data = [];
         data.push(res.data);

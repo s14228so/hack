@@ -1,11 +1,15 @@
 <template>
-  <!-- watch関数とかs使わないと -->
+  <!-- watch関数とか使わないと -->
   <!-- 現状初期値がパラメータとして送られてしまう -->
   <!-- updateするとidが取得できない -->
   <div>
     <h5>ユーザー情報編集</h5>
     <form @submit.prevent="update">
-      <v-text-field v-for="(value, key) in status" :key="key" :label="key" :value="value"></v-text-field>
+      <div v-for="(item,index) in status" :key="item.id">
+        <div v-for="(value, key) in item" :key="key">
+          <v-text-field :label="key" v-model="status[index][key]"></v-text-field>
+        </div>
+      </div>
       <input type="submit">
     </form>
   </div>
@@ -18,38 +22,44 @@ export default {
     return {
       token: "",
       id: "",
-      status: {
-        nickname: "",
-        email: "",
-        university: "",
-        grade: "",
-        introduction: "",
-        app: "",
-        address: "",
-        phone: "",
-        firstName: "",
-        lastName: "",
-        // images: [],
-        university: "",
-        department: ""
-      }
+      status: [
+        { nickname: "" },
+        { email: "" },
+        { university: "" },
+        { grade: "" },
+        { introduction: "" },
+        { app: "" },
+        { address: "" },
+        { phone: "" },
+        { firstName: "" },
+        { lastName: "" },
+        // // images: [],
+        { university: "" },
+        { department: "" }
+      ]
     };
+  },
+  watch: {
+    // status(newVal, oldVal) {
+    //   console.log(`更新前のデータ：${oldVal}`);
+    //   console.log(`更新後のデータ：${newVal}`);
+    // }
   },
   mounted() {
     var data = localStorage.getItem("currentStudent");
     data = JSON.parse(data);
     this.token = data[0].access_token;
-    this.status.email = data[0].email;
-    this.status.nickname = data[0].nickname;
-    this.status.university = data[0].nickname;
-    this.status.department = data[0].department;
-    this.status.grade = data[0].grade;
-    this.status.introduction = data[0].introduction;
-    this.status.app = data[0].app;
-    this.status.phone = data[0].phone_number;
-    this.status.firstName = data[0].first_name;
-    this.status.lastName = data[0].last_name;
-    this.status.address = data[0].address;
+    this.status[1].email = data[0].email;
+    this.status[0].nickname = data[0].nickname;
+    this.status[2].university = data[0].nickname;
+    this.status[10].department = data[0].department;
+    this.status[3].grade = data[0].grade;
+    this.status[4].introduction = data[0].introduction;
+    this.status[5].app = data[0].app;
+    this.status[7].phone = data[0].phone_number;
+    this.status[8].firstName = data[0].first_name;
+    this.status[9].lastName = data[0].last_name;
+    this.status[6].address = data[0].address;
     this.id = data[0].student_id;
   },
   methods: {

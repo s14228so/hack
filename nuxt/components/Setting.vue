@@ -1,4 +1,7 @@
 <template>
+  <!-- watch関数とかs使わないと -->
+  <!-- 現状初期値がパラメータとして送られてしまう -->
+  <!-- updateするとidが取得できない -->
   <div>
     <h5>ユーザー情報編集</h5>
     <form @submit.prevent="update">

@@ -8,6 +8,10 @@ module V1
       render json: Student.all, each_serializer: V1::StudentSerializer
     end
 
+    def show
+      render json: current_student, each_serializer: V1::CurrentStudentSerializer
+    end
+
     def current
       render json: current_student.events, each_serializer: V1::CurrentEventsSerializer
     end
@@ -36,7 +40,7 @@ module V1
     private
 
     def student_params
-      params.permit(:email, :password, :university, :department, :nickname, :university, :department, :address, :phone_numebr, :last_name, :first_name, :images )
+      params.require(:student).permit(:email, :password, :grade, :university, :department, :app, :nickname, :university, :department, :address, :introduction, :phone_number, :last_name, :first_name, :images )
     end
   end
 end

@@ -1,20 +1,8 @@
 <template>
-  <!-- v-forで回したらいけるかも -->
-  <!-- student.statuses -->
   <div>
     <h5>ユーザー情報編集</h5>
     <form @submit.prevent="update">
-      <v-text-field v-model="email" label="email"></v-text-field>
-      <v-text-field v-model="introduction" label="introduction"></v-text-field>
-      <v-text-field v-model="address" label="address"></v-text-field>
-      <v-text-field v-model="app" label="app"></v-text-field>
-      <v-text-field v-model="nickname" label="nickname"></v-text-field>
-      <v-text-field v-model="phone" label="phone_number"></v-text-field>
-      <v-text-field v-model="firstName" label="first_name"></v-text-field>
-      <v-text-field v-model="lastName" label="last_name"></v-text-field>
-      <v-text-field v-model="university" label="university"></v-text-field>
-      <v-text-field v-model="department" label="department"></v-text-field>
-
+      <v-text-field v-for="(value, key) in status" :key="key" :label="key" :value="value"></v-text-field>
       <input type="submit">
     </form>
   </div>
@@ -26,26 +14,40 @@ export default {
   data() {
     return {
       token: "",
-      nickname: "",
       id: "",
-      email: "",
-      university: "",
-      grade: "",
-      introduction: "",
-      app: "",
-      address: "",
-      phone: "",
-      firstName: "",
-      lastName: "",
-      images: [],
-      university: "",
-      department: ""
+      status: {
+        nickname: "",
+        email: "",
+        university: "",
+        grade: "",
+        introduction: "",
+        app: "",
+        address: "",
+        phone: "",
+        firstName: "",
+        lastName: "",
+        // images: [],
+        university: "",
+        department: ""
+      }
     };
   },
   mounted() {
     var data = localStorage.getItem("currentStudent");
     data = JSON.parse(data);
     this.token = data[0].access_token;
+    this.status.email = data[0].email;
+    this.status.nickname = data[0].nickname;
+    this.status.university = data[0].nickname;
+    this.status.department = data[0].department;
+    this.status.grade = data[0].grade;
+    this.status.introduction = data[0].introduction;
+    this.status.app = data[0].app;
+    this.status.phone = data[0].phone_number;
+    this.status.firstName = data[0].first_name;
+    this.status.lastName = data[0].last_name;
+    this.status.address = data[0].address;
+
     this.id = data[0].student_id;
   },
   methods: {
@@ -54,24 +56,29 @@ export default {
         const responce = await axios.put(
           `http://localhost:5000/v1/students/${this.id}`,
           {
-            email: this.email,
-            nickname: this.nickname,
-            address: this.address,
-            phone_number: this.phone,
+            email: this.status.email,
+            nickname: this.status.nickname,
+            address: this.status.address,
+            phone_number: this.status.phone,
             app: this.app,
-            introduction: this.introduction,
-            grade: this.grade,
-            university: this.university,
+            introduction: this.status.introduction,
+            grade: this.status.grade,
+            university: this.status.university,
             last_name: this.lastName,
-            first_name: this.firstName,
-            department: this.department,
-            department: this.department,
-            university: this.university
+            first_name: this.status.firstName,
+            department: this.status.department,
+            university: this.status.university
           }
         );
+        const res = await axios.get(
+          `http://localhost:5000/v1/students/${this.id}`
+        );
+        var data = [];
+        data.push(res.data);
         this.$router.push({
           name: "index"
         });
+        localStorage.setItem("currentStudent", JSON.stringify(data));
       } catch (error) {
         console.log(error);
       }

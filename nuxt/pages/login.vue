@@ -56,9 +56,7 @@ export default {
       ]
     };
   },
-  mounted() {
-    console.log($store);
-  },
+  mounted() {},
   methods: {
     clear() {
       this.email = "";

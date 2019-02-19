@@ -68,18 +68,17 @@ export default {
         const responce = await axios.put(
           `http://localhost:5000/v1/students/${this.id}`,
           {
-            email: this.status.email,
-            nickname: this.status.nickname,
-            address: this.status.address,
-            phone_number: this.status.phone,
-            app: this.app,
-            introduction: this.status.introduction,
-            grade: this.status.grade,
-            university: this.status.university,
-            last_name: this.lastName,
-            first_name: this.status.firstName,
-            department: this.status.department,
-            university: this.status.university
+            email: this.status[1].email,
+            nickname: this.status[0].nickname,
+            address: this.status[6].address,
+            phone_number: this.status[7].phone,
+            app: this.status[5].app,
+            introduction: this.status[4].introduction,
+            grade: this.status[3].grade,
+            university: this.status[2].university,
+            last_name: this.status[9].lastName,
+            first_name: this.status[8].firstName,
+            department: this.status[10].department
           }
         );
         const res = await axios.get(

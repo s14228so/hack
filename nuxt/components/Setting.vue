@@ -47,8 +47,8 @@ export default {
     this.status.firstName = data[0].first_name;
     this.status.lastName = data[0].last_name;
     this.status.address = data[0].address;
-
-    this.id = data[0].student_id;
+    this.id = data[0].id;
+    console.log(data[0]);
   },
   methods: {
     async update() {

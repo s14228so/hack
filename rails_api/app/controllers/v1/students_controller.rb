@@ -40,7 +40,7 @@ module V1
     private
 
     def student_params
-      params.require(:student).permit(:email, :password, :grade, :university, :department, :app, :nickname, :university, :department, :address, :introduction, :phone_number, :last_name, :first_name, :images )
+      params.require(:student).permit(:email, :password, :grade, :university, :department, :app, :nickname, :university, :department, :address, :introduction, :phone_number, :last_name, :first_name, :image )
     end
   end
 end

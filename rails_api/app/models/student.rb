@@ -11,7 +11,7 @@ class Student < ApplicationRecord
   has_many :event_students
   has_many :events, through: :event_students
 
-  has_many_attached :images
+  has_one_attached :image
   has_many :student_teams
   has_many :teams, through: :student_teams
 

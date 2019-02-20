@@ -29,11 +29,19 @@
       </v-layout>
       <form @submit.prevent="uploadImage">
         <!-- <input type="hidden" name="authenticity_token" :value="this.student.access_token"> -->
-        <input
+        <!-- <input
           type="file"
           name="student[image][]"
           id="student_images"
           @change="processFile($event)"
+        >-->
+        <input
+          type="file"
+          name="student[image]"
+          id="student_image"
+          @change="selectedFile"
+          accept="image/*"
+          placeholder="Upload file..."
         >
         <br>
         <!-- <div v-if="image">
@@ -66,6 +74,7 @@ export default {
       settingStatus: false,
       // blob_url: blob_url,
       image: "",
+      blob: "",
       uploadFile: null
     };
   },
@@ -76,33 +85,19 @@ export default {
     showSetting: function() {
       this.settingStatus = true;
     },
-    // onFileChange(e) {
-    //   var files = e.target.files || e.dataTransfer.files;
-    //   if (!files.length) return;
-    //   this.createImage(files[0]);
-    // },
-    processFile(event) {
-      this.uploadFile = event.target.files[0];
+    selectedFile(e) {
+      e.preventDefault();
+      const files = e.target.files;
+      this.uploadFile = files[0];
     },
-    // createImage(file) {
-    //   var image = new Image();
-    //   var reader = new FileReader();
-    //   var vm = this;
-
-    //   reader.onload = e => {
-    //     vm.image = e.target.result;
-    //   };
-    //   reader.readAsDataURL(file);
-    // },
-    // removeImage: function(e) {
-    //   this.image = "rs";
-    // },
     async uploadImage() {
+      const formData = new FormData();
+      formData.append("student[image]", this.uploadFile);
       const response = await axios.put(
         `http://localhost:5000/v1/students/${this.student.student_id}`,
         {
           headers: { Authorization: this.student.access_token },
-          image: this.uploadFile
+          formData
         }
       );
       this.$router.push({

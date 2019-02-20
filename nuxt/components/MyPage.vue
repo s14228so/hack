@@ -9,16 +9,16 @@
               <img :src="blob">
             </v-avatar>
 
-            <div class="caption grey--text mt-3">ユーザ名</div>
-            <div>{{ student.nickname }}</div>
-            <div class="caption grey--text mt-3">メールアドレス</div>
-            <div>{{ student.email }}</div>
-            <div class="caption grey--text mt-3">大学</div>
-            <div>{{ student.university }}</div>
-            <div class="caption grey--text mt-3">学部</div>
-            <div>{{student.department}}</div>
-            <div class="caption grey--text mt-3">学年</div>
-            <div>{{ student.grade }}年</div>
+            <p class="caption grey--text mt-3">ユーザ名</p>
+            <p>{{ student.nickname }}</p>
+            <p class="caption grey--text mt-3">メールアドレス</p>
+            <p>{{ student.email }}</p>
+            <p class="caption grey--text mt-3">大学</p>
+            <p>{{ student.university }}</p>
+            <p class="caption grey--text mt-3">学部</p>
+            <p>{{student.department}}</p>
+            <p class="caption grey--text mt-3">学年</p>
+            <p>{{ student.grade }}年</p>
             <v-icon class="icon-setting" @click="showSetting">edit</v-icon>
           </v-card>
         </v-flex>
@@ -109,11 +109,11 @@ export default {
     }
   },
   mounted: async function() {
-  if(localStorage){
-    var data = localStorage.getItem("currentStudent");
-    data = JSON.parse(data);
-  }
-  this.student = data[0]
+    if (localStorage) {
+      var data = localStorage.getItem("currentStudent");
+      data = JSON.parse(data);
+    }
+    this.student = data[0];
   }
 };
 </script>

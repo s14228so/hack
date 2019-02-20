@@ -33,8 +33,6 @@ export default {
         { phone: "" },
         { firstName: "" },
         { lastName: "" },
-        // // images: [],
-        { university: "" },
         { department: "" }
       ]
     };
@@ -48,19 +46,19 @@ export default {
   mounted() {
     var data = localStorage.getItem("currentStudent");
     data = JSON.parse(data);
+    this.id = data[0].student_id;
     this.token = data[0].access_token;
-    this.status[1].email = data[0].email;
     this.status[0].nickname = data[0].nickname;
-    this.status[2].university = data[0].nickname;
-    this.status[10].department = data[0].department;
+    this.status[1].email = data[0].email;
+    this.status[2].university = data[0].university;
     this.status[3].grade = data[0].grade;
     this.status[4].introduction = data[0].introduction;
     this.status[5].app = data[0].app;
+    this.status[6].address = data[0].address;
     this.status[7].phone = data[0].phone_number;
     this.status[8].firstName = data[0].first_name;
     this.status[9].lastName = data[0].last_name;
-    this.status[6].address = data[0].address;
-    this.id = data[0].student_id;
+    this.status[10].department = data[0].department;
   },
   methods: {
     async update() {

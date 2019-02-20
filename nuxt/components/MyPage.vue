@@ -27,19 +27,10 @@
           <setting-comp></setting-comp>
         </v-flex>
       </v-layout>
-      <v-form
-        enctype="multipart/form-data"
-        action="/students/9"
-        accept-charset="UTF-8"
-        method="post"
-      >
+      <form @submit.prevent="uploadImage">
         <input name="utf8" type="hidden" value="✓">
         <input type="hidden" name="_method" value="patch">
-        <input
-          type="hidden"
-          name="authenticity_token"
-          value="jmIl112dGCbGMDRHjS54MetsksXB8mUFNX4tiF47/tPNr+eS4h1sBpHIAnHY90mPePfUAkd9Mxt7XPTs7pBCpg=="
-        >
+        <input type="hidden" name="authenticity_token" :value="this.student.access_token">
         <input
           multiple="multiple"
           type="file"
@@ -59,7 +50,7 @@
           value="Update Student"
           data-disable-with="Update Student"
         >
-      </v-form>
+      </form>
 
       <!-- https://codepen.io/Atinux/pen/qOvawK -->
     </v-container>
@@ -106,6 +97,18 @@ export default {
     },
     removeImage: function(e) {
       this.image = "rs";
+    },
+    async uploadImage() {
+      const response = await axios.put(
+        `http://localhost:5000/v1/students/${this.student.student_id}`,
+        {
+          headers: { Authorization: this.student.access_token },
+          images: this.image
+        }
+      );
+      this.$router.push({
+        name: "mypage"
+      });
     }
   },
   mounted: async function() {

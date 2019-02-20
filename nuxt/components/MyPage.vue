@@ -28,22 +28,18 @@
         </v-flex>
       </v-layout>
       <form @submit.prevent="uploadImage">
-        <input name="utf8" type="hidden" value="✓">
-        <input type="hidden" name="_method" value="patch">
-        <input type="hidden" name="authenticity_token" :value="this.student.access_token">
+        <!-- <input type="hidden" name="authenticity_token" :value="this.student.access_token"> -->
         <input
-          multiple="multiple"
           type="file"
-          name="student[images][]"
+          name="student[image][]"
           id="student_images"
-          @change="onFileChange"
+          @change="processFile($event)"
         >
         <br>
-        <div v-if="image">
+        <!-- <div v-if="image">
           <img :src="image" width="50" height="50">
           <button @click="removeImage">Remove image</button>
-        </div>
-
+        </div>-->
         <input
           type="submit"
           name="commit"
@@ -70,7 +66,7 @@ export default {
       settingStatus: false,
       // blob_url: blob_url,
       image: "",
-      blob: ""
+      uploadFile: null
     };
   },
   components: {
@@ -80,30 +76,33 @@ export default {
     showSetting: function() {
       this.settingStatus = true;
     },
-    onFileChange(e) {
-      var files = e.target.files || e.dataTransfer.files;
-      if (!files.length) return;
-      this.createImage(files[0]);
+    // onFileChange(e) {
+    //   var files = e.target.files || e.dataTransfer.files;
+    //   if (!files.length) return;
+    //   this.createImage(files[0]);
+    // },
+    processFile(event) {
+      this.uploadFile = event.target.files[0];
     },
-    createImage(file) {
-      var image = new Image();
-      var reader = new FileReader();
-      var vm = this;
+    // createImage(file) {
+    //   var image = new Image();
+    //   var reader = new FileReader();
+    //   var vm = this;
 
-      reader.onload = e => {
-        vm.image = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    },
-    removeImage: function(e) {
-      this.image = "rs";
-    },
+    //   reader.onload = e => {
+    //     vm.image = e.target.result;
+    //   };
+    //   reader.readAsDataURL(file);
+    // },
+    // removeImage: function(e) {
+    //   this.image = "rs";
+    // },
     async uploadImage() {
       const response = await axios.put(
         `http://localhost:5000/v1/students/${this.student.student_id}`,
         {
           headers: { Authorization: this.student.access_token },
-          images: this.image
+          image: this.uploadFile
         }
       );
       this.$router.push({

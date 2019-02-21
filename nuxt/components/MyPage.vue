@@ -6,19 +6,19 @@
         <v-flex xs12 md4 v-show="!settingStatus">
           <v-card flat class="pa-5">
             <v-avatar>
-              <img :src="blob">
+              <img :src="student.image">
             </v-avatar>
 
-            <div class="caption grey--text mt-3">ユーザ名</div>
-            <div>{{ student.nickname }}</div>
-            <div class="caption grey--text mt-3">メールアドレス</div>
-            <div>{{ student.email }}</div>
-            <div class="caption grey--text mt-3">大学</div>
-            <div>{{ student.university }}</div>
-            <div class="caption grey--text mt-3">学部</div>
-            <div>{{student.department}}</div>
-            <div class="caption grey--text mt-3">学年</div>
-            <div>{{ student.grade }}年</div>
+            <p class="caption grey--text mt-3">ユーザ名</p>
+            <p>{{ student.nickname }}</p>
+            <p class="caption grey--text mt-3">メールアドレス</p>
+            <p>{{ student.email }}</p>
+            <p class="caption grey--text mt-3">大学</p>
+            <p>{{ student.university }}</p>
+            <p class="caption grey--text mt-3">学部</p>
+            <p>{{student.department}}</p>
+            <p class="caption grey--text mt-3">学年</p>
+            <p>{{ student.grade }}年</p>
             <v-icon class="icon-setting" @click="showSetting">edit</v-icon>
           </v-card>
         </v-flex>
@@ -27,39 +27,34 @@
           <setting-comp></setting-comp>
         </v-flex>
       </v-layout>
-      <v-form
-        enctype="multipart/form-data"
-        action="/students/9"
-        accept-charset="UTF-8"
-        method="post"
-      >
-        <input name="utf8" type="hidden" value="✓">
-        <input type="hidden" name="_method" value="patch">
-        <input
-          type="hidden"
-          name="authenticity_token"
-          value="jmIl112dGCbGMDRHjS54MetsksXB8mUFNX4tiF47/tPNr+eS4h1sBpHIAnHY90mPePfUAkd9Mxt7XPTs7pBCpg=="
-        >
-        <input
-          multiple="multiple"
+      <form action method="post" novalidate="true" @submit.prevent="uploadImage">
+        <!-- <input type="hidden" name="authenticity_token" :value="this.student.access_token"> -->
+        <!-- <input
           type="file"
-          name="student[images][]"
+          name="student[image][]"
           id="student_images"
-          @change="onFileChange"
+          @change="processFile($event)"
+        >-->
+        <input
+          type="file"
+          name="student[images]"
+          id="student_image"
+          @change="selectedFile"
+          accept="image/*"
+          placeholder="Upload file..."
         >
         <br>
-        <div v-if="image">
+        <!-- <div v-if="image">
           <img :src="image" width="50" height="50">
           <button @click="removeImage">Remove image</button>
-        </div>
-
+        </div>-->
         <input
           type="submit"
           name="commit"
           value="Update Student"
           data-disable-with="Update Student"
         >
-      </v-form>
+      </form>
 
       <!-- https://codepen.io/Atinux/pen/qOvawK -->
     </v-container>
@@ -79,7 +74,8 @@ export default {
       settingStatus: false,
       // blob_url: blob_url,
       image: "",
-      blob: ""
+      blob: "",
+      uploadFile: null
     };
   },
   components: {
@@ -89,31 +85,38 @@ export default {
     showSetting: function() {
       this.settingStatus = true;
     },
-    onFileChange(e) {
-      var files = e.target.files || e.dataTransfer.files;
-      if (!files.length) return;
-      this.createImage(files[0]);
+    selectedFile(e) {
+      e.preventDefault();
+      const files = e.target.files;
+      this.uploadFile = files[0];
+      console.log(this.uploadFile);
     },
-    createImage(file) {
-      var image = new Image();
-      var reader = new FileReader();
-      var vm = this;
+    async uploadImage() {
+      // formData.append("student[image]", this.uploadFile);
+      // console.log(formData);
+      const formData = new FormData();
 
-      reader.onload = e => {
-        vm.image = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    },
-    removeImage: function(e) {
-      this.image = "rs";
+      // const formData = new FormData();
+      formData.append("student[images]", this.uploadFile);
+      console.log(formData);
+      const response = await axios.post(
+        `http://localhost:5000/v1/students/${this.student.student_id}/image`,
+        formData,
+        {
+          headers: { Authorization: this.student.access_token }
+        }
+      );
+      this.$router.push({
+        name: "mypage"
+      });
     }
   },
   mounted: async function() {
-  if(localStorage){
-    var data = localStorage.getItem("currentStudent");
-    data = JSON.parse(data);
-  }
-  this.student = data[0]
+    if (localStorage) {
+      var data = localStorage.getItem("currentStudent");
+      data = JSON.parse(data);
+    }
+    this.student = data[0];
   }
 };
 </script>

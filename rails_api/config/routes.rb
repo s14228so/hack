@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   namespace :v1, defaults: { format: :json } do
     resource :login, only: [:create], controller: :sessions
     resource :logout, only: [:destroy], controller: :sessions
-    resources :students, only: [:index , :create, :update] do
+    resources :students, only: [:index , :create, :update, :show] do
       get "current", on: :member
+      post "image", on: :member
     end
     resources :event_students, only: [:create]
     resources :events, only: [:index , :create] do

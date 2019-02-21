@@ -1,10 +1,15 @@
 module V1
   class StudentsController < ApplicationController
-    skip_before_action :authenticate_student_from_token!, only: [:create, :update]
+    protect_from_forgery with: :null_session 
+    skip_before_action :authenticate_student_from_token!, only: [:create, :update, :image]
 
 
     def index
       render json: Student.all, each_serializer: V1::StudentSerializer
+    end
+
+    def show
+      render json: current_student, each_serializer: V1::CurrentStudentSerializer
     end
 
     def current
@@ -32,10 +37,22 @@ module V1
       end
     end
 
+    def image
+      @student = Student.find(params[:id])
+      @student.update(image_params)
+    end
+
+
     private
 
     def student_params
-      params.require(:student).permit(:email, :password, :nickname, :university, :department, :address, :phone_numebr, :last_name, :first_name, :images )
+      params.require(:student).permit(:email, :password, :grade, :university, :department, :app, :nickname, :university, :department, :address, :introduction, :phone_number, :last_name, :first_name, :image )
     end
+
+    def image_params
+      params.require(:student).permit(:images)
+    end
+
+
   end
 end

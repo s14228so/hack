@@ -10,7 +10,7 @@ module V1
     end
 
     def image
-          url_for(object.images[0])
+        url_for(object.images.last)
     end
 
     def token_type

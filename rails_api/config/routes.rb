@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resource :logout, only: [:destroy], controller: :sessions
     resources :students, only: [:index , :create, :update, :show] do
       get "current", on: :member
+      post "image", on: :member
     end
     resources :event_students, only: [:create]
     resources :events, only: [:index , :create] do

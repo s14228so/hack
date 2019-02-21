@@ -10,7 +10,7 @@ module V1
     end
 
     def image
-       return rails_blob_path(object.image, only_path: true)
+      puts "aaaaaaaa"
     end
 
     def token_type

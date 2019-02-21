@@ -1,7 +1,7 @@
 module V1
   class StudentsController < ApplicationController
     protect_from_forgery with: :null_session 
-    skip_before_action :authenticate_student_from_token!, only: [:create, :update]
+    skip_before_action :authenticate_student_from_token!, only: [:create, :update, :image]
 
 
     def index
@@ -37,10 +37,23 @@ module V1
       end
     end
 
+    def image
+      @student = Student.find(params[:id])
+      binding.pry
+      @student.update(image_params)
+    end
+
+
     private
 
     def student_params
       params.require(:student).permit(:email, :password, :grade, :university, :department, :app, :nickname, :university, :department, :address, :introduction, :phone_number, :last_name, :first_name, :image )
     end
+
+    def image_params
+      params.require(:student).permit(:image)
+    end
+
+
   end
 end

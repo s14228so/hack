@@ -8,7 +8,10 @@ module V1
     end
 
     def image
-      rails_blob_path(object.image)
+      if object.image
+        # polymorphic_url(object.image)
+        puts "aaaaaa"
+      end
     end
   
   end

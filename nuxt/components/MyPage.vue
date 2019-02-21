@@ -6,7 +6,7 @@
         <v-flex xs12 md4 v-show="!settingStatus">
           <v-card flat class="pa-5">
             <v-avatar>
-              <img :src="blob">
+              <img :src="student.image">
             </v-avatar>
 
             <p class="caption grey--text mt-3">ユーザ名</p>
@@ -27,7 +27,7 @@
           <setting-comp></setting-comp>
         </v-flex>
       </v-layout>
-      <form @submit.prevent="uploadImage">
+      <form action method="post" novalidate="true" @submit.prevent="uploadImage">
         <!-- <input type="hidden" name="authenticity_token" :value="this.student.access_token"> -->
         <!-- <input
           type="file"
@@ -89,15 +89,17 @@ export default {
       e.preventDefault();
       const files = e.target.files;
       this.uploadFile = files[0];
+      console.log(this.uploadFile);
     },
     async uploadImage() {
-      const formData = new FormData();
-      formData.append("student[image]", this.uploadFile);
+      // const formData = new FormData();
+      // formData.append("student[image]", this.uploadFile);
+      // console.log(formData);
       const response = await axios.put(
         `http://localhost:5000/v1/students/${this.student.student_id}`,
         {
           headers: { Authorization: this.student.access_token },
-          formData
+          student: { image: this.uploadFile }
         }
       );
       this.$router.push({

@@ -6,6 +6,10 @@ module V1
     def student_id
       object.id
     end
+
+    def image
+      rails_blob_path(object.image)
+    end
   
   end
 end

@@ -113,21 +113,23 @@ export default {
     }
   },
   mounted: async function() {
-    if (localStorage) {
+    if (localStorage.currentStudent) {
       var data = localStorage.getItem("currentStudent");
       data = JSON.parse(data);
-    }
-    const res = await axios.get(
-      `http://localhost:5000/v1/students/${this.student.student_id}`,
-      {
-        headers: { Authorization: this.token }
-      }
-    );
-    var data = [];
-    data.push(res.data);
-    localStorage.setItem("currentStudent", JSON.stringify(data));
+      this.student = data[0];
+    } else {
+      const res = await axios.get(
+        `http://localhost:5000/v1/students/${this.$store.login}`,
+        {
+          headers: { Authorization: this.token }
+        }
+      );
+      var data = [];
+      data.push(res.data);
+      localStorage.setItem("currentStudent", JSON.stringify(data));
 
-    this.student = data[0];
+      this.student = data[0];
+    }
   }
 };
 </script>

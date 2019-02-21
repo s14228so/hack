@@ -8,10 +8,7 @@ module V1
     end
 
     def image
-      if object.image
-        # polymorphic_url(object.image)
-        puts "aaaaaa"
-      end
+        polymorphic_url(object.image)
     end
   
   end

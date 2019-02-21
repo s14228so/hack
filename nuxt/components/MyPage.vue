@@ -117,6 +117,7 @@ export default {
       data = JSON.parse(data);
     }
     this.student = data[0];
+    this.student.image = `http://localhost:5000/${this.student.image}`;
   }
 };
 </script>

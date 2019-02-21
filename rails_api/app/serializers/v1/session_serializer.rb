@@ -10,7 +10,7 @@ module V1
     end
 
     def image
-      puts "aaaaaaaa"
+          url_for(object.images[0])
     end
 
     def token_type

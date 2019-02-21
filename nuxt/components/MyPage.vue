@@ -106,6 +106,7 @@ export default {
           headers: { Authorization: this.student.access_token }
         }
       );
+      localStorage.removeItem("currentStudent");
       this.$router.push({
         name: "mypage"
       });
@@ -116,6 +117,16 @@ export default {
       var data = localStorage.getItem("currentStudent");
       data = JSON.parse(data);
     }
+    const res = await axios.get(
+      `http://localhost:5000/v1/students/${this.student.student_id}`,
+      {
+        headers: { Authorization: this.token }
+      }
+    );
+    var data = [];
+    data.push(res.data);
+    localStorage.setItem("currentStudent", JSON.stringify(data));
+
     this.student = data[0];
   }
 };

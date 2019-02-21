@@ -39,7 +39,6 @@ module V1
 
     def image
       @student = Student.find(params[:id])
-      binding.pry
       @student.update(image_params)
     end
 
@@ -51,7 +50,7 @@ module V1
     end
 
     def image_params
-      params.require(:student).permit(:image)
+      params.require(:student).permit(:images)
     end
 
 

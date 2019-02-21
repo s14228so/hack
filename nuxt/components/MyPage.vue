@@ -37,7 +37,7 @@
         >-->
         <input
           type="file"
-          name="student[image]"
+          name="student[images]"
           id="student_image"
           @change="selectedFile"
           accept="image/*"
@@ -97,13 +97,13 @@ export default {
       const formData = new FormData();
 
       // const formData = new FormData();
-      formData.append("student[image]", this.uploadFile);
+      formData.append("student[images]", this.uploadFile);
       console.log(formData);
       const response = await axios.post(
         `http://localhost:5000/v1/students/${this.student.student_id}/image`,
+        formData,
         {
-          headers: { Authorization: this.student.access_token },
-          formData
+          headers: { Authorization: this.student.access_token }
         }
       );
       this.$router.push({

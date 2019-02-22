@@ -85,7 +85,9 @@ export default {
     if (localStorage.currentStudent) {
       var data = localStorage.getItem("currentStudent");
       data = JSON.parse(data);
-      this.token = data[0].access_token;
+
+      this.token = data.access_token;
+      console.log(this.token);
     }
     var local = localStorage.getItem("login");
     local = JSON.parse(local);

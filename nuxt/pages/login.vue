@@ -64,29 +64,36 @@ export default {
       this.select = null;
       this.checkbox = false;
     },
-    async submit() {
-      try {
-        const response = await axios.post(`http://localhost:5000/v1/login`, {
-          email: this.email,
-          password: this.password
-        });
+    submit() {
+      this.$store.dispatch(`getStudent`, {
+        email: this.email,
+        password: this.password
+      });
+      this.$router.push({
+        name: "index"
+      });
 
-        // await this.$router.go()
-        // this.$router.push("/")
-        this.currentStudent = response.data;
-        var data = [];
-        data.push(response.data);
-        localStorage.setItem("currentStudent", JSON.stringify(data));
-        // console.log(this.currentStudent);
-        this.$store.commit("login", this.currentStudent);
-        this.$store.state.currentStudent = response.data;
-        this.$router.push({
-          name: "index"
-          // params: { currentStudent: this.currentStudent }
-        });
-      } catch (error) {
-        console.log(error);
-      }
+      // try {
+      //   const response = await axios.post(`http://localhost:5000/v1/login`, {
+      //     email: this.email,
+      //     password: this.password
+      //   });
+      //   // await this.$router.go()
+      //   // this.$router.push("/")
+      //   this.currentStudent = response.data;
+      //   var data = [];
+      //   data.push(response.data);
+      //   localStorage.setItem("currentStudent", JSON.stringify(data));
+      //   // console.log(this.currentStudent);
+      //   this.$store.commit("login", this.currentStudent);
+      //   this.$store.state.currentStudent = response.data;
+      //   this.$router.push({
+      //     name: "index"
+      //     // params: { currentStudent: this.currentStudent }
+      //   });
+      // } catch (error) {
+      //   console.log(error);
+      // }
     },
     async index() {
       try {

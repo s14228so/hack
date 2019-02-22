@@ -25,8 +25,7 @@ export default {
     // console.log(this.currentStudent)
     var data = localStorage.getItem("currentStudent");
     data = JSON.parse(data);
-    this.currentStudent = data[0];
-    console.log(this.currentStudent);
+    this.currentStudent = data;
   }
 };
 </script>

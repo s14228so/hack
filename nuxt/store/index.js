@@ -4,7 +4,8 @@ import createPersistedState from "vuex-persistedstate";
 const createStore = () => {
   return new Vuex.Store({
     state: () => ({
-      login: true
+      login: true,
+      student_id: null
     }),
     mutations: {
       login(state) {
@@ -12,6 +13,19 @@ const createStore = () => {
       },
       logout(state) {
         state.login = false;
+      }
+    },
+
+    //ログイン情報を引数で取るためにactionsのpayloadとかを学ぶ必要がありそう
+    actions: {
+      async getMessageAction(context) {
+        const payload = {
+          message: ""
+        };
+        await axios.get("http://localhost:3000").then(res => {
+          payload.message = res.data;
+        });
+        context.commit("getMessage", payload);
       }
     },
     plugins: [

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       post "image", on: :member
     end
     resources :event_students, only: [:create]
-    resources :events, only: [:index , :create] do
+    resources :events, only: [:index , :create, :show] do
       get 'join_students', on: :member
       get 'myhacks', on: :collection
     end

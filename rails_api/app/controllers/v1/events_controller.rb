@@ -7,7 +7,7 @@ module V1
 
   def show
     @event = Event.find(params[:id])
-    render "show", formats: "json", handlers: "jbuilder"
+    render json: @event, each_serializer: V1::EventSerializer
   end
 
   def myhacks

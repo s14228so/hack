@@ -74,10 +74,10 @@ export default {
   async created() {
     var data = localStorage.getItem("currentStudent");
     data = JSON.parse(data);
-    this.currentId = data[0].student_id;
+    this.currentId = data.student_id;
     try {
       const response = await axios.get(`http://localhost:5000/v1/events`, {
-        headers: { Authorization: data[0].access_token }
+        headers: { Authorization: data.access_token }
       });
       this.events = response.data;
     } catch (error) {
@@ -86,7 +86,7 @@ export default {
     let response = await axios.get(
       `http://localhost:5000/v1/students/${this.currentId}/current`,
       {
-        headers: { Authorization: data[0].access_token }
+        headers: { Authorization: data.access_token }
       }
     );
     console.log(response.data);
@@ -108,8 +108,9 @@ export default {
         const response = await axios.post(
           `http://localhost:5000/v1/event_students`,
           {
+            student_id: this.currentId,
             event_id: id,
-            headers: { Authorization: data[0].access_token }
+            headers: { Authorization: data.access_token }
           }
         );
       } catch (error) {
@@ -125,7 +126,7 @@ export default {
     },
     openDetail(event) {
       this.$router.push({
-        name: "events/_id",
+        name: "events-id",
         params: { event: event, id: event.id }
       });
       // console.log(event)

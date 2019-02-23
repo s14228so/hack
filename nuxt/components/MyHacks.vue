@@ -28,12 +28,12 @@ export default {
     EventDetail
   },
   mounted: async function() {
-    if(localStorage){
-    var data = localStorage.getItem("currentStudent");
-    data = JSON.parse(data);
-  }
+    if (localStorage) {
+      var data = localStorage.getItem("currentStudent");
+      data = JSON.parse(data);
+    }
     const res = await axios.get(`http://localhost:5000/v1/events/myhacks`, {
-      headers: { Authorization: data[0].access_token }
+      headers: { Authorization: data.access_token }
     });
     if (res.status !== 200) {
       process.exit();
@@ -53,7 +53,7 @@ export default {
       const res = await axios.get(
         `http://localhost:5000/v1/events/${event.id}/join_students`,
         {
-          headers: { Authorization: data[0].access_token }
+          headers: { Authorization: data.access_token }
         }
       );
       if (res.status !== 200) {

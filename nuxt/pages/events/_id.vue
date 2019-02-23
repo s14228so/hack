@@ -1,4 +1,9 @@
-<template></template>
+<template>
+  <div>
+    <div>{{event.title}}</div>
+    <div>{{event.date }}</div>
+  </div>
+</template>
 <script>
 import axios from "axios";
 import "babel-polyfill";

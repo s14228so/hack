@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get "current", on: :member
       post "image", on: :member
     end
+    resources :teams
     resources :event_students, only: [:create]
     resources :events, only: [:index , :create, :show] do
       get 'join_students', on: :member

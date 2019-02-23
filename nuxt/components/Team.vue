@@ -19,11 +19,11 @@ export default {
     TeamMember
   },
   mounted: async function() {
-    const res = await axios.get(`/api/myteams`);
+    const res = await axios.get(`http://localhost:5000/v1/`);
     if (res.status !== 200) {
       process.exit();
     }
-    this.parent = res.data.array;
+    this.parent = res.data;
     //これだとカレンダー側からしか呼び出せていない
   }
 };

@@ -6,6 +6,8 @@ module V1
     end
 
     def show
+        @teams = current_student.teams
+        render json: @teams, each_serializer: V1::TeamsSerializer
     end
 
     def create

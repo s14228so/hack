@@ -22,41 +22,28 @@
             <v-icon class="icon-setting" @click="showSetting">edit</v-icon>
           </v-card>
         </v-flex>
+        <form action method="post" novalidate="true" @submit.prevent="uploadImage">
+          <input
+            type="file"
+            name="student[images]"
+            id="student_image"
+            @change="selectedFile"
+            accept="image/*"
+            placeholder="Upload file..."
+          >
+          <br>
+          <input
+            type="submit"
+            name="commit"
+            value="Update Student"
+            data-disable-with="Update Student"
+          >
+        </form>
         <v-flex md2 v-show="!settingStatus"></v-flex>
         <v-flex xs12 md4 v-show="settingStatus">
           <setting-comp></setting-comp>
         </v-flex>
       </v-layout>
-      <form action method="post" novalidate="true" @submit.prevent="uploadImage">
-        <!-- <input type="hidden" name="authenticity_token" :value="this.student.access_token"> -->
-        <!-- <input
-          type="file"
-          name="student[image][]"
-          id="student_images"
-          @change="processFile($event)"
-        >-->
-        <input
-          type="file"
-          name="student[images]"
-          id="student_image"
-          @change="selectedFile"
-          accept="image/*"
-          placeholder="Upload file..."
-        >
-        <br>
-        <!-- <div v-if="image">
-          <img :src="image" width="50" height="50">
-          <button @click="removeImage">Remove image</button>
-        </div>-->
-        <input
-          type="submit"
-          name="commit"
-          value="Update Student"
-          data-disable-with="Update Student"
-        >
-      </form>
-
-      <!-- https://codepen.io/Atinux/pen/qOvawK -->
     </v-container>
   </div>
 </template>
@@ -87,19 +74,6 @@ export default {
       data = JSON.parse(data);
       this.student = data;
     }
-    // } else {
-    //   const res = await axios.get(
-    //     `http://localhost:5000/v1/students/${this.$store.state.currentStudent.student_id}`,
-    //     {
-    //       headers: { Authorization: this.token }
-    //     }
-    //   );
-    //   var data = [];
-    //   data.push(res.data);
-    //   localStorage.setItem("currentStudent", JSON.stringify(data));
-
-    //   this.student = data;
-    // }
   },
   methods: {
     showSetting: function() {
@@ -112,11 +86,7 @@ export default {
       console.log(this.uploadFile);
     },
     async uploadImage() {
-      // formData.append("student[image]", this.uploadFile);
-      // console.log(formData);
       const formData = new FormData();
-
-      // const formData = new FormData();
       formData.append("student[images]", this.uploadFile);
       console.log(formData);
       const response = await axios.post(

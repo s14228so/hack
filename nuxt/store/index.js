@@ -96,8 +96,8 @@ const createStore = () => {
     },
     plugins: [
       createPersistedState({
-        key: "login",
-        paths: ["login"],
+        key: "app",
+        paths: ["login", "currentStudent"],
         storage: window.localStorage
       })
     ]

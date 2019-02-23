@@ -20,6 +20,7 @@ export default {
       hack: "",
       events: [],
       detailStatus: false,
+      student: this.$store.state.currentStudent,
       students: [],
       event: {}
     };
@@ -28,12 +29,8 @@ export default {
     EventDetail
   },
   mounted: async function() {
-    if (localStorage) {
-      var data = localStorage.getItem("currentStudent");
-      data = JSON.parse(data);
-    }
     const res = await axios.get(`http://localhost:5000/v1/events/myhacks`, {
-      headers: { Authorization: data.access_token }
+      headers: { Authorization: this.student.access_token }
     });
     if (res.status !== 200) {
       process.exit();
@@ -45,15 +42,12 @@ export default {
 
   methods: {
     async showDetail(event) {
-      var data = localStorage.getItem("currentStudent");
-      data = JSON.parse(data);
       this.detailStatus = !this.detailStatus;
       this.event = event;
-      console.log("親です");
       const res = await axios.get(
         `http://localhost:5000/v1/events/${event.id}/join_students`,
         {
-          headers: { Authorization: data.access_token }
+          headers: { Authorization: this.student.access_token }
         }
       );
       if (res.status !== 200) {

@@ -56,7 +56,7 @@ export default {
   name: "MyPage",
   data: function() {
     return {
-      student: {},
+      student: this.$store.state.currentStudent,
       infos: ["ユーザ名", "メールアドレス", "大学", "学部", "学年"],
       settingStatus: false,
       // blob_url: blob_url,
@@ -68,13 +68,7 @@ export default {
   components: {
     "setting-comp": Setting
   },
-  mounted: async function() {
-    if (localStorage.currentStudent) {
-      var data = localStorage.getItem("currentStudent");
-      data = JSON.parse(data);
-      this.student = data;
-    }
-  },
+  mounted: async function() {},
   methods: {
     showSetting: function() {
       this.settingStatus = true;

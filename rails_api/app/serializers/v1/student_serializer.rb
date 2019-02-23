@@ -8,7 +8,7 @@ module V1
     end
 
     def image
-          url_for(object.images.last)
+       url_for(object.images.last)
     end
   
   end

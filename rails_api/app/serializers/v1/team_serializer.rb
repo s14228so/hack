@@ -1,6 +1,6 @@
 module V1
   class TeamSerializer < ActiveModel::Serializer
-      attributes :id, :name
+      attributes :id, :name, :introduction 
   end
 end
 

@@ -19,7 +19,13 @@ export default {
     TeamMember
   },
   mounted: async function() {
-    const res = await axios.get(`http://localhost:5000/v1/`);
+    var data = localStorage.getItem("currentStudent");
+    data = JSON.parse(data);
+    const res = await axios.get(`http://localhost:5000/v1/myteams`, {
+      headers: {
+        Authorization: data.access_token
+      }
+    });
     if (res.status !== 200) {
       process.exit();
     }

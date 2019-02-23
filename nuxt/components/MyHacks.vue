@@ -3,7 +3,7 @@
     <event-detail @rand="showDetail" :events="events"></event-detail>
     <div v-show="detailStatus">
       {{event.title}}
-      <div v-for="student in students" class="mt-3">
+      <div v-for="student in students" class="mt-3" :key="student.email">
         <v-chip>{{ student.email }}</v-chip>
       </div>
     </div>

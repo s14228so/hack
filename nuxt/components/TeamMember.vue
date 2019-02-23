@@ -2,7 +2,10 @@
   <v-container>
     <div class="slot">
       <div class="myteams">マイチーム</div>
-      <div v-for="team in teams" class="grey--text">{{ team.name }}</div>
+      <div v-for="team in teams" class="grey--text" :key="team.name">
+        {{ team.name }}
+        {{ team.introduction }}
+      </div>
     </div>
   </v-container>
 </template>

@@ -36,8 +36,6 @@ export default {
       process.exit();
     }
     this.events = res.data;
-
-    //これだとカレンダー側からしか呼び出せていない
   },
 
   methods: {

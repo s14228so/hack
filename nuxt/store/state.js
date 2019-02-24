@@ -1,6 +1,6 @@
 const state = {
   login: false,
-  currrentStudent: {},
+  currentStudent: {},
   test: ""
 };
 

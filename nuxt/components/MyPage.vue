@@ -90,7 +90,6 @@ export default {
           headers: { Authorization: this.student.access_token }
         }
       );
-      localStorage.removeItem("currentStudent");
       this.$router.push({
         name: "mypage"
       });

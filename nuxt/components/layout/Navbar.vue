@@ -44,70 +44,50 @@ import LogOut from "../devise/LogOut.vue";
 import LogIn from "../devise/LogIn.vue";
 
 export default {
-  data: () => ({
-    login: "",
-    drawer: false,
-    token: "",
-    tags: [
-      {
-        path: "/",
-        label: "Home",
-        icon: "home"
-      },
-      {
-        path: "/calendar",
-        label: "Calendar",
-        icon: "calendar_today"
-      },
-      {
-        path: "/mypage",
-        label: "Mypage",
-        icon: "person"
-      },
-      {
-        path: "/myhacks",
-        label: "MyHacks",
-        icon: "computer"
-      },
-      {
-        path: "/team",
-        label: "Team",
-        icon: "folder"
-      }
-    ]
-  }),
+  data() {
+    return {
+      login: "",
+      drawer: false,
+      token: "",
+      student: this.$store.state.currentStudent,
+      tags: [
+        {
+          path: "/",
+          label: "Home",
+          icon: "home"
+        },
+        {
+          path: "/calendar",
+          label: "Calendar",
+          icon: "calendar_today"
+        },
+        {
+          path: "/mypage",
+          label: "Mypage",
+          icon: "person"
+        },
+        {
+          path: "/myhacks",
+          label: "MyHacks",
+          icon: "computer"
+        },
+        {
+          path: "/team",
+          label: "Team",
+          icon: "folder"
+        }
+      ]
+    };
+  },
   components: {
     NavbarList,
     LogOut,
     LogIn
   },
-  mounted() {
-    if (localStorage.currentStudent) {
-      var data = localStorage.getItem("currentStudent");
-      data = JSON.parse(data);
-
-      this.token = data.access_token;
-      console.log(this.token);
-    }
-    var local = localStorage.getItem("login");
-    local = JSON.parse(local);
-    this.login = local["login"];
-  },
+  mounted() {},
   methods: {
     async signOut() {
-      try {
-        const response = await axios.delete(`http://localhost:5000/v1/logout`, {
-          params: { access_token: this.token }
-        });
-        this.$store.commit("logout");
-        localStorage.removeItem("currentStudent");
-        this.$router.push({
-          name: "login"
-          // params: { currentStudent: this.currentStudent }
-        });
-      } catch (error) {
-        console.log(error);
-      }
+      this.$store.dispatch(`signOut`, this.student.access_token);
     }
   }
 };

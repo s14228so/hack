@@ -5,6 +5,7 @@ const mutations = {
   },
   logout(state) {
     state.login = false;
+    state.currentStudent = "";
   },
   test(state) {
     state.test = true;

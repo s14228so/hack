@@ -72,28 +72,6 @@ export default {
       this.$router.push({
         name: "index"
       });
-
-      // try {
-      //   const response = await axios.post(`http://localhost:5000/v1/login`, {
-      //     email: this.email,
-      //     password: this.password
-      //   });
-      //   // await this.$router.go()
-      //   // this.$router.push("/")
-      //   this.currentStudent = response.data;
-      //   var data = [];
-      //   data.push(response.data);
-      //   localStorage.setItem("currentStudent", JSON.stringify(data));
-      //   // console.log(this.currentStudent);
-      //   this.$store.commit("login", this.currentStudent);
-      //   this.$store.state.currentStudent = response.data;
-      //   this.$router.push({
-      //     name: "index"
-      //     // params: { currentStudent: this.currentStudent }
-      //   });
-      // } catch (error) {
-      //   console.log(error);
-      // }
     },
     async index() {
       try {

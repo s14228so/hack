@@ -22,6 +22,7 @@ export default {
     return {
       token: "",
       id: "",
+      student: this.$store.state.currentStudent,
       status: [
         { nickname: "" },
         { email: "" },
@@ -43,22 +44,20 @@ export default {
     //   console.log(`更新後のデータ：${newVal}`);
     // }
   },
-  mounted() {
-    var data = localStorage.getItem("currentStudent");
-    data = JSON.parse(data);
-    this.id = data.student_id;
-    this.token = data.access_token;
-    this.status[0].nickname = data.nickname;
-    this.status[1].email = data.email;
-    this.status[2].university = data.university;
-    this.status[3].grade = data.grade;
-    this.status[4].introduction = data.introduction;
-    this.status[5].app = data.app;
-    this.status[6].address = data.address;
-    this.status[7].phone = data.phone_number;
-    this.status[8].firstName = data.first_name;
-    this.status[9].lastName = data.last_name;
-    this.status[10].department = data.department;
+  async mounted() {
+    this.id = this.student.student_id;
+    this.token = this.student.access_token;
+    this.status[0].nickname = this.student.nickname;
+    this.status[1].email = this.student.email;
+    this.status[2].university = this.student.university;
+    this.status[3].grade = this.student.grade;
+    this.status[4].introduction = this.student.introduction;
+    this.status[5].app = this.student.app;
+    this.status[6].address = this.student.address;
+    this.status[7].phone = this.student.phone_number;
+    this.status[8].firstName = this.student.first_name;
+    this.status[9].lastName = this.student.last_name;
+    this.status[10].department = this.student.department;
   },
   methods: {
     async update() {
@@ -79,18 +78,9 @@ export default {
             department: this.status[10].department
           }
         );
-        const res = await axios.get(
-          `http://localhost:5000/v1/students/${this.id}`,
-          {
-            headers: { Authorization: this.token }
-          }
-        );
-        var data = [];
-        data.push(res.data);
         this.$router.push({
           name: "index"
         });
-        localStorage.setItem("currentStudent", JSON.stringify(data));
       } catch (error) {
         console.log(error);
       }

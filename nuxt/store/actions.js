@@ -19,6 +19,20 @@ const actions = {
         localStorage.setItem("currentStudent", JSON.stringify(res.data));
       });
     context.commit("login", payload);
+  },
+  async signOut(context, access_token) {
+    try {
+      await axios.delete(`http://localhost:5000/v1/logout`, {
+        params: { access_token: access_token }
+      });
+      this.$router.push({
+        name: "login"
+      });
+      localStorage.removeItem("currentStudent");
+    } catch (error) {
+      console.log(error);
+    }
+    context.commit("logout");
   }
 };
 

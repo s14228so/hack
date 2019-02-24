@@ -75,10 +75,8 @@ export default {
             department: this.status[10].department
           }
         );
-        this.$store.dispatch(`update`, {
-          access_token: this.student.access_token,
-          student_id: this.student.student_id
-        });
+        console.log(responce.data);
+        this.$store.dispatch(`update`, responce.data);
         this.$router.push({
           name: "mypage"
         });

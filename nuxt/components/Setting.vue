@@ -1,7 +1,4 @@
 <template>
-  <!-- watch関数とか使わないと -->
-  <!-- 現状初期値がパラメータとして送られてしまう -->
-  <!-- updateするとidが取得できない -->
   <div>
     <h5>ユーザー情報編集</h5>
     <form @submit.prevent="update">
@@ -78,9 +75,14 @@ export default {
             department: this.status[10].department
           }
         );
-        this.$router.push({
-          name: "index"
+        this.$store.dispatch(`update`, {
+          access_token: this.student.access_token,
+          student_id: this.student.student_id
         });
+        this.$router.push({
+          name: "mypage"
+        });
+        this.$emit("update");
       } catch (error) {
         console.log(error);
       }

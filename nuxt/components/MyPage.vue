@@ -41,7 +41,7 @@
         </form>
         <v-flex md2 v-show="!settingStatus"></v-flex>
         <v-flex xs12 md4 v-show="settingStatus">
-          <setting-comp></setting-comp>
+          <setting-comp @update="rails"></setting-comp>
         </v-flex>
       </v-layout>
     </v-container>
@@ -73,6 +73,9 @@ export default {
     showSetting: function() {
       this.settingStatus = true;
     },
+    rails() {
+      this.settingStatus = false;
+    },
     selectedFile(e) {
       e.preventDefault();
       const files = e.target.files;
@@ -90,6 +93,10 @@ export default {
           headers: { Authorization: this.student.access_token }
         }
       );
+      this.$store.dispatch(`update`, {
+        access_token: this.student.access_token,
+        student_id: this.student.student_id
+      });
       this.$router.push({
         name: "mypage"
       });

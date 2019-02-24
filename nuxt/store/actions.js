@@ -33,6 +33,25 @@ const actions = {
       console.log(error);
     }
     context.commit("logout");
+  },
+  async update(context, { access_token, student_id }) {
+    const payload = {
+      student: {}
+    };
+    try {
+      const res = await axios.get(
+        `http:://localhost:5000/v1/students/${student_id}`,
+        {
+          headers: {
+            Authorization: access_token
+          }
+        }
+      );
+      payload.student = res.data;
+      context.commit("update");
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 

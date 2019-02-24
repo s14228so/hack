@@ -9,6 +9,9 @@ const mutations = {
   },
   test(state) {
     state.test = true;
+  },
+  update(state, payload) {
+    state.currentStudent = payload.student;
   }
 };
 

@@ -120,7 +120,7 @@ export default {
     openDetail(event) {
       this.$router.push({
         name: "events-id",
-        params: { event: event, id: event.id }
+        params: { id: event.id }
       });
     }
   }

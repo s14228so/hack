@@ -8,7 +8,9 @@ module V1
     end
 
     def image
+      if object.images.present?
        url_for(object.images.last)
+     end
     end
   
   end

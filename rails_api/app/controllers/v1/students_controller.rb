@@ -12,6 +12,11 @@ module V1
       render json: current_student, each_serializer: V1::CurrentStudentSerializer
     end
 
+    def one
+      @student = Student.find(params[:id])
+      render json: @student, each_serializer: V1::CurrentStudentSerializer
+    end
+
     def current
       render json: current_student.events, each_serializer: V1::CurrentEventsSerializer
     end

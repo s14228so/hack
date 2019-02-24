@@ -18,15 +18,10 @@
 export default {
   data() {
     return {
-      currentStudent: {}
+      currentStudent: this.$store.state.currentStudent
     };
   },
-  mounted() {
-    // console.log(this.currentStudent)
-    var data = localStorage.getItem("currentStudent");
-    data = JSON.parse(data);
-    this.currentStudent = data;
-  }
+  mounted() {}
 };
 </script>
 

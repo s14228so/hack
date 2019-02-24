@@ -29,7 +29,6 @@ export default {
       process.exit();
     }
     this.parent = res.data;
-    //これだとカレンダー側からしか呼び出せていない
   }
 };
 </script>

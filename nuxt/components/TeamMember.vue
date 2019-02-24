@@ -3,7 +3,7 @@
     <div class="slot">
       <div class="myteams">マイチーム</div>
       <div v-for="team in teams" class="grey--text" :key="team.name">
-        <v-chip @click="teamDetail">{{ team.name }}</v-chip>
+        <v-chip @click="teamDetail(team)">{{ team.name }}</v-chip>
         <span>{{ team.introduction }}</span>
       </div>
     </div>
@@ -16,9 +16,9 @@ export default {
   props: ["teams"],
   mounted() {},
   methods: {
-    temaDetail(team) {
+    teamDetail(team) {
       this.$router.push({
-        name: "temas-id",
+        name: "teams-id",
         params: { id: team.id }
       });
     }

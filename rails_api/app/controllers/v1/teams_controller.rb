@@ -10,6 +10,11 @@ module V1
         render json: @teams, each_serializer: V1::TeamSerializer
     end
 
+    def one
+        @team = Team.find(params[:id])
+        render json: @team, each_serializer: V1::TeamSerializer
+    end
+
     def create
     end
 

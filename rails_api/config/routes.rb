@@ -9,6 +9,9 @@ Rails.application.routes.draw do
       get "one", on: :member
       post "image", on: :member
     end
+    resources :teams do 
+      get "one", on: :member
+    end
     get "/myteams" => "teams#show"
     resources :event_students, only: [:create]
     resources :events, only: [:index , :create, :show] do

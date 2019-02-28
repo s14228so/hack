@@ -11,6 +11,11 @@ export default {
       student: {}
     };
   },
+  fetch({ store, redirect }) {
+    if (store.state.login === false) {
+      return redirect("/");
+    }
+  },
   async mounted() {
     const res = await axios.get(`http://localhost:5000/v1/students/7/one`, {
       headers: {

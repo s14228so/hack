@@ -4,7 +4,7 @@
       <v-flex xs6>
         <h2>Log in</h2>
         <template>
-          <form v-model="valid" @submit.prevent="submit">
+          <form @submit.prevent="submit">
             <v-text-field
               required
               :rules="emailRules"

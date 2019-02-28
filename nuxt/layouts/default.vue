@@ -7,8 +7,10 @@
       </v-container>
     </v-content>
 
-    <v-footer :fixed="fixed" app>
-      <span>&copy; 2019</span>
+    <v-footer :fixed="fixed" app class="text-center">
+      <div class="text-center">
+        <span>&copy; hack 2019</span>
+      </div>
     </v-footer>
   </v-app>
 </template>
@@ -46,3 +48,9 @@ export default {
   methods: {}
 };
 </script>
+<style>
+.text-center {
+  text-align: center;
+}
+</style>
+

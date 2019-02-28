@@ -18,6 +18,8 @@
               required
               :rules="passwordRules"
               v-model="password"
+              :append-icon="show1 ? 'visibility_off' : 'visibility'"
+              :type="show1 ? 'text' : 'password'"
               :counter="20"
               name="password"
               label="Password"
@@ -85,7 +87,7 @@ export default {
 <style scoped>
 .box {
   background: #3d454c;
-  width: 50%;
+  width: 35%;
   padding: 40px;
   border-radius: 20px;
   position: absolute;
@@ -98,6 +100,7 @@ export default {
   color: white;
   text-transform: uppercase;
   font-weight: 500;
+  margin-bottom: 30px;
 }
 
 .box input[type="text"],

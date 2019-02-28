@@ -1,13 +1,6 @@
 <template>
   <div>
-    {{currentStudent.email }}
-    {{currentStudent.nickname}}
-    {{currentStudent.address}}
-    {{currentStudent.univeristy}}
-    {{currentStudent.app}}
-    {{currentStudent.first_name}}
-    {{currentStudent.last_name}}
-    {{currentStudent.student_id}}
+    <events></events>
   </div>
 </template>
 
@@ -15,11 +8,15 @@
 
 
 <script>
+import Events from "./Events";
 export default {
   data() {
     return {
       currentStudent: this.$store.state.currentStudent
     };
+  },
+  components: {
+    Events
   },
   mounted() {}
 };

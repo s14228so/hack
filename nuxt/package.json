@@ -20,7 +20,9 @@
     "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {
+    "node-sass": "^4.11.0",
     "nodemon": "^1.18.9",
+    "sass-loader": "^7.1.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2"
   }

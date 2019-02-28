@@ -1,7 +1,10 @@
 <template>
   <v-container>
     <ul v-for="event in events" :key="event.id">
-      <li>{{event.title}}</li>
+      <li>
+        <span>{{event.date}}</span>
+        <span @click="clickEvent(event)">{{event.title}}</span>
+      </li>
     </ul>
   </v-container>
 </template>
@@ -25,6 +28,16 @@ export default {
     } catch (error) {
       console.log(error);
     }
+  },
+  methods: {
+    clickEvent(event) {
+      this.$router.push({
+        name: "events-id",
+        params: {
+          id: event.id
+        }
+      });
+    }
   }
 };
 </script>
@@ -34,6 +47,12 @@ ul {
   list-style: none;
   li {
     padding: 10px 5px;
+    span:nth-child(1) {
+      margin-right: 10px;
+    }
+    span:nth-child(2) {
+      cursor: pointer;
+    }
   }
 }
 </style>

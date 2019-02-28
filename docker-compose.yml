@@ -1,72 +1,27 @@
-Last login: Wed Feb 27 13:12:31 on ttys002
-You have mail.
-MacBook-Pro-7:~ satoshi$ c
--bash: c: command not found
-MacBook-Pro-7:~ satoshi$ c
--bash: c: command not found
-MacBook-Pro-7:~ satoshi$ ls
-Applications         SIO                  ios-sfcbustimer
-Creative Cloud Files VirtualBox VMs       lesson
-Desktop              docker_rails         macports
-Documents            etoria               mycentOSVM
-Downloads            go                   nginex-aio.pem
-Library              go-lesson            rails-nuxt-tutorial
-Movies               hack                 s14228so.pem
-Music                imagebuild           udemy.pem
-Pictures             infratop             vagrant
-Public               ios
-MacBook-Pro-7:~ satoshi$ cd
-MacBook-Pro-7:~ satoshi$ cd rails-nuxt-tutorial/
-MacBook-Pro-7:rails-nuxt-tutorial satoshi$ ls
-README.md          docker-compose.yml nuxt               rails
-MacBook-Pro-7:rails-nuxt-tutorial satoshi$ cat docker-compose.yml 
 version: '3'
 services:
   db:
-    image: postgres:10.3
-    ports: 
-      - "5432:5432"
+    image: mysql
+    environment:
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - '3316:3306'
     volumes:
-      - ./rails/tmp/db:/var/lib/postgresql/data
+      - ./db/mysql/volumes:/var/lib/mysql
+
   rails:
-    build: ./rails
+   build: ./rails
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     volumes:
       - ./rails:/rails
     ports:
-      - "3000:3000"
-    depends_on:
+      - "5000:5000"
+    depnds_on:
       - db
   nuxt:
     build: ./nuxt
-    command: yarn dev
+    command: npm run dev
     volumes:
       - ./nuxt:/nuxt
-    ports:
-      - "8080:8080"MacBook-Pro-7:rails-nuxt-tutorial satoshi$ vi docker-compose.yml 
-
-version: '3'
-services:
-  db:
-    image: postgres:10.3
-    ports:
-      - "5432:5432"
-    volumes:
-      - ./rails/tmp/db:/var/lib/postgresql/data
-  rails_api:
-    build: ./rails
-    command: bundle exec rails s -p 3000 -b '0.0.0.0'
-    volumes:
-      - ./rails:/rails
-    ports:
-      - "3000:3000"
-    depends_on:
-      - db
-  nuxt:
-    build: ./nuxt
-    command: yarn dev
-    volumes:
-      - ./nuxt:/nuxt
-    ports:
-"docker-compose.yml" [noeol] 24L, 435C
-
+    ports:      - "3000:3000"

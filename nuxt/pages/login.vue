@@ -2,9 +2,9 @@
   <v-container mt-2>
     <v-layout row wrap>
       <v-flex xs6>
-        <h2>Log in</h2>
         <template>
-          <form @submit.prevent="submit">
+          <form @submit.prevent="submit" class="box">
+            <h2>Log in</h2>
             <v-text-field
               required
               :rules="emailRules"
@@ -12,6 +12,7 @@
               :counter="20"
               label="email"
               name="email"
+              class="email"
             ></v-text-field>
             <v-text-field
               required
@@ -21,12 +22,10 @@
               name="password"
               label="Password"
             ></v-text-field>
-            <p>{{email}}</p>
-            <p>{{password}}</p>
             <v-checkbox label="Do you agree?" required></v-checkbox>
             <!-- <input type="submit" @click="submit"> -->
-            <input type="submit">
-            <v-btn @click="clear">clear</v-btn>
+            <input type="submit" value="login">
+            <v-btn @click="clear" class="clear">clear</v-btn>
           </form>
         </template>
       </v-flex>
@@ -83,8 +82,72 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
+.box {
+  background: #3d454c;
+  width: 50%;
+  padding: 40px;
+  border-radius: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.box h2 {
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.box input[type="text"],
+.box input[type="password"] {
+  border: 0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 14px 10px;
+  width: 100px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.5s;
+}
+
+.box input[type="text"]:focus,
+.box input[type="password"]:focus {
+  width: 280px;
+  border-color: #2ecc71;
+}
+
+.clear {
+  border-radius: 24px;
+  padding: 14px 10px 32px;
+}
+
+.box input[type="submit"] {
+  border: 0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 12px 30px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.box input[type="submit"]:hover {
+  background: #2ecc71;
+}
 </style>
+
+
 
 
 

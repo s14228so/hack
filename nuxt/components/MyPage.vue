@@ -22,7 +22,9 @@
             <v-icon class="icon-setting" @click="showSetting">edit</v-icon>
           </v-card>
         </v-flex>
-        <form action method="post" novalidate="true" @submit.prevent="uploadImage">
+        <form action method="post" novalidate="true" @submit.prevent="uploadImage" class="uploader">
+          <h3>プロフィール写真の追加</h3>
+          <hr>
           <input
             type="file"
             name="student[images]"
@@ -35,8 +37,9 @@
           <input
             type="submit"
             name="commit"
-            value="Update Student"
+            value="追加"
             data-disable-with="Update Student"
+            class="img-btn"
           >
         </form>
         <v-flex md2 v-show="!settingStatus"></v-flex>
@@ -110,5 +113,19 @@ export default {
 .icon-setting {
   float: right;
   cursor: pointer;
+}
+.uploader {
+  margin-top: 20px;
+  margin-left: 70px;
+}
+.uploader hr {
+  margin-bottom: 20px;
+}
+.img-btn {
+  margin-top: 20px;
+  padding: 8px 14px;
+  background: gray;
+  color: #fff;
+  border-radius: 10px;
 }
 </style>

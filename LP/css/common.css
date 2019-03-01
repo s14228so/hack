@@ -1,0 +1,211 @@
+@charset "UTF-8";
+/****************************************
+Resetting
+*****************************************/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, main,hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,ul,li{
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+input[type="submit"],
+input[type="button"],
+input[type="reset"]{
+  appearance: button;
+  border: none;
+  border-radius: 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  -webkit-box-sizing: content-box;
+  -webkit-appearance: button;
+}
+
+a{
+  text-decoration: none;
+}
+/******************************************
+normarise
+******************************************/
+*{
+  box-sizing:border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+@import url(http://fonts.googleapis.com/earlyaccess/notosansjapanese.css);
+@font-face {
+   font-family: 'Noto Sans Japanese';
+   font-style: normal;
+   font-weight: 500;
+   src: url(//fonts.gstatic.com/ea/notosansjapanese/v6/NotoSansJP-Medium.woff2) format('woff2'),
+        url(//fonts.gstatic.com/ea/notosansjapanese/v6/NotoSansJP-Medium.woff) format('woff'),
+        url(//fonts.gstatic.com/ea/notosansjapanese/v6/NotoSansJP-Medium.otf) format('opentype');
+ }
+
+@font-face {
+   font-family: 'Noto Sans Japanese';
+   font-style: normal;
+   font-weight: 700;
+   src: url(//fonts.gstatic.com/ea/notosansjapanese/v6/NotoSansJP-Bold.woff2) format('woff2'),
+        url(//fonts.gstatic.com/ea/notosansjapanese/v6/NotoSansJP-Bold.woff) format('woff'),
+        url(//fonts.gstatic.com/ea/notosansjapanese/v6/NotoSansJP-Bold.otf) format('opentype');
+ }
+
+@font-face {
+   font-family: 'Noto Sans Japanese';
+   font-style: normal;
+   font-weight: 900;
+   src: url(//fonts.gstatic.com/ea/notosansjapanese/v6/NotoSansJP-Black.woff2) format('woff2'),
+        url(//fonts.gstatic.com/ea/notosansjapanese/v6/NotoSansJP-Black.woff) format('woff'),
+        url(//fonts.gstatic.com/ea/notosansjapanese/v6/NotoSansJP-Black.otf) format('opentype');
+}
+
+body{
+  color: #999;
+  font-size:20px;
+  font-family: 'Noto Sans Japanese', sans-serif;;
+  line-height: 2;
+}
+
+a{
+  color: #999;
+  transition: .5s;
+}
+
+a:hover{
+  opacity: 0.8;
+}
+
+/******************************************
+clearfix
+******************************************/
+.clearfix:after {
+  content: ".";
+  clear: both;
+  display: block;
+  height: 0;
+  visibility: hidden;
+}
+
+.clearfix {
+  display: inline-table;
+}  
+/* Hides from IE-mac \*/
+* html .clearfix {
+  height: 1%;
+}  
+.clearfix {
+  display: block;
+}  
+/* End hide from IE-mac */
+
+/****************************************
+Layout
+*****************************************/
+/*flexbox*/
+.flex{
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  flex-wrap: wrap;
+  -webkit-flex-wrap:wrap;
+}
+.flex--start{
+  justify-content: flex-start;
+  -webkit-justify-content: flex-start;
+}
+
+.flex--center{
+  justify-content: center;
+  -webkit-justify-content: center;
+}
+.flex--end{
+  justify-content: flex-end;
+  -webkit-justify-content: flex-end;
+}
+
+.flex--bet{
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+}
+
+/*col*/
+.col2{
+  width:48%;
+}
+
+.col3{
+  width:30%;
+}
+
+.col4{
+  width:25%;
+}
+
+.col5{
+  width:18.4%;
+}
+
+.col6{
+  width:15%;
+}
+
+.inner{
+  margin: 0 auto;
+  max-width: 1080px;
+  width: 90%;
+}

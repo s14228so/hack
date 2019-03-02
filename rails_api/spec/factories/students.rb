@@ -1,8 +1,6 @@
 FactoryBot.define do
   factory :student do
-    nickname: "satoshi"
-    university: "慶応"
-    email: "testbot@test.com"
-    password: "testtest"
+    sequence(:email) { |n| "TEST#{n}@example.com"}
+    sequence(:password){ |n| "TEST#{n}password"}
   end
 end

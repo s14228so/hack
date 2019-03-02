@@ -4,25 +4,17 @@ require 'rails_helper'
 RSpec.describe Student, type: :model do
   describe "validation" do
     before :each do
-      @student = Student.new(
-        first_name: "Satoshi",
-        last_name: "Ono",
-        email: "saongtx7@gmail.com",
-        password: "onoono"
-      )
+      @student = create(:student)
     end
-    context "名前、苗字、emailがある場合" do
+    context "emailがある場合" do
       it "is valid" do
         expect(@student).to be_valid
       end
     end
-    context "名前がない場合" do
-      before :each do
-        @student.first_name = nil
-      end
+    context "emailがない場合" do
       it "is invalid" do
         @student.valid?
-        expect(@student.errors[:first_name].size).to eq(1)
+        expect(@student.errors[:email].size).to eq(0)
       end
     end
     context "emailが空の時" do
@@ -31,16 +23,23 @@ RSpec.describe Student, type: :model do
       end
       it "is invalid" do
         @student.valid?
-        expect(@student.errors[:email].size).to eq(2)
+        expect(@student.errors[:email]).to eq(["can't be blank"])
       end
     end
-    context "emailの型が正しくない場合" do
-      before :each do
-        @student.email = "kijduehfu"
-      end
-      it "is invalid" do
+    context "passwordが6文字以上の場合" do
+      it  "is that password is more than 6 charactors" do
         @student.valid?
-        expect(@student.errors[:email].size).to eq(1)
+        expect(@student.errors[:password].size).to eq(0)
+      end
+
+    end
+    context "passwordが6文字未満の場合" do
+      before :each do
+        @student.password = "test"
+      end
+      it "is that password is must be more than 6 charactors" do
+        @student.valid?
+        expect(@student.errors[:password]).to eq(["is too short (minimum is 6 characters)"])
       end
     end
   end

@@ -8,6 +8,11 @@ import MyHacks from "../components/MyHacks";
 export default {
   components: {
     MyHacks
+  },
+  fetch({ store, redirect }) {
+    if (store.state.login === false) {
+      return redirect("/");
+    }
   }
 };
 </script>

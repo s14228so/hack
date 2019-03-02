@@ -2,7 +2,10 @@
   <v-container>
     <div class="slot">
       <div class="myteams">マイチーム</div>
-      <div v-for="team in teams" class="grey--text">{{ team.name }}</div>
+      <div v-for="team in teams" class="grey--text" :key="team.name">
+        <v-chip @click="teamDetail(team)">{{ team.name }}</v-chip>
+        <span>{{ team.introduction }}</span>
+      </div>
     </div>
   </v-container>
 </template>
@@ -11,7 +14,15 @@
 import axios from "axios";
 export default {
   props: ["teams"],
-  mounted() {}
+  mounted() {},
+  methods: {
+    teamDetail(team) {
+      this.$router.push({
+        name: "teams-id",
+        params: { id: team.id }
+      });
+    }
+  }
 };
 </script>
 

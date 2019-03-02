@@ -22,41 +22,31 @@
             <v-icon class="icon-setting" @click="showSetting">edit</v-icon>
           </v-card>
         </v-flex>
+        <form action method="post" novalidate="true" @submit.prevent="uploadImage" class="uploader">
+          <h3>プロフィール写真の追加</h3>
+          <hr>
+          <input
+            type="file"
+            name="student[images]"
+            id="student_image"
+            @change="selectedFile"
+            accept="image/*"
+            placeholder="Upload file..."
+          >
+          <br>
+          <input
+            type="submit"
+            name="commit"
+            value="追加"
+            data-disable-with="Update Student"
+            class="img-btn"
+          >
+        </form>
         <v-flex md2 v-show="!settingStatus"></v-flex>
         <v-flex xs12 md4 v-show="settingStatus">
-          <setting-comp></setting-comp>
+          <setting-comp @update="rails"></setting-comp>
         </v-flex>
       </v-layout>
-      <form action method="post" novalidate="true" @submit.prevent="uploadImage">
-        <!-- <input type="hidden" name="authenticity_token" :value="this.student.access_token"> -->
-        <!-- <input
-          type="file"
-          name="student[image][]"
-          id="student_images"
-          @change="processFile($event)"
-        >-->
-        <input
-          type="file"
-          name="student[images]"
-          id="student_image"
-          @change="selectedFile"
-          accept="image/*"
-          placeholder="Upload file..."
-        >
-        <br>
-        <!-- <div v-if="image">
-          <img :src="image" width="50" height="50">
-          <button @click="removeImage">Remove image</button>
-        </div>-->
-        <input
-          type="submit"
-          name="commit"
-          value="Update Student"
-          data-disable-with="Update Student"
-        >
-      </form>
-
-      <!-- https://codepen.io/Atinux/pen/qOvawK -->
     </v-container>
   </div>
 </template>
@@ -81,9 +71,15 @@ export default {
   components: {
     "setting-comp": Setting
   },
+  async mounted() {
+    this.student = this.$store.state.currentStudent;
+  },
   methods: {
     showSetting: function() {
       this.settingStatus = true;
+    },
+    rails() {
+      this.settingStatus = false;
     },
     selectedFile(e) {
       e.preventDefault();
@@ -92,11 +88,7 @@ export default {
       console.log(this.uploadFile);
     },
     async uploadImage() {
-      // formData.append("student[image]", this.uploadFile);
-      // console.log(formData);
       const formData = new FormData();
-
-      // const formData = new FormData();
       formData.append("student[images]", this.uploadFile);
       console.log(formData);
       const response = await axios.post(
@@ -106,17 +98,14 @@ export default {
           headers: { Authorization: this.student.access_token }
         }
       );
+      this.$store.dispatch(`update`, {
+        access_token: this.student.access_token,
+        student_id: this.student.student_id
+      });
       this.$router.push({
         name: "mypage"
       });
     }
-  },
-  mounted: async function() {
-    if (localStorage) {
-      var data = localStorage.getItem("currentStudent");
-      data = JSON.parse(data);
-    }
-    this.student = data[0];
   }
 };
 </script>
@@ -124,5 +113,19 @@ export default {
 .icon-setting {
   float: right;
   cursor: pointer;
+}
+.uploader {
+  margin-top: 20px;
+  margin-left: 70px;
+}
+.uploader hr {
+  margin-bottom: 20px;
+}
+.img-btn {
+  margin-top: 20px;
+  padding: 8px 14px;
+  background: gray;
+  color: #fff;
+  border-radius: 10px;
 }
 </style>

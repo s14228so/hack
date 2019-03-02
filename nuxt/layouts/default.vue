@@ -2,19 +2,24 @@
   <v-app dark>
     <v-content>
       <v-container>
+        <message></message>
         <navbar></navbar>
         <nuxt/>
       </v-container>
     </v-content>
 
-    <v-footer :fixed="fixed" app>
-      <span>&copy; 2019</span>
+    <v-footer :fixed="fixed" app class="text-center">
+      <div class="text-center">
+        <span>&copy; hack 2019</span>
+      </div>
     </v-footer>
   </v-app>
 </template>
 
 <script>
 import Navbar from "../components/layout/Navbar.vue";
+import Message from "../components/flash/Message.vue";
+
 export default {
   data() {
     return {
@@ -41,8 +46,15 @@ export default {
     };
   },
   components: {
-    Navbar
+    Navbar,
+    Message
   },
   methods: {}
 };
 </script>
+<style>
+.text-center {
+  text-align: center;
+}
+</style>
+

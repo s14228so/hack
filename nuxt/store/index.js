@@ -1,23 +1,19 @@
 import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
+import state from "./state";
+import actions from "./actions";
+import mutations from "./mutations";
+import "babel-polyfill";
 
 const createStore = () => {
   return new Vuex.Store({
-    state: () => ({
-      login: true
-    }),
-    mutations: {
-      login(state) {
-        state.login = true;
-      },
-      logout(state) {
-        state.login = false;
-      }
-    },
+    state: state,
+    mutations: mutations,
+    actions: actions,
     plugins: [
       createPersistedState({
-        key: "login",
-        paths: ["login"],
+        key: "app",
+        paths: ["login", "currentStudent"],
         storage: window.localStorage
       })
     ]

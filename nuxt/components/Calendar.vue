@@ -56,28 +56,25 @@ import axios from "axios";
 import "babel-polyfill";
 
 export default {
-  data: () => ({
-    today: "2019-01-10",
-    events: [],
-    currentId: "",
-    eventIds: []
-  }),
+  data() {
+    return {
+      student: this.$store.state.currentStudent,
+      today: "2019-01-10",
+      events: [],
+      eventIds: []
+    };
+  },
   computed: {
-    // convert the list of events into a map of lists keyed by date
     eventsMap() {
       const map = {};
       this.events.forEach(e => (map[e.date] = map[e.date] || []).push(e));
       return map;
-      // console.log(this.eventsMap);
     }
   },
   async created() {
-    var data = localStorage.getItem("currentStudent");
-    data = JSON.parse(data);
-    this.currentId = data[0].student_id;
     try {
       const response = await axios.get(`http://localhost:5000/v1/events`, {
-        headers: { Authorization: data[0].access_token }
+        headers: { Authorization: this.student.access_token }
       });
       this.events = response.data;
     } catch (error) {
@@ -86,30 +83,27 @@ export default {
     let response = await axios.get(
       `http://localhost:5000/v1/students/${this.currentId}/current`,
       {
-        headers: { Authorization: data[0].access_token }
+        headers: { Authorization: this.student.access_token }
       }
     );
-    console.log(response.data);
     var arrayIds = [];
     response.data.forEach(function(data) {
       arrayIds.push(data.id);
     });
     this.eventIds = arrayIds;
-    console.log(this.eventIds);
   },
   methods: {
     open(event) {
       alert(event.title);
     },
     async reserveEvent(id) {
-      var data = localStorage.getItem("currentStudent");
-      data = JSON.parse(data);
       try {
         const response = await axios.post(
           `http://localhost:5000/v1/event_students`,
           {
+            student_id: this.student.student_id,
             event_id: id,
-            headers: { Authorization: data[0].access_token }
+            headers: { Authorization: this.student.access_token }
           }
         );
       } catch (error) {
@@ -125,10 +119,9 @@ export default {
     },
     openDetail(event) {
       this.$router.push({
-        name: "events/_id",
-        params: { event: event, id: event.id }
+        name: "events-id",
+        params: { id: event.id }
       });
-      // console.log(event)
     }
   }
 };

@@ -12,19 +12,23 @@ import TeamMember from "./TeamMember";
 export default {
   data() {
     return {
-      parent: []
+      parent: [],
+      student: this.$store.state.currentStudent
     };
   },
   components: {
     TeamMember
   },
   mounted: async function() {
-    const res = await axios.get(`/api/myteams`);
+    const res = await axios.get(`http://localhost:5000/v1/myteams`, {
+      headers: {
+        Authorization: this.student.access_token
+      }
+    });
     if (res.status !== 200) {
       process.exit();
     }
-    this.parent = res.data.array;
-    //これだとカレンダー側からしか呼び出せていない
+    this.parent = res.data;
   }
 };
 </script>

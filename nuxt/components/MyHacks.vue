@@ -3,8 +3,8 @@
     <event-detail @rand="showDetail" :events="events"></event-detail>
     <div v-show="detailStatus">
       {{event.title}}
-      <div v-for="student in students" class="mt-3">
-        <v-chip>{{ student.email }}</v-chip>
+      <div v-for="student in students" class="mt-3" :key="student.email">
+        <v-chip @click="idPush(student)">{{ student.email }}</v-chip>
       </div>
     </div>
   </v-container>
@@ -20,6 +20,7 @@ export default {
       hack: "",
       events: [],
       detailStatus: false,
+      student: this.$store.state.currentStudent,
       students: [],
       event: {}
     };
@@ -28,32 +29,23 @@ export default {
     EventDetail
   },
   mounted: async function() {
-    if(localStorage){
-    var data = localStorage.getItem("currentStudent");
-    data = JSON.parse(data);
-  }
     const res = await axios.get(`http://localhost:5000/v1/events/myhacks`, {
-      headers: { Authorization: data[0].access_token }
+      headers: { Authorization: this.student.access_token }
     });
     if (res.status !== 200) {
       process.exit();
     }
     this.events = res.data;
-
-    //これだとカレンダー側からしか呼び出せていない
   },
 
   methods: {
     async showDetail(event) {
-      var data = localStorage.getItem("currentStudent");
-      data = JSON.parse(data);
       this.detailStatus = !this.detailStatus;
       this.event = event;
-      console.log("親です");
       const res = await axios.get(
         `http://localhost:5000/v1/events/${event.id}/join_students`,
         {
-          headers: { Authorization: data[0].access_token }
+          headers: { Authorization: this.student.access_token }
         }
       );
       if (res.status !== 200) {
@@ -61,6 +53,14 @@ export default {
       }
       this.students = res.data;
       console.log(this.students);
+    },
+    idPush(student) {
+      this.$router.push({
+        name: "students-id",
+        params: {
+          id: student.student_id
+        }
+      });
     }
   }
 };

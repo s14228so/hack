@@ -7,6 +7,7 @@ class Student < ApplicationRecord
   after_create :update_access_token!
   
   validates :email, presence: true
+  
 
   has_many :event_students
   has_many :events, through: :event_students

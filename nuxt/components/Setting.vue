@@ -1,7 +1,4 @@
 <template>
-  <!-- watch関数とか使わないと -->
-  <!-- 現状初期値がパラメータとして送られてしまう -->
-  <!-- updateするとidが取得できない -->
   <div>
     <h5>ユーザー情報編集</h5>
     <form @submit.prevent="update">
@@ -22,6 +19,7 @@ export default {
     return {
       token: "",
       id: "",
+      student: this.$store.state.currentStudent,
       status: [
         { nickname: "" },
         { email: "" },
@@ -43,22 +41,20 @@ export default {
     //   console.log(`更新後のデータ：${newVal}`);
     // }
   },
-  mounted() {
-    var data = localStorage.getItem("currentStudent");
-    data = JSON.parse(data);
-    this.id = data[0].student_id;
-    this.token = data[0].access_token;
-    this.status[0].nickname = data[0].nickname;
-    this.status[1].email = data[0].email;
-    this.status[2].university = data[0].university;
-    this.status[3].grade = data[0].grade;
-    this.status[4].introduction = data[0].introduction;
-    this.status[5].app = data[0].app;
-    this.status[6].address = data[0].address;
-    this.status[7].phone = data[0].phone_number;
-    this.status[8].firstName = data[0].first_name;
-    this.status[9].lastName = data[0].last_name;
-    this.status[10].department = data[0].department;
+  async mounted() {
+    this.id = this.student.student_id;
+    this.token = this.student.access_token;
+    this.status[0].nickname = this.student.nickname;
+    this.status[1].email = this.student.email;
+    this.status[2].university = this.student.university;
+    this.status[3].grade = this.student.grade;
+    this.status[4].introduction = this.student.introduction;
+    this.status[5].app = this.student.app;
+    this.status[6].address = this.student.address;
+    this.status[7].phone = this.student.phone_number;
+    this.status[8].firstName = this.student.first_name;
+    this.status[9].lastName = this.student.last_name;
+    this.status[10].department = this.student.department;
   },
   methods: {
     async update() {
@@ -79,18 +75,12 @@ export default {
             department: this.status[10].department
           }
         );
-        const res = await axios.get(
-          `http://localhost:5000/v1/students/${this.id}`,
-          {
-            headers: { Authorization: this.token }
-          }
-        );
-        var data = [];
-        data.push(res.data);
+        console.log(responce.data);
+        this.$store.dispatch(`update`, responce.data);
         this.$router.push({
-          name: "index"
+          name: "mypage"
         });
-        localStorage.setItem("currentStudent", JSON.stringify(data));
+        this.$emit("update");
       } catch (error) {
         console.log(error);
       }

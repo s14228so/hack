@@ -1,13 +1,6 @@
 <template>
   <div>
-    {{currentStudent.email }}
-    {{currentStudent.nickname}}
-    {{currentStudent.address}}
-    {{currentStudent.univeristy}}
-    {{currentStudent.app}}
-    {{currentStudent.first_name}}
-    {{currentStudent.last_name}}
-    {{currentStudent.student_id}}
+    <events></events>
   </div>
 </template>
 
@@ -15,19 +8,17 @@
 
 
 <script>
+import Events from "./Events";
 export default {
   data() {
     return {
-      currentStudent: {}
+      currentStudent: this.$store.state.currentStudent
     };
   },
-  mounted() {
-    // console.log(this.currentStudent)
-    var data = localStorage.getItem("currentStudent");
-    data = JSON.parse(data);
-    this.currentStudent = data[0];
-    console.log(this.currentStudent);
-  }
+  components: {
+    Events
+  },
+  mounted() {}
 };
 </script>
 

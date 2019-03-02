@@ -6,10 +6,15 @@ Rails.application.routes.draw do
     resource :logout, only: [:destroy], controller: :sessions
     resources :students, only: [:index , :create, :update, :show] do
       get "current", on: :member
+      get "one", on: :member
       post "image", on: :member
     end
+    resources :teams do 
+      get "one", on: :member
+    end
+    get "/myteams" => "teams#show"
     resources :event_students, only: [:create]
-    resources :events, only: [:index , :create] do
+    resources :events, only: [:index , :create, :show] do
       get 'join_students', on: :member
       get 'myhacks', on: :collection
     end

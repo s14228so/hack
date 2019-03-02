@@ -6,6 +6,13 @@ module V1
     end
 
     def show
+        @teams = current_student.teams
+        render json: @teams, each_serializer: V1::TeamSerializer
+    end
+
+    def one
+        @team = Team.find(params[:id])
+        render json: @team, each_serializer: V1::TeamSerializer
     end
 
     def create

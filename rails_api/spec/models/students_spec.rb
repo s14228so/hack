@@ -42,6 +42,21 @@ RSpec.describe Student, type: :model do
         expect(@student.errors[:password]).to eq(["is too short (minimum is 6 characters)"])
       end
     end
+    context "grade(学年)が4以下である場合" do
+      it "is that student`s grade is valid" do
+        @student.valid?
+        expect(@student.errors[:grade].size).to eq(0)
+      end
+    end
+    context "grade(学年)が5を超える場合" do
+      before :each do
+        @student.grade = 5
+      end
+      it "is that student`s grade is invalid" do
+        @student.valid?
+        expect(@student.errors[:grade].size).to eq(1)
+      end
+    end
   end
 end
 

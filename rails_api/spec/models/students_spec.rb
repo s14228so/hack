@@ -17,13 +17,22 @@ RSpec.describe Student, type: :model do
         expect(@student.errors[:email].size).to eq(0)
       end
     end
+    context "emailの値が不正な場合" do
+      before :each do
+        @student.email = "aaabbb"
+      end
+      it "is that Email is not an email" do
+        @student.valid?
+        expect(@student.errors[:email]).to eq(["is invalid", "is not an email"])
+      end
+    end
     context "emailが空の時" do
       before :each do
         @student.email = nil
       end
       it "is invalid" do
         @student.valid?
-        expect(@student.errors[:email]).to eq(["can't be blank"])
+        expect(@student.errors[:email]).to eq(["can't be blank", "is not an email"])
       end
     end
     context "passwordが6文字以上の場合" do

@@ -6,8 +6,16 @@ class Student < ApplicationRecord
          :recoverable, :rememberable, :validatable
   after_create :update_access_token!
   
-  validates :email, presence: true
-  validates_numericality_of :grade, less_than_or_equal_to: 4
+  validates :email, email: true
+  validates :grade, numericality: {less_than_or_equal_to: 4},allow_nil: true
+  validates :university, length: { maximum: 10 }
+  validates :first_name, length: { maximum: 10 }
+  validates :last_name, length: { maximum: 10 }
+  # validates_with TelephoneValidator
+  validates :app, length: { maximum: 300,
+    too_long: "最大%{count}文字まで使えます" }
+  validates :introduction, length: { maximum: 300,
+    too_long: "最大%{count}文字まで使えます" }
 
   has_many :event_students
   has_many :events, through: :event_students

@@ -16,13 +16,12 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'pry-rails'    # rails cの対話式コンソールがirbの代わりにリッチなpryになる
-  gem 'pry-doc'      # pry中に show-source [method名] でソース内を読める
-  gem 'pry-byebug'   # binding.pryをソースに記載すると、ブレイクポイントとなりデバッグが可能になる
-  gem 'pry-stack_explorer' # pry中にスタックを上がったり下がったり行き来できる
-
-  gem 'hirb'         # モデルの出力結果を表形式で表示する
-  gem 'hirb-unicode' # hirbの日本語などマルチバイト文字の出力時の出力結果がすれる問題に対応
+  gem 'pry-rails'   
+  gem 'pry-doc'     
+  gem 'pry-byebug'   
+  gem 'pry-stack_explorer' 
+  gem 'hirb'         
+  gem 'hirb-unicode'
 end
 
 group :test do

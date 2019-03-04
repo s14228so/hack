@@ -1,6 +1,7 @@
 module V1
   class EventsController < ApplicationController
-  protect_from_forgery :except => [:index,:create, :show, :myhacks, :join_students]
+  skip_before_action :authenticate_student_from_token!, only: [:index]
+  protect_from_forgery :except => [:index, :create, :show, :myhacks, :join_students]
   def index
      render json: Event.all, each_serializer: V1::EventSerializer
   end

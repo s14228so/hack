@@ -1,7 +1,7 @@
 <template>
   <transition name="fade">
-    <p v-if="show" class="login-msg">ログインしました</p>
-    <p v-if="!show" class="login-msg">ログアウトしました</p>
+    <p v-if="show" title="クリックで非表示" id="login-msg">ログインしました</p>
+    <p v-if="!show" title="クリックで非表示" id="login-msg">ログアウトしました</p>
   </transition>
 </template>
 
@@ -9,25 +9,52 @@
 export default {
   data() {
     return {
-      show: this.$store.state.login
+      show: this.$store.state.login,
+      message: ""
     };
   },
-  mounted() {},
+  watch: {
+    // この関数は question が変わるごとに実行されます。
+    show: function(now, prev) {
+      console.log("changed:", prev, "->", now);
+    }
+  },
+  mounted() {
+    var text = document.getElementById("login-msg");
+    text.addEventListener(
+      "click",
+      function() {
+        text.classList.add("fadeout");
+        setTimeout(function() {
+          text.style.display = "none";
+        }, 1000);
+      },
+      false
+    );
+  },
   methods: {}
 };
 </script>
 
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
 
-.login-msg {
+
+
+<style scoped>
+#login-msg {
   color: green;
+  cursor: pointer;
+}
+.fadeout {
+  animation: fadeOut 1s;
+  animation-fill-mode: both;
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 </style>
+

@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import MyHacks from "../components/MyHacks";
+import MyHacks from "../components/my/MyHacks";
 export default {
   components: {
     MyHacks

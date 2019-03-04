@@ -8,7 +8,7 @@
 
 
 <script>
-import Events from "./Events";
+import Events from "./events/Events";
 export default {
   data() {
     return {

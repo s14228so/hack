@@ -2,7 +2,7 @@
   <my-page></my-page>
 </template>
 <script>
-import MyPage from "../components/MyPage";
+import MyPage from "../components/my/MyPage";
 export default {
   components: {
     MyPage

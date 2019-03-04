@@ -53,7 +53,7 @@
 <script>
 import axios from "axios";
 import "babel-polyfill";
-import Setting from "./Setting.vue";
+import Setting from "../../components/Setting.vue";
 
 export default {
   name: "MyPage",

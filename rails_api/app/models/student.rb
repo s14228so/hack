@@ -7,7 +7,7 @@ class Student < ApplicationRecord
   after_create :update_access_token!
   
   validates :email, email: true
-  validates :phone_number, phone: true
+  validates :phone_number, phone: true, allow_nil: true
   validates :grade, numericality: {less_than_or_equal_to: 4},allow_nil: true
   validates :university, length: { maximum: 10 }
   validates :first_name, length: { maximum: 10 }

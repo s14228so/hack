@@ -18,9 +18,10 @@
               required
               :rules="passwordRules"
               v-model="password"
-              :append-icon="show1 ? 'visibility_off' : 'visibility'"
-              :type="show1 ? 'text' : 'password'"
+              :append-icon="show ? 'visibility_off' : 'visibility'"
+              :type="show ? 'text' : 'password'"
               :counter="20"
+              :autocomplete="true"
               name="password"
               label="Password"
             ></v-text-field>
@@ -47,6 +48,7 @@ export default {
       accessToken: "",
       currentStudent: {},
       login: "",
+      show: false,
       emailRules: [
         v => !!v || "Email is required",
         v => /.+@.+/.test(v) || "Email must be valid"

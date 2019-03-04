@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Team from "../components/team/Team";
+import Team from "../components/teams/Team";
 export default {
   components: {
     Team

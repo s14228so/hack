@@ -1,6 +1,7 @@
 <template>
   <transition name="fade">
     <p v-if="show" class="login-msg">ログインしました</p>
+    <p v-if="!show" class="login-msg">ログアウトしました</p>
   </transition>
 </template>
 

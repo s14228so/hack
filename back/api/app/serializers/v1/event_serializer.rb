@@ -1,6 +1,6 @@
 module V1
   class EventSerializer < ActiveModel::Serializer
-    attributes :id, :title, :date, :created_at, :updated_at
+    attributes :id, :title, :content, :date, :created_at, :updated_at
   end
 end
   

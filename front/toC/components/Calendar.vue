@@ -36,7 +36,7 @@
                       </v-btn>
                     </v-toolbar>
                     <v-card-title primary-title>
-                      <span v-html="event.content"></span>
+                      <span v-html="event.content" class="color-black"></span>
                     </v-card-title>
                     <v-card-actions>
                       <v-btn flat color="secondary">Cancel</v-btn>
@@ -59,7 +59,6 @@ export default {
   data() {
     return {
       student: this.$store.state.currentStudent,
-      today: "2019-01-10",
       events: [],
       eventIds: []
     };
@@ -69,6 +68,15 @@ export default {
       const map = {};
       this.events.forEach(e => (map[e.date] = map[e.date] || []).push(e));
       return map;
+    },
+    today() {
+      var hiduke = new Date();
+      var year = hiduke.getFullYear();
+      var month = hiduke.getMonth() + 1;
+      var week = hiduke.getDay();
+      var day = hiduke.getDate();
+      var current = `${year}-${month}-${day}`;
+      return current;
     }
   },
   async created() {
@@ -91,6 +99,7 @@ export default {
       arrayIds.push(data.id);
     });
     this.eventIds = arrayIds;
+    console.log(`今日は${this.today}です`);
   },
   methods: {
     open(event) {
@@ -126,3 +135,8 @@ export default {
   }
 };
 </script>
+<style scoped>
+.color-black {
+  color: black;
+}
+</style>

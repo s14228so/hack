@@ -1,0 +1,12 @@
+.header{
+  width: 100%;
+  height: 100px;
+  ul{
+    list-style: none;
+    display: flex;
+  }
+  li{
+    float: right;
+    padding:30px;
+  }
+}

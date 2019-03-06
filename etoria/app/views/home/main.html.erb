@@ -1,0 +1,187 @@
+<header class="nav">
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://bulma.io">
+        <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+      </a>
+
+      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item">
+          Home
+        </a>
+
+        <a class="navbar-item">
+          Documentation
+        </a>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More
+          </a>
+
+          <div class="navbar-dropdown">
+            <a class="navbar-item">
+              About
+            </a>
+            <a class="navbar-item">
+              Jobs
+            </a>
+            <a class="navbar-item">
+              Contact
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item">
+              Report an issue
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <%= link_to user_path(current_user), class: "button is-primary" do %>
+              <strong>マイページ</strong>
+              <% end %>
+            <%= link_to  destroy_user_session_path, method: :delete, class: "button is-light" do %>
+              ログアウト
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="hero is-info is-bold">
+    <div class="hero-body">
+      <div class="container">
+        <% if current_user.team.present? %>
+        <h1 class="title"><%=current_user.team.name %></h1>
+        <h2 class="subtitle">@<%=current_user.team.team_id %></h2>
+          <% end %>
+      </div>
+    </div>
+  </div>
+  <section class="level">
+    <div class="level-left"></div>
+    <div class="level-right">
+      <div class="level-item tabs">
+        <ul>
+          <li class="is-active"><a>最近の一言</a></li>
+          <li><a>古い一言</a></li>
+          <li><a>コメント付き</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="level-right">
+      <div class="level-item">
+        <a class="button is-greylight">フォロー</a>
+      </div>
+    </div>
+  </section>
+</header>
+
+<main class="columns">
+  <div class="submenu column is-3">
+    <% if current_user.team.present? %>
+
+  　<aside class="box">
+    <%= current_user.team.name %>は、ＸＸＸＸＸＸＸＸを実現する会社です。私たちは△△△△△△△△を通じて社会に貢献していきます。
+  </aside>
+      <% end %>
+    <aside class="box menu">
+      <p class="menu-label">
+        類似のチーム
+      </p>
+      <ul class="menu-list">
+<!--        チームの種類によって分類し、同じ分野のチームをlimit(3)で表示-->
+        <li><a href="#">株式会社カサ<small>@casainc</small></a></li>
+        <li><a href="#">レア製作所<small>@rea-product</small></a></li>
+        <li><a href="#">オフィス・アル<small>@office-al</small></a></li>
+      </ul>
+      <p class="menu-label">
+        キーワード
+      </p>
+      <ul class="menu-list">
+        <li><a href="#">システム開発</a></li>
+        <li><a class="is-active" href="#">技術教育</a>
+          <ul>
+            <li><a href="#">一社研修</a></li>
+            <li><a href="#">定期開催コース</a></li>
+          </ul>
+        </li>
+        <li><a href="#">ソフトウェアテスティング</a></li>
+      </ul>
+    </aside>
+  </div>
+  <div class="column">
+    <article class="box media">
+      <figure class="media-left">
+        <p class="image is-64x64">
+          <img src="http://placehold.it/128x128">
+        </p>
+      </figure>
+      <div class="media-content">
+        <div class="content">
+          <p><strong>CASAREAL</strong><br>
+            内容、内容、内容、内容、内容、内容、内容、内容、内容、内容、内容、内容、内容<br>
+            <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
+          </p>
+        </div>
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-48x48">
+              <img src="http://placehold.it/96x96">
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p><strong>Sean Brown</strong><br>
+                コメントコメントコメントコメントコメントコメントコメントコメントコメントコメント<br>
+                <small><a>Like</a> · <a>Reply</a> · 2 hrs</small>
+              </p>
+            </div>
+            <article class="media">
+              リプライリプライリプライリプライリプライリプライリプライリプライリプライリプライ。
+            </article>
+            <article class="media">
+              リプライリプライリプライリプライリプライリプライリプライリプライリプライリプライ。
+            </article>
+          </div>
+        </article>
+      </div>
+    </article>
+    <article class="box media">
+      <figure class="media-left">
+        <p class="image is-48x48">
+          <img src="http://placehold.it/96x96">
+        </p>
+      </figure>
+      <div class="media-content">
+        <div class="content">
+          <p><strong>CASAREAL</strong><br>
+            内容、内容、内容、内容、内容、内容、内容、内容、内容、内容、内容、内容、内容、内容<br>
+            <small><a>Like</a> · <a>Reply</a> · 2 hrs</small>
+          </p>
+        </div>
+      </div>
+    </article>
+    <footer class="footer">
+      <div class="container">
+        <div class="content has-text-centered">
+          <% if current_user.team.present? %>
+
+        <%= Time.now.year %> ©<%=current_user.team.name %>
+            <% end %>
+        </div>
+      </div>
+    </footer>
+  </div>
+</main>

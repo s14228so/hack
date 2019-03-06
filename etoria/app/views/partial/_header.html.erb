@@ -1,0 +1,37 @@
+<div class="header">
+  <ul>
+    <% if user_signed_in? %>
+      <% if current_user.team %>
+      <li>
+        <%= link_to "マイチーム", team_path(current_user.team) %>
+      </li>
+        <% end %>
+      <li>
+        <%= link_to "マイページ", user_path(current_user)%>
+      </li>
+      <li>
+        <%= link_to "トップ", main_path %>
+      </li>
+      <li>
+        <%= link_to "タイムライン", posts_path %>
+      </li>
+      <li>
+        <%= link_to "みんなのアイデア", ideas_path %>
+      </li>
+
+    <li>
+      <%= link_to "ログアウト",  destroy_user_session_path, method: :delete %> </li>
+
+    <li>
+      <%= link_to "投稿する", new_post_path %>
+    </li>
+      <% else %>
+      <li>
+        <%= link_to "ログイン", new_user_session_path %>
+      </li>
+      <li>
+        <%= link_to "新規登録", new_user_registration_path %>
+      </li>
+      <% end %>
+  </ul>
+</div>

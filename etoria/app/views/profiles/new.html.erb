@@ -1,0 +1,9 @@
+<%= form_for @profile, url: user_profiles_path do |f| %>
+  <%= f.label :skill %><br>
+  <%= f.text_field :skill %><br>
+  <%= f.label :資格 %><br>
+  <%= f.text_field :license %><br>
+  <%= f.label :自己アピール %><br>
+  <%= f.text_area :appear %><br>
+  <%= f.submit :完了 %>
+<% end %>

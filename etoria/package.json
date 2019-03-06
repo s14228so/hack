@@ -1,0 +1,16 @@
+{
+  "name": "etoria",
+  "private": true,
+  "dependencies": {
+    "@rails/webpacker": "https://github.com/rails/webpacker",
+    "axios": "^0.18.0",
+    "element-ui": "^2.4.11",
+    "qs": "^6.6.0",
+    "vue": "^2.5.17",
+    "vue-loader": "^15.4.2",
+    "vue-template-compiler": "^2.5.17"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.1.10"
+  }
+}

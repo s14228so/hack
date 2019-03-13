@@ -10,10 +10,10 @@ services:
     volumes:
       - ./back/rails_api/db/mysql/volumes:/var/lib/mysql
   rails:
-    build: ./back/rails_api
+    build: ./back/api
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     volumes:
-      - ./rails:/rails
+      - ./back/api:/rails
     ports:
       - "5000:5000"
     depends_on:

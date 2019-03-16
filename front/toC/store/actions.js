@@ -5,7 +5,10 @@ const actions = {
     context.commit("test");
     console.log(context.state.login);
   },
-  async getStudent(context, { email, password }) {
+  async getStudent(context, {
+    email,
+    password
+  }) {
     const payload = {
       student: {}
     };
@@ -23,7 +26,9 @@ const actions = {
   async signOut(context, access_token) {
     try {
       await axios.delete(`http://localhost:5000/v1/logout`, {
-        params: { access_token: access_token }
+        params: {
+          access_token: access_token
+        }
       });
       this.$router.push({
         name: "login"
@@ -34,7 +39,7 @@ const actions = {
     }
     context.commit("logout");
   },
-  async update(context, data) {
+  async updateImg(context, data) {
     const payload = {
       student: {}
     };

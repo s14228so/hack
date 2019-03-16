@@ -14,6 +14,16 @@
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile v-show="!this.$store.state.login">
+          <v-list-tile-action>
+            <v-icon>open_in_new</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>
+              <sign-link></sign-link>
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
         <v-list-tile v-show="this.$store.state.login">
           <v-list-tile-action>
             <v-icon>exit_to_app</v-icon>
@@ -42,6 +52,7 @@ import "babel-polyfill";
 import NavbarList from "../layout/NavbarList.vue";
 import LogOut from "../devise/LogOut.vue";
 import LogIn from "../devise/LogIn.vue";
+import SignLink from "../devise/SignLink.vue";
 
 export default {
   data() {
@@ -82,7 +93,8 @@ export default {
   components: {
     NavbarList,
     LogOut,
-    LogIn
+    LogIn,
+    SignLink
   },
   mounted() {},
   methods: {

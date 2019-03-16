@@ -2,11 +2,15 @@
 /****************************************
 header
 *****************************************/
+body{
+  font-size: 16px;
+}
 .site-header{
   background: rgba(255,255,255,0.8);
-  padding: 20px;
+  padding: 0 20px;
   position: fixed;
   top: 0;
+  height: 80px;
   transition: .5s;
   width: 100%;
   z-index: 999;
@@ -16,17 +20,27 @@ header
   transform: translateY(-100%);
 }
 
-.site-logo__img{
-  height: auto;
-  width: 50%;
-}
-.gnav__menu__item{
+.site-logo{
+  line-height: 80px;
+  color:black;
+  font-size: 18px;
   margin-left: 20px;
 }
+.gnav__menu__item{
+  padding: 0px 20px;
+  line-height: 80px;
+  font-size: 14px;
+  color: black;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all .3s;
+}
+.gnav__menu__item:hover{
+  opacity: 1.0;
+  background: gray;
+};
 
 .gnav__menu__item__link{
-  color: #333;
-  font-size: 16px;
   font-weight: 700;
 }
 
@@ -59,10 +73,13 @@ contents
 .page-title{
   text-align: center;
 }
+.footer-nav__item__link{
+  color: white;
+}
 
 .page-title__title{
   color: #333;
-  font-size: 48px;
+  font-size: 23px;
   font-weight: 700;
   line-height: 1.4;
   margin-bottom: 40px;
@@ -100,7 +117,7 @@ contents
 .text-container__title{
   color: #333;
   display: inline-block;
-  font-size: 60px;
+  font-size: 30px;
   font-weight: 700;
   overflow: hidden;
   position: relative;

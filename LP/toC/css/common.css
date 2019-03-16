@@ -114,13 +114,12 @@ html {
 
 body{
   color: #999;
-  font-size:20px;
   font-family: 'Noto Sans Japanese', sans-serif;;
   line-height: 2;
 }
 
 a{
-  color: #999;
+  color: black;
   transition: .5s;
 }
 

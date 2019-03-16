@@ -5,9 +5,12 @@
       <v-layout row wrap mt-5>
         <v-flex xs12 md4 v-show="!settingStatus">
           <v-card flat class="pa-5">
-            <v-avatar>
-              <img :src="student.image">
-            </v-avatar>
+            <div v-if="student.image">
+              <v-avatar>
+                <img :src="student.image">
+              </v-avatar>
+            </div>
+            <div v-else><img :src="img_src"</div>
 
             <p class="caption grey--text mt-3">ユーザ名</p>
             <p>{{ student.nickname }}</p>
@@ -65,7 +68,8 @@ export default {
       // blob_url: blob_url,
       image: "",
       blob: "",
-      uploadFile: null
+      uploadFile: null,
+      image_src: require("../../assets/test.png")
     };
   },
   components: {

@@ -17,17 +17,23 @@ export default {
     return {
       students: [],
       current_student: {},
-      message: "Hello Vue!"
+      message: "Hello Vue!",
+      token: this.$store.state.currentStudent.access_token
     };
   },
-  created: function() {
+  mounted: function() {
+    console.log(this.token);
     this.getStudents().then(result => {
       this.students = result;
     });
   },
   methods: {
     getStudents: async function() {
-      const res = await axios.get(`/api/students`);
+      const res = await axios.get(`/api/students`, {
+        headers: {
+          Authorization: this.token
+        }
+      });
       if (res.status !== 200) {
         process.exit();
       }

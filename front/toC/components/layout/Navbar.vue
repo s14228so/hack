@@ -16,7 +16,7 @@
         </v-list-tile>
         <v-list-tile v-show="!this.$store.state.login">
           <v-list-tile-action>
-            <v-icon>open_in_new</v-icon>
+            <v-icon>done</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>

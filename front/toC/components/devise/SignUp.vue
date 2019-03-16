@@ -1,5 +1,5 @@
 <template>
-  <v-container mt-2>
+  <v-container mt-2 class="signup-wrap">
     <v-layout row wrap>
       <v-flex xs6>
         <h2>Sign Up</h2>
@@ -37,8 +37,8 @@
               name="nickname"
               label="nickname"
             ></v-text-field>
-            <p>{{email}}</p>
-            <p>{{password}}</p>
+            {{password}}
+            {{passwordConfirm}}
             <v-checkbox label="Do you agree?" required></v-checkbox>
             <!-- <input type="submit" @click="submit"> -->
             <input type="submit">
@@ -80,16 +80,20 @@ export default {
       this.email = "";
       this.password = "";
       this.nickname = "";
+      this.password = "";
+      this.passwordConfirm = "";
       this.select = null;
       this.checkbox = false;
     },
     async submit() {
       try {
         const response = await axios.post(`http://localhost:5000/v1/students`, {
-          email: this.email,
-          password: this.password,
-          password_confirm: this.passwordConfirm,
-          nickname: this.nickname
+          student: {
+            email: this.email,
+            password: this.password,
+            password_confirmation: this.passwordConfirm,
+            nickname: this.nickname
+          }
         });
         this.currentStudent = response.data;
         var data = [];
@@ -108,6 +112,9 @@ export default {
 };
 </script>
 <style scoped>
+.signup-wrap {
+  padding-left: 350px;
+}
 </style>
 
 

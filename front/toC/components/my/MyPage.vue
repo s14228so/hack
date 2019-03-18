@@ -94,6 +94,7 @@ export default {
     },
     rails() {
       this.settingStatus = false;
+      this.student = this.$store.state.currentStudent;
     },
     selectedFile(e) {
       e.preventDefault();

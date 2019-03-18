@@ -39,12 +39,19 @@ const actions = {
     }
     context.commit("logout");
   },
-  async updateImg(context, data) {
+  async update(context, data) {
     const payload = {
       student: {}
     };
     payload.student = data;
     context.commit("update", payload);
+  },
+  async updateImg(context, data) {
+    const payload = {
+      student: {}
+    };
+    payload.student = data;
+    context.commit("updateImg", payload);
   }
 };
 

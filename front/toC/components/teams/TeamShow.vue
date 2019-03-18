@@ -10,16 +10,16 @@
           <v-container fill-height fluid>
             <v-layout fill-height>
               <v-flex xs12 align-end flexbox>
-                <span class="headline">Top 10 Australian beaches</span>
+                <span class="headline">{{team.name}}</span>
               </v-flex>
             </v-layout>
           </v-container>
         </v-img>
         <v-card-title>
-          <div>
-            <span class="grey--text">Number 10</span>
+          <div v-for="member in members" :key="member.id">
+            <span class="grey--text">メンバー</span>
             <br>
-            <span>Whitehaven Beach</span>
+            <span>{{member.name}}</span>/
             <br>
             <span>Whitsunday Island, Whitsunday Islands</span>
           </div>
@@ -32,10 +32,34 @@
     </v-flex>
   </v-layout>
 </template>
-
 <script>
-export default {};
+import axios from "axios";
+import "babel-polyfill";
+export default {
+  data() {
+    return {
+      student: this.$store.state.currentStudent,
+      team_id: this.$route.params.id,
+      team: {},
+      members: []
+    };
+  },
+  async mounted() {
+    const res = await axios.get(
+      `http://localhost:5000/v1/teams/${this.team_id}/one`,
+      { headers: { Authorization: this.student.access_token } }
+    );
+    this.team = res.data;
+    console.log(this.team);
+    const responce = await axios.get(
+      `http://localhost:5000/v1/teams/${this.team_id}/one`,
+      { headers: { Authorization: this.student.access_token } }
+    );
+    this.members = responce.data;
+    console.log(this.team);
+  }
+};
 </script>
 
-<style scopdd>
+<style scoped>
 </style>

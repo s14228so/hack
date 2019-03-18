@@ -18,10 +18,8 @@
         <v-card-title>
           <div v-for="member in members" :key="member.id">
             <span class="grey--text">メンバー</span>
-            <br>
-            <span>{{member.name}}</span>/
-            <br>
-            <span>Whitsunday Island, Whitsunday Islands</span>
+            <br>/
+            <span>{{member.nickname}}</span>
           </div>
         </v-card-title>
         <v-card-actions>
@@ -50,13 +48,7 @@ export default {
       { headers: { Authorization: this.student.access_token } }
     );
     this.team = res.data;
-    console.log(this.team);
-    const responce = await axios.get(
-      `http://localhost:5000/v1/teams/${this.team_id}/one`,
-      { headers: { Authorization: this.student.access_token } }
-    );
-    this.members = responce.data;
-    console.log(this.team);
+    this.members = this.team.students;
   }
 };
 </script>

@@ -22,10 +22,7 @@ export default {
       this.currentStudent = data;
     }
     const res = await axios.get(
-      `http://localhost:5000/v1/events/${this.$route.params.id}`,
-      {
-        headers: { Authorization: data.access_token }
-      }
+      `http://localhost:5000/v1/events/${this.$route.params.id}`
     );
     if (res.status !== 200) {
       process.exit();

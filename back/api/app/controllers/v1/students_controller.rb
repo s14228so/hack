@@ -25,6 +25,7 @@ module V1
     # Create an user
     def create
       @student = Student.new student_params
+      binding.pry
 
       if @student.save!
         render json: @student, serializer: V1::SessionSerializer, root: nil

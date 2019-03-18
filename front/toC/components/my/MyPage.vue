@@ -5,9 +5,14 @@
       <v-layout row wrap mt-5>
         <v-flex xs12 md4 v-show="!settingStatus">
           <v-card flat class="pa-5">
-            <v-avatar>
-              <img :src="student.image">
-            </v-avatar>
+            <div v-if="student.image">
+              <v-avatar>
+                <img :src="student.image">
+              </v-avatar>
+            </div>
+            <div v-else class="default-img">
+              <img :src="img_src">
+            </div>
 
             <p class="caption grey--text mt-3">ユーザ名</p>
             <p>{{ student.nickname }}</p>
@@ -22,26 +27,34 @@
             <v-icon class="icon-setting" @click="showSetting">edit</v-icon>
           </v-card>
         </v-flex>
-        <form action method="post" novalidate="true" @submit.prevent="uploadImage" class="uploader">
-          <h3>プロフィール写真の追加</h3>
-          <hr>
-          <input
-            type="file"
-            name="student[images]"
-            id="student_image"
-            @change="selectedFile"
-            accept="image/*"
-            placeholder="Upload file..."
+        <div v-if="image">
+          <form
+            action
+            method="post"
+            novalidate="true"
+            @submit.prevent="uploadImage"
+            class="uploader"
           >
-          <br>
-          <input
-            type="submit"
-            name="commit"
-            value="追加"
-            data-disable-with="Update Student"
-            class="img-btn"
-          >
-        </form>
+            <h3>プロフィール写真の追加</h3>
+            <hr>
+            <input
+              type="file"
+              name="student[images]"
+              id="student_image"
+              @change="selectedFile"
+              accept="image/*"
+              placeholder="Upload file..."
+            >
+            <br>
+            <input
+              type="submit"
+              name="commit"
+              value="追加"
+              data-disable-with="Update Student"
+              class="img-btn"
+            >
+          </form>
+        </div>
         <v-flex md2 v-show="!settingStatus"></v-flex>
         <v-flex xs12 md4 v-show="settingStatus">
           <setting-comp @update="rails"></setting-comp>
@@ -65,7 +78,8 @@ export default {
       // blob_url: blob_url,
       image: "",
       blob: "",
-      uploadFile: null
+      uploadFile: null,
+      img_src: require("../../assets/noimg.jpeg")
     };
   },
   components: {
@@ -80,6 +94,7 @@ export default {
     },
     rails() {
       this.settingStatus = false;
+      this.student = this.$store.state.currentStudent;
     },
     selectedFile(e) {
       e.preventDefault();
@@ -98,12 +113,13 @@ export default {
           headers: { Authorization: this.student.access_token }
         }
       );
-      this.$store.dispatch(`update`, {
+      this.$store.dispatch(`updateImg`, {
         access_token: this.student.access_token,
-        student_id: this.student.student_id
+        student_id: this.student.student_id,
+        image: formData
       });
       this.$router.push({
-        name: "mypage"
+        name: "index"
       });
     }
   }
@@ -127,5 +143,10 @@ export default {
   background: gray;
   color: #fff;
   border-radius: 10px;
+}
+.default-img img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
 </style>

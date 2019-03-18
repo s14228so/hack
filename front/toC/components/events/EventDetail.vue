@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-container mt-5>
-      <div v-for="event in events" class="mt-2">
+      <div v-for="event in events" :key="event.id" class="mt-2">
         <v-chip @click="childDetail(event)">
           {{ event.date }}
           {{ event.title }}

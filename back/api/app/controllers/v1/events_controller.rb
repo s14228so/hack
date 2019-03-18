@@ -1,6 +1,6 @@
 module V1
   class EventsController < ApplicationController
-  skip_before_action :authenticate_student_from_token!, only: [:index]
+  skip_before_action :authenticate_student_from_token!, except: [:myhacks]
   protect_from_forgery :except => [:index, :create, :show, :myhacks, :join_students]
   def index
      render json: Event.all, each_serializer: V1::EventSerializer
@@ -12,7 +12,12 @@ module V1
   end
 
   def myhacks
-    @myhacks = current_student.events
+    student = current_student
+    if student.events.present?
+      @myhacks = student.events
+    else
+      @myhacks = []
+    end
     render json: @myhacks, each_serializer: V1::MyHacksSerializer
   end
 

@@ -17,13 +17,20 @@ export default {
     }
   },
   async mounted() {
-    const res = await axios.get(`http://localhost:5000/v1/students/7/one`, {
-      headers: {
-        Authorization: this.$store.state.currentStudent.access_token
-      }
-    });
-    this.student = res.data;
-    console.log(res.data);
+    console.log(this.$route.params.id);
+    try {
+      const res = await axios.get(
+        `http://localhost:5000/v1/students/${this.$route.params.id}/one`,
+        {
+          headers: {
+            Authorization: this.$store.state.currentStudent.access_token
+          }
+        }
+      );
+      this.student = res.data;
+    } catch {
+      this.$router.push("/");
+    }
   }
 };
 </script>

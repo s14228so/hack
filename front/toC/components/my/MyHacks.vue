@@ -6,12 +6,14 @@
       <hr>
       <p>{{event.content}}</p>
       <div v-for="student in students" class="mt-3" :key="student.email">
-        <div v-if="student.image">
-          <v-avatar>
-            <img :src="student.image">
-          </v-avatar>
-        </div>
-        <v-chip @click="idPush(student)">{{ student.email }}</v-chip>
+        <v-chip @click="idPush(student)">
+          <div v-if="student.image" class="image">
+            <v-avatar>
+              <img :src="student.image">
+            </v-avatar>
+          </div>
+          {{ student.email }}
+        </v-chip>
       </div>
     </div>
   </v-container>
@@ -49,7 +51,9 @@ export default {
 
   methods: {
     async showDetail(event) {
-      this.detailStatus = !this.detailStatus;
+      if (this.detailStatus === false) {
+        this.detailStatus = true;
+      }
       this.event = event;
       const res = await axios.get(
         `http://localhost:5000/v1/events/${event.id}/join_students`,
@@ -89,5 +93,7 @@ h4 {
 p {
   font-size: 12px;
   margin-top: 10px;
+}
+.image {
 }
 </style>

@@ -1,4 +1,4 @@
-Student.seed do |s|
+Event.seed do |s|
   s.id = 1
   s.nickname = "Mondo"
   s.email = "mondo@gmail.com"
@@ -6,7 +6,7 @@ Student.seed do |s|
   s.password = "password"
 end
 
-Student.seed do |s|
+Event.seed do |s|
   s.id = 2
   s.nickname = "Shingai"
   s.email = "shingai@gmail.com"
@@ -14,21 +14,21 @@ Student.seed do |s|
   s.password = "password"
 end
 
-Student.seed do |s|
+Event.seed do |s|
   s.id = 3
   s.nickame = "Ono"
   s.email = "ono@ono.com"
   s.password = "password"
 end
 
-Student.seed do |s|
+Event.seed do |s|
   s.id = 4
   s.nickname = "test"
   s.email = "test@test.com"
   s.password = "password"
 end
 
-Student.seed do |s|
+Event.seed do |s|
   s.id = 4
   s.nickname = "yamada"
   s.email = "yamada@yamada.com"
@@ -36,7 +36,7 @@ Student.seed do |s|
 end
 
 
-Student.seed do |s|
+Event.seed do |s|
   s.id = 4
   s.nickname = "tanaka"
   s.email = "tanaka@tanaka.com"

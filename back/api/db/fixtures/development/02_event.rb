@@ -1,6 +1,6 @@
 Event.seed do |s|
   s.id = 1
-  s.nickname = "Mondo"
+  s.title = "Mondo"
   s.email = "mondo@gmail.com"
   s.password = "mondomondo"
   s.password = "password"
@@ -8,7 +8,7 @@ end
 
 Event.seed do |s|
   s.id = 2
-  s.nickname = "Shingai"
+  s.title = "Shingai"
   s.email = "shingai@gmail.com"
   s.password = "shingai"
   s.password = "password"
@@ -23,14 +23,14 @@ end
 
 Event.seed do |s|
   s.id = 4
-  s.nickname = "test"
+  s.title = "test"
   s.email = "test@test.com"
   s.password = "password"
 end
 
 Event.seed do |s|
   s.id = 4
-  s.nickname = "yamada"
+  s.title = "yamada"
   s.email = "yamada@yamada.com"
   s.password = "password"
 end
@@ -38,7 +38,7 @@ end
 
 Event.seed do |s|
   s.id = 4
-  s.nickname = "tanaka"
+  s.title = "tanaka"
   s.email = "tanaka@tanaka.com"
   s.password = "password"
 end

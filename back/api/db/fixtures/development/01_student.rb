@@ -31,6 +31,14 @@ end
 Student.seed do |s|
   s.id = 4
   s.nickname = "yamada"
-  s.email = "test@test.com"
+  s.email = "yamada@yamada.com"
+  s.password = "password"
+end
+
+
+Student.seed do |s|
+  s.id = 4
+  s.nickname = "tanaka"
+  s.email = "tanaka@tanaka.com"
   s.password = "password"
 end

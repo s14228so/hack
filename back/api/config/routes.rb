@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       get "one", on: :member
     end
     get "/myteams" => "teams#show"
-    resources :event_students, only: [:create]
+    resources :event_students, only: [:create, :destroy]
     resources :events, only: [:index , :create, :show] do
       get 'join_students', on: :member
       get 'myhacks', on: :collection

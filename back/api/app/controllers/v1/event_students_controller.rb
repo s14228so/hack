@@ -8,6 +8,11 @@ module V1
       render json: @event_student, each_serializer: V1::EventStudentSerializer
     end
 
+    def destory
+      @event_student = EventStudent.destory
+      render json: @event_student, each_serializer: V1::EventStudentSerializer
+    end
+
     # def index
     #   @student = Event.find(1)
     #   render json: @event.students, each_serializer: V1::Students

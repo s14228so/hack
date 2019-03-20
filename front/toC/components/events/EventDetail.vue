@@ -41,7 +41,7 @@ export default {
       console.log("yamada");
       if (
         await this.$refs.confirm.open(
-          "イベント予約のキャンセル",
+          "予約キャンセル",
           "キャンセルしますか？",
           {
             color: "red"

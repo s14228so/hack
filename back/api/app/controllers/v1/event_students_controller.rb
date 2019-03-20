@@ -10,7 +10,6 @@ module V1
 
     def destroy
       @event_student = EventStudent.find_by(event_id: params[:event_id], student_id: params[:student_id])
-      binding.pry
       @event_student.destroy
     end
 

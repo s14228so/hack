@@ -21,9 +21,10 @@
                     v-html="event.title"
                     @click.once="eventFilter(event)"
                   ></div>
+
                   <v-card color="grey lighten-4" width="400px" flat>
                     <v-toolbar color="primary" dark>
-                      <v-btn icon @click="reserveEvent(event.id)" v-show="event.event_filter">
+                      <v-btn icon @click="onClickOpen(event)" v-show="event.event_filter">
                         <v-icon title="予約する">done</v-icon>
                       </v-btn>
                       <v-toolbar-title v-html="event.title"></v-toolbar-title>
@@ -49,19 +50,26 @@
         </v-sheet>
       </v-flex>
     </v-layout>
+    <confirm ref="confirm" @agree="reserveEvent"></confirm>
+    <!-- <v-btn color="success" @click>OpenConfirm</v-btn> -->
+    <!-- reserveEvent(event.id) -->
   </v-container>
 </template>
 <script>
 import axios from "axios";
 import "babel-polyfill";
-
+import Confirm from "./flash/Confirm";
 export default {
+  props: ["event"],
   data() {
     return {
       student: this.$store.state.currentStudent,
       events: [],
       eventIds: []
     };
+  },
+  components: {
+    Confirm
   },
   computed: {
     eventsMap() {
@@ -102,16 +110,33 @@ export default {
     console.log(`今日は${this.today}です`);
   },
   methods: {
+    async onClickOpen(event) {
+      console.log("--onClickOpen");
+      if (
+        await this.$refs.confirm.open(
+          "イベントの予約",
+          "予約しますか？",
+          {
+            color: "red"
+          },
+          event
+        )
+      ) {
+        console.log("--yes");
+      } else {
+        console.log("--no");
+      }
+    },
     open(event) {
       alert(event.title);
     },
-    async reserveEvent(id) {
+    async reserveEvent(event) {
       try {
         const response = await axios.post(
           `http://localhost:5000/v1/event_students`,
           {
             student_id: this.student.student_id,
-            event_id: id,
+            event_id: event.id,
             headers: { Authorization: this.student.access_token }
           }
         );

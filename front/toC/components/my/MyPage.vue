@@ -27,34 +27,26 @@
             <v-icon class="icon-setting" @click="showSetting">edit</v-icon>
           </v-card>
         </v-flex>
-        <div v-if="image">
-          <form
-            action
-            method="post"
-            novalidate="true"
-            @submit.prevent="uploadImage"
-            class="uploader"
+        <form action method="post" novalidate="true" @submit.prevent="uploadImage" class="uploader">
+          <h3>プロフィール写真の変更</h3>
+          <hr>
+          <input
+            type="file"
+            name="student[images]"
+            id="student_image"
+            @change="selectedFile"
+            accept="image/*"
+            placeholder="Upload file..."
           >
-            <h3>プロフィール写真の追加</h3>
-            <hr>
-            <input
-              type="file"
-              name="student[images]"
-              id="student_image"
-              @change="selectedFile"
-              accept="image/*"
-              placeholder="Upload file..."
-            >
-            <br>
-            <input
-              type="submit"
-              name="commit"
-              value="追加"
-              data-disable-with="Update Student"
-              class="img-btn"
-            >
-          </form>
-        </div>
+          <br>
+          <input
+            type="submit"
+            name="commit"
+            value="追加"
+            data-disable-with="Update Student"
+            class="img-btn"
+          >
+        </form>
         <v-flex md2 v-show="!settingStatus"></v-flex>
         <v-flex xs12 md4 v-show="settingStatus">
           <setting-comp @update="rails"></setting-comp>
@@ -105,7 +97,6 @@ export default {
     async uploadImage() {
       const formData = new FormData();
       formData.append("student[images]", this.uploadFile);
-      console.log(formData);
       const response = await axios.post(
         `http://localhost:5000/v1/students/${this.student.student_id}/image`,
         formData,
@@ -113,13 +104,13 @@ export default {
           headers: { Authorization: this.student.access_token }
         }
       );
-      this.$store.dispatch(`updateImg`, {
-        access_token: this.student.access_token,
-        student_id: this.student.student_id,
-        image: formData
-      });
+      // this.$store.dispatch(`updateImg`, {
+      //   access_token: this.student.access_token,
+      //   student_id: this.student.student_id,
+      //   image: formData
+      // });
       this.$router.push({
-        name: "index"
+        name: "image"
       });
     }
   }

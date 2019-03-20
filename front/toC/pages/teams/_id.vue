@@ -1,23 +1,19 @@
 <template>
-  <div>{{team.name}}</div>
+  <team-show></team-show>
 </template>
+
 <script>
-import axios from "axios";
-import "babel-polyfill";
+import TeamShow from "../../components/teams/TeamShow";
+
 export default {
   data() {
-    return {
-      student: this.$store.state.currentStudent,
-      team_id: this.$route.params.id,
-      team: {}
-    };
+    return {};
   },
-  async mounted() {
-    const res = await axios.get(
-      `http://localhost:5000/v1/teams/${this.team_id}/one`,
-      { headers: { Authorization: this.student.access_token } }
-    );
-    this.team = res.data;
+  components: {
+    TeamShow
   }
 };
 </script>
+
+<style scoped>
+</style>

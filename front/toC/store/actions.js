@@ -46,13 +46,34 @@ const actions = {
     payload.student = data;
     context.commit("update", payload);
   },
-  async updateImg(context, data) {
+  async loadStudent(context, {
+    student_id,
+    access_token
+  }) {
     const payload = {
       student: {}
     };
-    payload.student = data;
-    context.commit("updateImg", payload);
-  }
+
+    await axios.get(`http://localhost:5000/v1/students/${student_id}`, {
+      headers: {
+        Authorization: access_token
+      }
+    }).then(responce => {
+      console.log(responce.data);
+      payload.student = responce.data;
+      localStorage.setItem("currentStudent", JSON.stringify(responce.data));
+    });
+    context.commit("loadStudent", payload);
+  },
+  // async updateImg(context, data) {
+  //   const payload = {
+  //     student: {}
+  //   };
+  //   payload.student = data;
+  //   console.log(payload.student);
+  //   console.log("iiii");
+  //   context.commit("updateImg", payload);
+  // }
 };
 
 export default actions;

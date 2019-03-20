@@ -1,10 +1,19 @@
 <template>
   <v-container>
     <event-detail @rand="showDetail" :events="events"></event-detail>
-    <div v-show="detailStatus">
-      {{event.title}}
+    <div v-show="detailStatus" class="box">
+      <h4>{{event.title}}</h4>
+      <hr>
+      <p>{{event.content}}</p>
       <div v-for="student in students" class="mt-3" :key="student.email">
-        <v-chip @click="idPush(student)">{{ student.email }}</v-chip>
+        <v-chip @click="idPush(student)">
+          <div v-if="student.image" class="image">
+            <v-avatar>
+              <img :src="student.image">
+            </v-avatar>
+          </div>
+          {{ student.email }}
+        </v-chip>
       </div>
     </div>
   </v-container>
@@ -29,6 +38,7 @@ export default {
     EventDetail
   },
   mounted: async function() {
+    console.log(this.students);
     const res = await axios.get(`http://localhost:5000/v1/events/myhacks`, {
       headers: { Authorization: this.student.access_token }
     });
@@ -36,11 +46,14 @@ export default {
       process.exit();
     }
     this.events = res.data;
+    console.log(this.events);
   },
 
   methods: {
     async showDetail(event) {
-      this.detailStatus = !this.detailStatus;
+      if (this.detailStatus === false) {
+        this.detailStatus = true;
+      }
       this.event = event;
       const res = await axios.get(
         `http://localhost:5000/v1/events/${event.id}/join_students`,
@@ -66,4 +79,21 @@ export default {
 };
 </script>
 <style scoped>
+.box {
+  width: 300px;
+  height: 400px;
+  padding: 20px;
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+
+h4 {
+  font-size: 18px;
+}
+p {
+  font-size: 12px;
+  margin-top: 10px;
+}
+.image {
+}
 </style>

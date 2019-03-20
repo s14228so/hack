@@ -10,10 +10,15 @@ const mutations = {
   test(state) {
     state.test = true;
   },
-  updateImg(state, payload) {
-    state.currentStudent.img = payload.student.img;
-  },
+  // updateImg(state, payload) {
+  //   console.log(payload)
+  //   state.currentStudent.image = payload.student.image;
+  // },
   update(state, payload) {
+    state.currentStudent = payload.student
+  },
+  loadStudent(state, payload) {
+    console.log("muta!")
     state.currentStudent = payload.student
   }
 };

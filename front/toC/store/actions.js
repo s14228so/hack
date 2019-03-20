@@ -47,15 +47,14 @@ const actions = {
     context.commit("update", payload);
   },
   async loadStudent(context, {
-      student_id,
-      access_token
-    }
-
-  ) {
+    student_id,
+    access_token
+  }) {
     const payload = {
       student: {}
     };
-    await axios.get("http://localhost:5000/students/${student_id}/curretnt", {
+
+    await axios.get(`http://localhost:5000/v1/students/${student_id}/current`, {
       headers: {
         Authorization: access_token
       }

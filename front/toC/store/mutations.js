@@ -18,6 +18,7 @@ const mutations = {
     state.currentStudent = payload.student
   },
   loadStudent(state, payload) {
+    console.log("muta!")
     state.currentStudent = payload.student
   }
 };

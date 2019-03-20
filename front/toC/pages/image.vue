@@ -18,8 +18,10 @@ export default {
   },
   methods: {
     loadImage() {
-      this.$store.dispatch("loadStudent", {this.student.student_id,this.student.access_token});
-      console.log("update");
+      this.$store.dispatch(`loadStudent`, {
+        student_id: this.student.student_id,
+        access_token: this.student.access_token
+      });
     }
   }
 };

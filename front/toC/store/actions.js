@@ -54,11 +54,12 @@ const actions = {
       student: {}
     };
 
-    await axios.get(`http://localhost:5000/v1/students/${student_id}/current`, {
+    await axios.get(`http://localhost:5000/v1/students/${student_id}`, {
       headers: {
         Authorization: access_token
       }
     }).then(responce => {
+      console.log(responce.data);
       payload.student = responce.data;
       localStorage.setItem("currentStudent", JSON.stringify(responce.data));
     });

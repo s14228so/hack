@@ -1,8 +1,7 @@
 <template>
   <div>
     <h2>画像のアップロードが完了しました！</h2>
-    <button @click="loadImage">やあ</button>
-    <router-link to="/mypage" @click="loadImage">プロフィールに戻る</router-link>
+    <button @click="loadImage">プロフィールに戻る</button>
   </div>
 </template>
 
@@ -21,6 +20,9 @@ export default {
       this.$store.dispatch(`loadStudent`, {
         student_id: this.student.student_id,
         access_token: this.student.access_token
+      });
+      this.$router.push({
+        name: "mypage"
       });
     }
   }

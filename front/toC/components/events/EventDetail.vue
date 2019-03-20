@@ -5,8 +5,10 @@
         <v-chip @click="childDetail(event)">
           {{ event.date }}
           {{ event.title }}
+          <cancel @dialog="onClickOpen(event)"></cancel>
         </v-chip>
       </div>
+      <confirm ref="confirm" @agree="deleteEvent"></confirm>
     </v-container>
   </div>
 </template>
@@ -14,8 +16,14 @@
 import axios from "axios";
 import "babel-polyfill";
 
+import Cancel from "../button/Cancel";
+import Confirm from "../flash/Confirm";
 export default {
   props: ["events"],
+  components: {
+    Cancel,
+    Confirm
+  },
   data: function() {
     return {
       students: []
@@ -27,6 +35,26 @@ export default {
       // vm.$emitでカスタムイベントfavを発火させる
       // 第二引数のデータはfavで指定しているコールバックに渡される
       this.$emit("rand", event);
+    },
+    async onClickOpen(event) {
+      console.log("yamada");
+      if (
+        await this.$refs.confirm.open(
+          "イベント予約のキャンセル",
+          "キャンセルしますか？",
+          {
+            color: "red"
+          },
+          event
+        )
+      ) {
+        console.log("--yes");
+      } else {
+        console.log("--no");
+      }
+    },
+    deleteEvent: function() {
+      alert("削除");
     }
   }
 };

@@ -23,6 +23,7 @@
 import axios from "axios";
 import "babel-polyfill";
 import EventDetail from "../events/EventDetail";
+
 export default {
   data: function() {
     return {

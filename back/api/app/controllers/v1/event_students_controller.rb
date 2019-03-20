@@ -8,9 +8,10 @@ module V1
       render json: @event_student, each_serializer: V1::EventStudentSerializer
     end
 
-    def destory
-      @event_student = EventStudent.destory
-      render json: @event_student, each_serializer: V1::EventStudentSerializer
+    def destroy
+      @event_student = EventStudent.find_by(event_id: params[:event_id], student_id: params[:student_id])
+      binding.pry
+      @event_student.destroy
     end
 
     # def index

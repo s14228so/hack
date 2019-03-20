@@ -26,7 +26,8 @@ export default {
   },
   data: function() {
     return {
-      students: []
+      students: [],
+      student: this.$store.state.currentStudent
     };
   },
   mounted() {},
@@ -53,8 +54,18 @@ export default {
         console.log("--no");
       }
     },
-    deleteEvent: function() {
-      alert("削除");
+    async deleteEvent(event) {
+      //event_studentのidが欲しい
+      // delete "/:event_id/:student_id"
+      await axios.delete(
+        `http://localhost:5000/v1/${event.id}/${this.student.student_id}`,
+        {
+          headers: { Authorization: this.student.access_token }
+        }
+      );
+      this.$router.push({
+        name: "canceled"
+      });
     }
   }
 };

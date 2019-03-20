@@ -97,7 +97,6 @@ export default {
     async uploadImage() {
       const formData = new FormData();
       formData.append("student[images]", this.uploadFile);
-      console.log(formData);
       const response = await axios.post(
         `http://localhost:5000/v1/students/${this.student.student_id}/image`,
         formData,
@@ -105,11 +104,11 @@ export default {
           headers: { Authorization: this.student.access_token }
         }
       );
-      this.$store.dispatch(`updateImg`, {
-        access_token: this.student.access_token,
-        student_id: this.student.student_id,
-        image: formData
-      });
+      // this.$store.dispatch(`updateImg`, {
+      //   access_token: this.student.access_token,
+      //   student_id: this.student.student_id,
+      //   image: formData
+      // });
       this.$router.push({
         name: "image"
       });

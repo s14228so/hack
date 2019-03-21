@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :student, only: []
-  devise_for :company, only: []
 
   namespace :v1, defaults: { format: :json } do
     resource :login, only: [:create], controller: :sessions
     resource :logout, only: [:destroy], controller: :sessions
+    post "/clogin" => "sessions#company_create"
+    delete "/clogout" => "sessions#company_destroy"
     resources :students, only: [:index , :create, :update, :show] do
       get "current", on: :member
       get "one", on: :member

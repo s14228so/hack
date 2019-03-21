@@ -28,6 +28,13 @@ module V1
       @student.save!
     end
 
+
+    def company_create
+    end
+
+    def company_destroy
+    end
+
     private
 
     def invalid_email

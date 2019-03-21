@@ -14,6 +14,10 @@ Rails.application.routes.draw do
       get "one", on: :member
     end
 
+    resources :companies do
+      get "events", on: :member
+    end
+
     delete "/:event_id/:student_id" => "event_students#destroy"
     get "/myteams" => "teams#show"
     resources :event_students, only: [:create]

@@ -1,7 +1,7 @@
 module V1
   class CompaniesController < ApplicationController
     protect_from_forgery with: :null_session 
-    skip_before_action :authenticate_compnay_from_token!, only: [:create, :update, :image]
+    skip_before_action :authenticate_company_from_token!, only: [:create, :update, :image, :events]
     skip_before_action :authenticate_student_from_token!
 
     # def index
@@ -19,6 +19,12 @@ module V1
 
     def current
       render json: current_compnay.events, each_serializer: V1::CurrentEventsSerializer
+    end
+
+    def events
+       @company = Company.find(params[:id])
+       @events = @company.events
+       render json: @events, each_serializer: V1::EventSerializer
     end
 
     # POST
@@ -52,11 +58,10 @@ module V1
 
     def company_params
       params.require(:compnay).permit(:email, :password)
+    end
 
     def image_params
       params.require(:compnay).permit(:images)
     end
-
-
-  end
+ end
 end

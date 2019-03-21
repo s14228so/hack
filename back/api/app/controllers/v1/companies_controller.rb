@@ -1,12 +1,12 @@
 module V1
-  class CompnaysController < ApplicationController
+  class CompaniesController < ApplicationController
     protect_from_forgery with: :null_session 
     skip_before_action :authenticate_compnay_from_token!, only: [:create, :update, :image]
     skip_before_action :authenticate_student_from_token!
 
-    def index
-      render json: Compnay.all, each_serializer: V1::CompnaySerializer
-    end
+    # def index
+    #   render json: Compnay.all, each_serializer: V1::CompnaySerializer
+    # end
 
     def show
       render json: current_compnay, each_serializer: V1::CurrentCompnaySerializer

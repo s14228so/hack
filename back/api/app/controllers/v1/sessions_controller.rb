@@ -31,6 +31,19 @@ module V1
 
 
     def company_create
+       # response.headers['X-CSRF-Token'] = form_authenticity_token
+      @company = Company.find_for_database_authentication(email: params[:email])
+      return invalid_email unless @company
+
+      if @company.valid_password?(params[:password])
+        sign_in :company, @company
+        @company.access_token = "#{@company.id}:#{Devise.friendly_token}"
+        @company.save!
+        render json: @company, serializer: SessionSerializer, root: nil
+      else
+        invalid_password
+      end
+
     end
 
     def company_destroy

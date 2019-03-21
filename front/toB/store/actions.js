@@ -5,27 +5,27 @@ const actions = {
     context.commit("test");
     console.log(context.state.login);
   },
-  async getStudent(context, {
+  async getCompany(context, {
     email,
     password
   }) {
     const payload = {
-      student: {}
+      company: {}
     };
     await axios
-      .post(`http://localhost:5000/v1/login`, {
+      .post(`http://localhost:5000/v1/clogin`, {
         email: email,
         password: password
       })
       .then(res => {
-        payload.student = res.data;
-        localStorage.setItem("currentStudent", JSON.stringify(res.data));
+        payload.company = res.data;
+        localStorage.setItem("currentCompany", JSON.stringify(res.data));
       });
     context.commit("login", payload);
   },
   async signOut(context, access_token) {
     try {
-      await axios.delete(`http://localhost:5000/v1/logout`, {
+      await axios.delete(`http://localhost:5000/v1/clogout`, {
         params: {
           access_token: access_token
         }

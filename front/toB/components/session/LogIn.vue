@@ -68,7 +68,7 @@ export default {
       this.checkbox = false;
     },
     submit() {
-      this.$store.dispatch(`getStudent`, {
+      this.$store.dispatch(`getCompany`, {
         email: this.email,
         password: this.password
       });

@@ -3,7 +3,7 @@ import createPersistedState from "vuex-persistedstate";
 import state from "./state";
 import actions from "./actions";
 import mutations from "./mutations";
-import "babel-polifil";
+import "babel-polyfill";
 
 
 const createStore = () => {
@@ -14,7 +14,7 @@ const createStore = () => {
     plugins: [
       createPersistedState({
         key: "app",
-        paths: ["login", "currentStudent"],
+        paths: ["login", "currentCompany"],
         storage: window.localStorage
       })
     ]
@@ -23,5 +23,3 @@ const createStore = () => {
 
 
 export default createStore;
-
-

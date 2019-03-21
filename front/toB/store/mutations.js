@@ -1,11 +1,11 @@
 const mutations = {
   login(state, payload) {
     state.login = true;
-    state.currentStudent = payload.student;
+    state.currentCompany = payload.company;
   },
   logout(state) {
     state.login = false;
-    state.currentStudent = "";
+    state.currentCompany = "";
   },
   test(state) {
     state.test = true;
@@ -15,11 +15,11 @@ const mutations = {
   //   state.currentStudent.image = payload.student.image;
   // },
   update(state, payload) {
-    state.currentStudent = payload.student
+    state.currentCompany = payload.company
   },
   loadStudent(state, payload) {
     console.log("muta!")
-    state.currentStudent = payload.student
+    state.currentCompany = payload.company
   }
 };
 

@@ -19,17 +19,19 @@ export default {
     return {
       title: "",
       date: "",
-      content: ""
+      content: "",
+      company: this.$store.state.currentCompany
     };
   },
   methods: {
     async makeEvent() {
       const res = await axios.post(
-        `http://localhost:5000/events`,
+        `http://localhost:5000/v1/events`,
         {
           title: this.title,
           content: this.content,
-          data: this.date
+          date: this.date,
+          company_id: this.company.company_id
         },
         {
           headers: {

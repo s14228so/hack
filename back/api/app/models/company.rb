@@ -5,5 +5,5 @@ class Company < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :name, length: { maximum: 15 }
-  validates :introduction, lenght: { maximum: 300 }
+  validates :introduction, length: { maximum: 300 }
 end

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :student, only: []
+  devise_for :company, only: []
 
   namespace :v1, defaults: { format: :json } do
     resource :login, only: [:create], controller: :sessions

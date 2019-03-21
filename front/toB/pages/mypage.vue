@@ -1,6 +1,9 @@
 <template>
   <div>
     <h4>マイページ</h4>
+    {{ company.name }}
+    {{ company.introduction }}
+    {{ company.email }}
   </div>
 </template>
 
@@ -11,7 +14,7 @@ import "babel-polyfill";
 export default {
   data() {
     return {
-      company: this.$store.state.company
+      company: this.$store.state.currentCompany
     };
   },
   async mouted() {

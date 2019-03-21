@@ -64,7 +64,7 @@ export default {
   name: "MyPage",
   data: function() {
     return {
-      student: {},
+      student: this.$store.state.currentStudent,
       infos: ["ユーザ名", "メールアドレス", "大学", "学部", "学年"],
       settingStatus: false,
       // blob_url: blob_url,

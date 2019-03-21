@@ -13,7 +13,7 @@ module V1
 
       if @student.valid_password?(params[:password])
         sign_in :student, @student
-        @student.access_token = "#{@student.id}:#{Devise.friendly_token}"
+        @student.access_token = "#s{@student.id}:#{Devise.friendly_token}"
         @student.save!
         render json: @student, serializer: SessionSerializer, root: nil
       else
@@ -37,9 +37,9 @@ module V1
 
       if @company.valid_password?(params[:password])
         sign_in :company, @company
-        @company.access_token = "#{@company.id}:#{Devise.friendly_token}"
+        @company.access_token = "c#{@company.id}:#{Devise.friendly_token}"
         @company.save!
-        render json: @company, serializer: SessionSerializer, root: nil
+        render json: @company, serializer: CompanySerializer, root: nil
       else
         invalid_password
       end

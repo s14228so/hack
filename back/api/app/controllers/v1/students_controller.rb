@@ -2,6 +2,7 @@ module V1
   class StudentsController < ApplicationController
     protect_from_forgery with: :null_session 
     skip_before_action :authenticate_student_from_token!, only: [:create, :update, :image]
+    skip_before_action :authenticate_company_from_token!
 
 
     def index
@@ -25,7 +26,6 @@ module V1
     # Create an user
     def create
       @student = Student.new student_params
-      binding.pry
 
       if @student.save!
         render json: @student, serializer: V1::SessionSerializer, root: nil

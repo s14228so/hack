@@ -5,6 +5,7 @@ class Event < ApplicationRecord
   validates :title, presence: true
   validates :date, presence: true
   validates :content, presence: true
+  belongs_to :company
 
    has_many_attached :images
 end

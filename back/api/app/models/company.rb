@@ -6,4 +6,6 @@ class Company < ApplicationRecord
 
   validates :name, length: { maximum: 15 }
   validates :introduction, length: { maximum: 300 }
+
+  has_many :events
 end

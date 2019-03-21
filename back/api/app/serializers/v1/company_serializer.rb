@@ -1,7 +1,7 @@
 module V1
   class CompanySerializer < ActiveModel::Serializer
 
-    attributes :email,:name, :email, :introduction,:access_token
+    attributes :email,:name, :email, :introduction, :access_token
 
     def token_type
       'Bearer'

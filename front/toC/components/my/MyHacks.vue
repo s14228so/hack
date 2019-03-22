@@ -40,9 +40,17 @@ export default {
   },
   mounted: async function() {
     console.log(this.students);
-    const res = await axios.get(`http://localhost:5000/v1/events/myhacks`, {
-      headers: { Authorization: this.student.access_token }
-    });
+    const res = await axios.get(
+      `http://localhost:5000/v1/events/myhacks`,
+      {
+        params: {
+          id: this.student.student_id
+        }
+      },
+      {
+        headers: { Authorization: this.student.access_token }
+      }
+    );
     if (res.status !== 200) {
       process.exit();
     }

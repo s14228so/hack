@@ -1,7 +1,7 @@
 module V1
   class StudentsController < ApplicationController
     protect_from_forgery with: :null_session 
-    skip_before_action :authenticate_student_from_token!, only: [:create, :update, :image]
+    skip_before_action :authenticate_student_from_token!
     skip_before_action :authenticate_company_from_token!
 
 
@@ -19,7 +19,8 @@ module V1
     end
 
     def current
-      render json: current_student.events, each_serializer: V1::CurrentEventsSerializer
+      student = Student.find(params[:id])
+      render json: student.events, each_serializer: V1::CurrentEventsSerializer
     end
 
     # POST

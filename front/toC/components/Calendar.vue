@@ -19,7 +19,7 @@
                     v-ripple
                     class="my-event"
                     v-html="event.title"
-                    @click.once="eventFilter(event)"
+                    @click="eventFilter(event)"
                   ></div>
 
                   <v-card color="grey lighten-4" width="400px" flat>
@@ -88,26 +88,28 @@ export default {
     }
   },
   async created() {
-    try {
-      const response = await axios.get(`http://localhost:5000/v1/events`, {
-        headers: { Authorization: this.student.access_token }
-      });
-      this.events = response.data;
-    } catch (error) {
-      console.log(error);
-    }
-    let response = await axios.get(
-      `http://localhost:5000/v1/students/${this.currentId}/current`,
+    const response = await axios.get(`http://localhost:5000/v1/events`, {
+      headers: { Authorization: this.student.access_token }
+    });
+    this.events = response.data;
+    const res = await axios.get(
+      `http://localhost:5000/v1/students/${this.student.student_id}/current`,
+      {
+        params: {
+          id: this.student.student_id
+        }
+      },
       {
         headers: { Authorization: this.student.access_token }
       }
     );
     var arrayIds = [];
-    response.data.forEach(function(data) {
+    res.data.forEach(function(data) {
       arrayIds.push(data.id);
     });
     this.eventIds = arrayIds;
     console.log(`今日は${this.today}です`);
+    console.log(this.eventIds);
   },
   methods: {
     async onClickOpen(event) {

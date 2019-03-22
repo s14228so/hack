@@ -1,7 +1,7 @@
 module V1
   class EventStudentsController < ApplicationController
     protect_from_forgery :except => [:index, :create]
-    skip_before_action :authenticate_student_from_token!, only: [:create]
+    skip_before_action :authenticate_student_from_token!
     skip_before_action :authenticate_company_from_token!
     # イベント予約
     def create

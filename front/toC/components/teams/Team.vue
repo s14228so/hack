@@ -20,11 +20,19 @@ export default {
     TeamMember
   },
   mounted: async function() {
-    const res = await axios.get(`http://localhost:5000/v1/myteams`, {
-      headers: {
-        Authorization: this.student.access_token
+    const res = await axios.get(
+      `http://localhost:5000/v1/myteams`,
+      {
+        params: {
+          id: this.student.student_id
+        }
+      },
+      {
+        headers: {
+          Authorization: this.student.access_token
+        }
       }
-    });
+    );
     if (res.status !== 200) {
       process.exit();
     }

@@ -13,7 +13,7 @@ module V1
 
       if @student.valid_password?(params[:password])
         sign_in :student, @student
-        @student.access_token = "#s{@student.id}:#{Devise.friendly_token}"
+        @student.access_token = "s#{@student.id}:#{Devise.friendly_token}"
         @student.save!
         render json: @student, serializer: SessionSerializer, root: nil
       else

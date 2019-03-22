@@ -1,9 +1,11 @@
 <template>
   <div>
     <div v-for="event in events" :key="event.title">
-      <p>タイトル: {{event.title}}</p>
-      <p>日付: {{event.date}}</p>
-      <p>内容: {{event.content}}</p>
+      <div class="card" @click="showDetail(event)">
+        <p>タイトル: {{event.title}}</p>
+        <p>日付: {{event.date}}</p>
+        <p>内容: {{event.content}}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -28,9 +30,27 @@ export default {
     this.events = res.data;
     console.log(this.events);
   },
-  methods: {}
+  methods: {
+    showDetail(event) {
+      this.$router.push({
+        name: "events-id",
+        params: {
+          id: event.id,
+          event: event
+        }
+      });
+    }
+  }
 };
 </script>
 
 <style>
+.card {
+  cursor: pointer;
+  width: 150px;
+  height: 200px;
+  padding: 20px;
+  border-radius: 5%;
+  border: 1px solid gray;
+}
 </style>

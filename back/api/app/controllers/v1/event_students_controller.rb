@@ -1,11 +1,17 @@
 module V1
   class EventStudentsController < ApplicationController
     protect_from_forgery :except => [:index, :create]
-    skip_before_action :authenticate_student_from_token!, only: [:create]
+    skip_before_action :authenticate_student_from_token!
+    skip_before_action :authenticate_company_from_token!
     # イベント予約
     def create
       @event_student = EventStudent.create event_student_params
       render json: @event_student, each_serializer: V1::EventStudentSerializer
+    end
+
+    def destroy
+      @event_student = EventStudent.find_by(event_id: params[:event_id], student_id: params[:student_id])
+      @event_student.destroy
     end
 
     # def index

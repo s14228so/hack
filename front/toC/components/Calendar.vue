@@ -19,11 +19,12 @@
                     v-ripple
                     class="my-event"
                     v-html="event.title"
-                    @click.once="eventFilter(event)"
+                    @click="eventFilter(event)"
                   ></div>
+
                   <v-card color="grey lighten-4" width="400px" flat>
                     <v-toolbar color="primary" dark>
-                      <v-btn icon @click="reserveEvent(event.id)" v-show="event.event_filter">
+                      <v-btn icon @click="onClickOpen(event)" v-show="event.event_filter">
                         <v-icon title="予約する">done</v-icon>
                       </v-btn>
                       <v-toolbar-title v-html="event.title"></v-toolbar-title>
@@ -49,19 +50,26 @@
         </v-sheet>
       </v-flex>
     </v-layout>
+    <confirm ref="confirm" @agree="reserveEvent"></confirm>
+    <!-- <v-btn color="success" @click>OpenConfirm</v-btn> -->
+    <!-- reserveEvent(event.id) -->
   </v-container>
 </template>
 <script>
 import axios from "axios";
 import "babel-polyfill";
-
+import Confirm from "./flash/Confirm";
 export default {
+  props: ["event"],
   data() {
     return {
       student: this.$store.state.currentStudent,
       events: [],
       eventIds: []
     };
+  },
+  components: {
+    Confirm
   },
   computed: {
     eventsMap() {
@@ -80,44 +88,66 @@ export default {
     }
   },
   async created() {
-    try {
-      const response = await axios.get(`http://localhost:5000/v1/events`, {
-        headers: { Authorization: this.student.access_token }
-      });
-      this.events = response.data;
-    } catch (error) {
-      console.log(error);
-    }
-    let response = await axios.get(
-      `http://localhost:5000/v1/students/${this.currentId}/current`,
+    const response = await axios.get(`http://localhost:5000/v1/events`, {
+      headers: { Authorization: this.student.access_token }
+    });
+    this.events = response.data;
+    const res = await axios.get(
+      `http://localhost:5000/v1/students/${this.student.student_id}/current`,
+      {
+        params: {
+          id: this.student.student_id
+        }
+      },
       {
         headers: { Authorization: this.student.access_token }
       }
     );
     var arrayIds = [];
-    response.data.forEach(function(data) {
+    res.data.forEach(function(data) {
       arrayIds.push(data.id);
     });
     this.eventIds = arrayIds;
     console.log(`今日は${this.today}です`);
+    console.log(this.eventIds);
   },
   methods: {
+    async onClickOpen(event) {
+      console.log("--onClickOpen");
+      if (
+        await this.$refs.confirm.open(
+          "イベントの予約",
+          "予約しますか？",
+          {
+            color: "red"
+          },
+          event
+        )
+      ) {
+        console.log("--yes");
+      } else {
+        console.log("--no");
+      }
+    },
     open(event) {
       alert(event.title);
     },
-    async reserveEvent(id) {
+    async reserveEvent(event) {
       try {
         const response = await axios.post(
           `http://localhost:5000/v1/event_students`,
           {
             student_id: this.student.student_id,
-            event_id: id,
+            event_id: event.id,
             headers: { Authorization: this.student.access_token }
           }
         );
       } catch (error) {
         console.log(error);
       }
+      this.$router.push({
+        name: "reserved"
+      });
     },
     eventFilter(event) {
       if (this.eventIds.includes(event.id)) {

@@ -1,12 +1,16 @@
 module V1
   class TeamsController < ApplicationController
+     skip_before_action :authenticate_company_from_token!
+      skip_before_action :authenticate_student_from_token!
+
     protect_from_forgery :except => [:index]
 
     def index
     end
 
     def show
-        @teams = current_student.teams
+        student = Student.find(params[:id])
+        @teams = student.teams
         render json: @teams, each_serializer: V1::TeamSerializer
     end
 

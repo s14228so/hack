@@ -5,8 +5,10 @@
         <v-chip @click="childDetail(event)">
           {{ event.date }}
           {{ event.title }}
+          <cancel @dialog="onClickOpen(event)"></cancel>
         </v-chip>
       </div>
+      <confirm ref="confirm" @agree="deleteEvent"></confirm>
     </v-container>
   </div>
 </template>
@@ -14,11 +16,18 @@
 import axios from "axios";
 import "babel-polyfill";
 
+import Cancel from "../button/Cancel";
+import Confirm from "../flash/Confirm";
 export default {
   props: ["events"],
+  components: {
+    Cancel,
+    Confirm
+  },
   data: function() {
     return {
-      students: []
+      students: [],
+      student: this.$store.state.currentStudent
     };
   },
   mounted() {},
@@ -27,6 +36,36 @@ export default {
       // vm.$emitでカスタムイベントfavを発火させる
       // 第二引数のデータはfavで指定しているコールバックに渡される
       this.$emit("rand", event);
+    },
+    async onClickOpen(event) {
+      console.log("yamada");
+      if (
+        await this.$refs.confirm.open(
+          "予約キャンセル",
+          "キャンセルしますか？",
+          {
+            color: "red"
+          },
+          event
+        )
+      ) {
+        console.log("--yes");
+      } else {
+        console.log("--no");
+      }
+    },
+    async deleteEvent(event) {
+      //event_studentのidが欲しい
+      // delete "/:event_id/:student_id"
+      await axios.delete(
+        `http://localhost:5000/v1/${event.id}/${this.student.student_id}`,
+        {
+          headers: { Authorization: this.student.access_token }
+        }
+      );
+      this.$router.push({
+        name: "canceled"
+      });
     }
   }
 };

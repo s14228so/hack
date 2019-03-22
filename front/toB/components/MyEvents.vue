@@ -1,6 +1,10 @@
 <template>
   <div>
-    <div v-for="event in events" :key="event.title">{{event.title}}</div>
+    <div v-for="event in events" :key="event.title">
+      <p>タイトル: {{event.title}}</p>
+      <p>日付: {{event.date}}</p>
+      <p>内容: {{event.content}}</p>
+    </div>
   </div>
 </template>
 

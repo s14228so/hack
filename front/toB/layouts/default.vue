@@ -60,13 +60,8 @@ export default {
       items: [
         {
           icon: "apps",
-          title: "Welcome",
-          to: "/"
-        },
-        {
-          icon: "bubble_chart",
           title: "マイページ",
-          to: "/mypage"
+          to: "/"
         },
         {
           icon: "bubble_chart",

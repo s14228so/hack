@@ -33,6 +33,7 @@ module V1
     def company_create
        # response.headers['X-CSRF-Token'] = form_authenticity_token
       @company = Company.find_for_database_authentication(email: params[:email])
+
       return invalid_email unless @company
 
       if @company.valid_password?(params[:password])

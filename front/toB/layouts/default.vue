@@ -57,11 +57,16 @@ export default {
       clipped: false,
       drawer: false,
       fixed: false,
-      items: [
+      item: [
         {
           icon: "apps",
           title: "マイページ",
           to: "/"
+        },
+        {
+          icon: "apps",
+          title: "ログイン",
+          to: "/login"
         },
         {
           icon: "bubble_chart",
@@ -74,6 +79,20 @@ export default {
       rightDrawer: false,
       title: "Hack"
     };
-  }
+  },
+ computed: {
+    items: function () {
+      var icon = {
+         icon: "apps",
+         title: "ログン",
+         to: "/login"
+      }
+      if (this.$store.state.login === true){
+        this.item.slice(1,2)
+      }
+      
+      return this.item
+    }
+ }
 };
 </script>

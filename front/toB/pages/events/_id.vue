@@ -25,40 +25,46 @@
 </template>
 
 <script>
-import axios from "axios";
+import http from "axios";
+import axios from "~/plugins/axios";
 import "babel-polyfill";
 export default {
   data() {
     return {
       detail: false,
       event_id: this.$route.params.id,
-      event: {},
-      students: [
-        {
-          student: {
-            detail: false
-          }
-        }
-      ]
+      students: []
     };
   },
+  async asyncData({ app, params, error }) {
+    const response = await axios.get(`/v1/events/${params.id}`).catch(err => {
+      return err.response;
+    });
+    if (response.status !== 200) {
+      error({
+        statusCode: response.status,
+        message: response.data.message
+      });
+      return;
+    }
+    return { event: response.data };
+  },
   async mounted() {
-    const responce = await axios.get(
-      `http://localhost:5000/v1/events/${this.event_id}`
-    );
-    if (responce.status !== 200) {
-      process.exit();
-    }
-    this.event = responce.data;
-
-    const res = await axios.get(
-      `http://localhost:5000/v1/events/${this.$route.params.id}/join_students`
-    );
+    const res = await axios
+      .get(`/v1/events/${this.$route.params.id}/join_students`)
+      .catch(err => {
+        return err.responce;
+      });
     if (res.status !== 200) {
-      process.exit();
+      error({
+        statusCode: res.status,
+        message: res.data.message
+      });
+      return;
     }
+
     this.students = res.data;
-    console.log(this.students);
+    console.log(res.data);
   },
   methods: {
     moreDetail(student) {

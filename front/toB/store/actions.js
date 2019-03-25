@@ -23,6 +23,9 @@ const actions = {
       .then(res => {
         payload.company = res.data;
         localStorage.setItem("currentCompany", JSON.stringify(res.data));
+          this.$router.push({
+           name: "index"
+        });
       });
     context.commit("login", payload);
   },

@@ -13,8 +13,8 @@ export default {
   },
   methods:{
     logout(){
-      this.$store.dispatch(`reset`)
-      // this.$store.state.currentCompany.access_token
+      this.$store.dispatch(`signOut`,this.$store.state.currentCompany.access_token)
+      // 
       this.$router.push({
         name: "login"
       });

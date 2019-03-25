@@ -29,14 +29,6 @@ const mutations = {
   logout(state) {
     state.login = false;
     state.currentCompany = "";
-    // state.items.splice(0,3)
-    state.items = [
-         {
-          icon: "apps",
-          title: "ログイン",
-          to: "/login"
-        },
-      ]
   },
   reset(state){
     state.login = false;

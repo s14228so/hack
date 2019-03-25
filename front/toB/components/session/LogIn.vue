@@ -72,11 +72,6 @@ export default {
         email: this.email,
         password: this.password
       });
-      if (this.$store.state.login === true){
-         this.$router.push({
-           name: "index"
-        });
-      }
     },
   }
 };

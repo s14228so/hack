@@ -48,6 +48,12 @@ module V1
     end
 
     def company_destroy
+      @company = Company.find_for_database_authentication(access_token: params[:access_token])
+      # binding.pry
+      # sign_out @company
+      @company.access_token = ""
+      render json: @company, serializer: CompanySerializer, root: nil
+      @company.save!
     end
 
     private

@@ -72,6 +72,11 @@ export default {
           icon: "bubble_chart",
           title: "イベント",
           to: "/event"
+        },
+        {
+          icon: "bubble_chart",
+          title: "ログアウト",
+          to: "/logout"
         }
       ],
       miniVariant: false,

@@ -1,11 +1,19 @@
 const mutations = {
   login(state, payload) {
-    state.login = true;
     state.currentCompany = payload.company;
+    if (state.currentCompany.error){
+       state.login = false;
+    } else {
+      state.login = true;
+    }
   },
   logout(state) {
     state.login = false;
     state.currentCompany = "";
+  },
+  reset(state){
+    state.login = false;
+    state.currentCompany = ""
   },
   test(state) {
     state.test = true;

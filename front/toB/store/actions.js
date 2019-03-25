@@ -5,6 +5,9 @@ const actions = {
     context.commit("test");
     console.log(context.state.login);
   },
+  async reset(context){
+    context.commit("reset")
+  },
   async getCompany(context, {
     email,
     password

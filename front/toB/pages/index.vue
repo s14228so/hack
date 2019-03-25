@@ -30,6 +30,11 @@ export default {
   },
   async mouted() {
     await axios.get(`http://localhost:5000/v1/campanies/${company.id}`);
+  },
+  fetch({ store, redirect }) {
+    if (store.state.login === false) {
+      return redirect("/login");
+    }
   }
 };
 </script>

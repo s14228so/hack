@@ -72,17 +72,12 @@ export default {
         email: this.email,
         password: this.password
       });
-      this.$router.push({
-        name: "index"
-      });
-    },
-    async index() {
-      try {
-        const response = await axios.get(`http://localhost:5000/v1/students`);
-      } catch (error) {
-        console.log(error);
+      if (this.$store.state.login === true){
+         this.$router.push({
+           name: "index"
+        });
       }
-    }
+    },
   }
 };
 </script>

@@ -1,9 +1,13 @@
-import axios from "axios";
+import axios from "~/plugins/axios";
+import "babel-polyfill"
 
 const actions = {
   test(context) {
     context.commit("test");
     console.log(context.state.login);
+  },
+  async reset(context) {
+    context.commit("reset")
   },
   async getCompany(context, {
     email,
@@ -13,19 +17,22 @@ const actions = {
       company: {}
     };
     await axios
-      .post(`http://localhost:5000/v1/clogin`, {
+      .post(`/v1/clogin`, {
         email: email,
         password: password
       })
       .then(res => {
         payload.company = res.data;
         localStorage.setItem("currentCompany", JSON.stringify(res.data));
+        this.$router.push({
+          name: "index"
+        });
       });
     context.commit("login", payload);
   },
   async signOut(context, access_token) {
     try {
-      await axios.delete(`http://localhost:5000/v1/clogout`, {
+      await axios.delete(`/v1/clogout`, {
         params: {
           access_token: access_token
         }
@@ -54,7 +61,7 @@ const actions = {
       student: {}
     };
 
-    await axios.get(`http://localhost:5000/v1/students/${student_id}`, {
+    await axios.get(`/v1/students/${student_id}`, {
       headers: {
         Authorization: access_token
       }

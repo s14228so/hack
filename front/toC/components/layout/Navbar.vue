@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "~/plugins/axios";
 import "babel-polyfill";
 import NavbarList from "../layout/NavbarList.vue";
 import LogOut from "../devise/LogOut.vue";

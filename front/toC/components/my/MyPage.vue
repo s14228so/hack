@@ -56,7 +56,7 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+import axios from "~/plugins/axios";
 import "babel-polyfill";
 import Setting from "../../components/Setting.vue";
 
@@ -98,17 +98,12 @@ export default {
       const formData = new FormData();
       formData.append("student[images]", this.uploadFile);
       const response = await axios.post(
-        `http://localhost:5000/v1/students/${this.student.student_id}/image`,
+        `/v1/students/${this.student.student_id}/image`,
         formData,
         {
           headers: { Authorization: this.student.access_token }
         }
-      );
-      // this.$store.dispatch(`updateImg`, {
-      //   access_token: this.student.access_token,
-      //   student_id: this.student.student_id,
-      //   image: formData
-      // });
+      );s
       this.$router.push({
         name: "image"
       });

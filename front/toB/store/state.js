@@ -1,7 +1,7 @@
 const state = {
   login: false,
   currentCompany: {},
-  test: ""
+  test: "",
 };
 
 export default state;

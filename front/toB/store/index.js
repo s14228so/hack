@@ -6,6 +6,7 @@ import mutations from "./mutations";
 import "babel-polyfill";
 
 
+
 const createStore = () => {
   return new Vuex.Store({
     state: state,
@@ -20,6 +21,5 @@ const createStore = () => {
     ]
   })
 }
-
 
 export default createStore;

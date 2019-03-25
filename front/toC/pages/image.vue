@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import axios from "axios";
-import "babel-polyfill";
+// import axios from "~/plugins/axios";
+// import "babel-polyfill";
 
 export default {
   data() {

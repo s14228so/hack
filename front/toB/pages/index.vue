@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "~/plugins/axios";
 import "babel-polyfill";
 import MyEvents from "../components/MyEvents";
 export default {
@@ -29,7 +29,12 @@ export default {
     MyEvents
   },
   async mouted() {
-    await axios.get(`http://localhost:5000/v1/campanies/${company.id}`);
+    await axios.get(`/v1/campanies/${company.id}`);
+  },
+  fetch({ store, redirect }) {
+    if (store.state.login === false) {
+      return redirect("/login");
+    }
   }
 };
 </script>

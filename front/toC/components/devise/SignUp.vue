@@ -50,7 +50,7 @@
   </v-container>
 </template>
 <script>
-import axios from "axios";
+import axios from "~/plugins/axios";
 import "babel-polyfill";
 // curl localhost:3000/v1/login --data 'email=user@example.com&password=mypass'
 export default {
@@ -87,7 +87,7 @@ export default {
     },
     async submit() {
       try {
-        const response = await axios.post(`http://localhost:5000/v1/students`, {
+        const response = await axios.post(`/v1/students`, {
           student: {
             email: this.email,
             password: this.password,

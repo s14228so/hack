@@ -5,8 +5,8 @@
 
 
 <script>
+import axios from "~/plugins/axios";
 import "babel-polyfill";
-import axios from "axios";
 
 export default {
   name: "StudentShow",

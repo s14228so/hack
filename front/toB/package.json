@@ -5,7 +5,7 @@
   "author": "satoshi ono",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "nuxt --port 8888",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate"

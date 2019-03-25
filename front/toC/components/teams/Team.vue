@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+import axios from "~/plugins/axios";
 import "babel-polyfill";
 import TeamMember from "./TeamMember";
 export default {
@@ -21,7 +21,7 @@ export default {
   },
   mounted: async function() {
     const res = await axios.get(
-      `http://localhost:5000/v1/myteams`,
+      `/v1/myteams`,
       {
         params: {
           id: this.student.student_id

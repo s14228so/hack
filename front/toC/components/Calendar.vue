@@ -56,7 +56,7 @@
   </v-container>
 </template>
 <script>
-import axios from "axios";
+import axios from "~/plugins/axios";
 import "babel-polyfill";
 import Confirm from "./flash/Confirm";
 export default {
@@ -88,12 +88,12 @@ export default {
     }
   },
   async created() {
-    const response = await axios.get(`http://localhost:5000/v1/events`, {
+    const response = await axios.get(`/v1/events`, {
       headers: { Authorization: this.student.access_token }
     });
     this.events = response.data;
     const res = await axios.get(
-      `http://localhost:5000/v1/students/${this.student.student_id}/current`,
+      `/v1/students/${this.student.student_id}/current`,
       {
         params: {
           id: this.student.student_id
@@ -134,14 +134,11 @@ export default {
     },
     async reserveEvent(event) {
       try {
-        const response = await axios.post(
-          `http://localhost:5000/v1/event_students`,
-          {
-            student_id: this.student.student_id,
-            event_id: event.id,
-            headers: { Authorization: this.student.access_token }
-          }
-        );
+        const response = await axios.post(`/v1/event_students`, {
+          student_id: this.student.student_id,
+          event_id: event.id,
+          headers: { Authorization: this.student.access_token }
+        });
       } catch (error) {
         console.log(error);
       }

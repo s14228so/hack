@@ -33,6 +33,7 @@ module V1
     def company_create
        # response.headers['X-CSRF-Token'] = form_authenticity_token
       @company = Company.find_for_database_authentication(email: params[:email])
+
       return invalid_email unless @company
 
       if @company.valid_password?(params[:password])
@@ -47,18 +48,24 @@ module V1
     end
 
     def company_destroy
+      @company = Company.find_for_database_authentication(access_token: params[:access_token])
+      # binding.pry
+      # sign_out @company
+      @company.access_token = ""
+      render json: @company, serializer: CompanySerializer, root: nil
+      @company.save!
     end
 
     private
 
     def invalid_email
       warden.custom_failure!
-      render json: { error: t('invalid_email') }
+      render json: { error: ('メールアドレスが正しくありません') }
     end
 
     def invalid_password
       warden.custom_failure!
-      render json: { error: t('invalid_password') }
+      render json: { error: ('パスワードが正しくありません') }
     end
   end
 end

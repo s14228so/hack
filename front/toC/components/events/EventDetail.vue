@@ -13,7 +13,7 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+import axios from "~/plugins/axios";
 import "babel-polyfill";
 
 import Cancel from "../button/Cancel";
@@ -57,12 +57,9 @@ export default {
     async deleteEvent(event) {
       //event_studentのidが欲しい
       // delete "/:event_id/:student_id"
-      await axios.delete(
-        `http://localhost:5000/v1/${event.id}/${this.student.student_id}`,
-        {
-          headers: { Authorization: this.student.access_token }
-        }
-      );
+      await axios.delete(`/v1/${event.id}/${this.student.student_id}`, {
+        headers: { Authorization: this.student.access_token }
+      });
       this.$router.push({
         name: "canceled"
       });

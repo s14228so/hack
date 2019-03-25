@@ -31,7 +31,7 @@
   </v-layout>
 </template>
 <script>
-import axios from "axios";
+import axios from "~/plugins/axios";
 import "babel-polyfill";
 export default {
   data() {
@@ -43,10 +43,9 @@ export default {
     };
   },
   async mounted() {
-    const res = await axios.get(
-      `http://localhost:5000/v1/teams/${this.team_id}/one`,
-      { headers: { Authorization: this.student.access_token } }
-    );
+    const res = await axios.get(`/v1/teams/${this.team_id}/one`, {
+      headers: { Authorization: this.student.access_token }
+    });
     this.team = res.data;
     this.members = this.team.students;
   }

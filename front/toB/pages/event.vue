@@ -10,6 +10,11 @@ import MakeEvent from "../components/MakeEvent";
 export default {
   components: {
     MakeEvent
+  },
+  fetch({ store, redirect }) {
+    if (store.state.login === false) {
+      return redirect("/login");
+    }
   }
 };
 </script>

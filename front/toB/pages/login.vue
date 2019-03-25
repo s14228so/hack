@@ -7,6 +7,7 @@
 <script>
 import LogIn from "../components/session/LogIn";
 export default {
+  layout: "logout",
   components: {
     LogIn
   },

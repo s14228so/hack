@@ -5,15 +5,50 @@ const mutations = {
        state.login = false;
     } else {
       state.login = true;
+       state.items = [ 
+        {
+          icon: "apps",
+          title: "マイページ",
+          to: "/"
+        },
+    
+        {
+          icon: "bubble_chart",
+          title: "イベント",
+          to: "/event"
+        },
+        {
+          icon: "bubble_chart",
+          title: "ログアウト",
+          to: "/logout"
+        }
+      ]
     }
+   
   },
   logout(state) {
     state.login = false;
     state.currentCompany = "";
+    // state.items.splice(0,3)
+    state.items = [
+         {
+          icon: "apps",
+          title: "ログイン",
+          to: "/login"
+        },
+      ]
   },
   reset(state){
     state.login = false;
     state.currentCompany = ""
+    state.items.splice(0,3)
+     state.items = [
+         {
+          icon: "apps",
+          title: "ログイン",
+          to: "/login"
+        },
+      ]
   },
   test(state) {
     state.test = true;

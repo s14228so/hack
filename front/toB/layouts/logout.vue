@@ -61,25 +61,15 @@ export default {
       right: true,
       rightDrawer: false,
       title: "Hack",
-      items: [
-        {
-          icon: "apps",
-          title: "マイページ",
-          to: "/"
-        },
-    
-        {
-          icon: "bubble_chart",
-          title: "イベント",
-          to: "/event"
-        },
-        {
-          icon: "bubble_chart",
-          title: "ログアウト",
-          to: "/logout"
-        },
-      ],
+      items:
+        [
+           {
+            icon: "apps",
+            title: "ログイン",
+            to: "/login"
+          },
+        ]
     };
-  },
+  }
 };
 </script>

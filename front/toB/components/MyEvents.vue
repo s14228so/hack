@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "~/plugins/axios";
 import "babel-polyfill";
 export default {
   data() {
@@ -22,7 +22,7 @@ export default {
   },
   async mounted() {
     const res = await axios.get(
-      `http://localhost:5000/v1/companies/${this.company.company_id}/events`
+      `/v1/companies/${this.company.company_id}/events`
     );
     if (res.status !== 200) {
       process.exit();

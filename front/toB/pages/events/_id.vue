@@ -25,7 +25,6 @@
 </template>
 
 <script>
-import http from "axios";
 import axios from "~/plugins/axios";
 import "babel-polyfill";
 export default {

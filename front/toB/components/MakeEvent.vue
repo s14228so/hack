@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "~/plugins/axios";
 import "babel-polyfill";
 export default {
   data() {
@@ -26,7 +26,7 @@ export default {
   methods: {
     async makeEvent() {
       const res = await axios.post(
-        `http://localhost:5000/v1/events`,
+        `/v1/events`,
         {
           title: this.title,
           content: this.content,

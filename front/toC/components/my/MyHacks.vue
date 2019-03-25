@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "~/plugins/axios";
 import "babel-polyfill";
 import EventDetail from "../events/EventDetail";
 
@@ -41,7 +41,7 @@ export default {
   mounted: async function() {
     console.log(this.students);
     const res = await axios.get(
-      `http://localhost:5000/v1/events/myhacks`,
+      `/v1/events/myhacks`,
       {
         params: {
           id: this.student.student_id
@@ -64,12 +64,9 @@ export default {
         this.detailStatus = true;
       }
       this.event = event;
-      const res = await axios.get(
-        `http://localhost:5000/v1/events/${event.id}/join_students`,
-        {
-          headers: { Authorization: this.student.access_token }
-        }
-      );
+      const res = await axios.get(`/v1/events/${event.id}/join_students`, {
+        headers: { Authorization: this.student.access_token }
+      });
       if (res.status !== 200) {
         process.exit();
       }

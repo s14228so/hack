@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "~/plugins/axios";
 
 const actions = {
   test(context) {
@@ -13,7 +13,7 @@ const actions = {
       student: {}
     };
     await axios
-      .post(`http://localhost:5000/v1/login`, {
+      .post(`/v1/login`, {
         email: email,
         password: password
       })
@@ -25,7 +25,7 @@ const actions = {
   },
   async signOut(context, access_token) {
     try {
-      await axios.delete(`http://localhost:5000/v1/logout`, {
+      await axios.delete(`/v1/logout`, {
         params: {
           access_token: access_token
         }
@@ -54,7 +54,7 @@ const actions = {
       student: {}
     };
 
-    await axios.get(`http://localhost:5000/v1/students/${student_id}`, {
+    await axios.get(`/v1/students/${student_id}`, {
       headers: {
         Authorization: access_token
       }

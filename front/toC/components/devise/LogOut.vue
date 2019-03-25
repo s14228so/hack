@@ -4,30 +4,15 @@
   </div>
 </template>
 <script>
-import axios from "axios";
-import "babel-polyfill";
+// import axios from "~/plugins/axios";
+// import "babel-polyfill";
 export default {
   data() {
     return {
       token: ""
     };
   },
-  methods: {
-    // async destroyUserSession() {
-    //   try {
-    //     const response = await axios.delete(`http://localhost:5000/v1/logout`, {
-    //       params: { access_token: this.token }
-    //     });
-    //     localStorage.clear();
-    //     this.$router.push({
-    //       name: "login"
-    //       // params: { currentStudent: this.currentStudent }
-    //     });
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
-  }
+  methods: {}
 };
 </script>
 <style scoped>

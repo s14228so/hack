@@ -9,7 +9,7 @@
   </v-container>
 </template>
 <script>
-import axios from "axios";
+import axios from "~/plugins/axios";
 import "babel-polyfill";
 
 export default {
@@ -21,7 +21,7 @@ export default {
   },
   async mounted() {
     try {
-      const response = await axios.get(`http://localhost:5000/v1/events`, {
+      const response = await axios.get(`/v1/events`, {
         headers: { Authorization: this.student.access_token }
       });
       this.events = response.data;

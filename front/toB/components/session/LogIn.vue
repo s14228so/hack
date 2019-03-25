@@ -4,7 +4,7 @@
       <v-flex xs6>
         <template>
           <form @submit.prevent="submit" class="box">
-               <p class="error white--text"> {{error}} </p>
+            <p class="error white--text">{{error}}</p>
             <h2>Log in</h2>
             <v-text-field
               required
@@ -37,8 +37,8 @@
   </v-container>
 </template>
 <script>
-import axios from "axios";
-import "babel-polyfill";
+// import axios from "~/plugins/axios";
+// import "babel-polyfill";
 // curl localhost:3000/v1/login --data 'email=user@example.com&password=mypass'
 export default {
   data() {
@@ -78,8 +78,7 @@ export default {
         email: this.email,
         password: this.password
       });
-    },
-
+    }
   }
 };
 </script>
@@ -143,7 +142,7 @@ export default {
   transition: 0.5s;
   cursor: pointer;
 }
-.error{
+.error {
   color: red;
 }
 .box input[type="submit"]:hover {

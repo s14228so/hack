@@ -6,7 +6,7 @@
   </v-container>
 </template>
 <script>
-import axios from "axios";
+import axios from "~/plugins/axios";
 import "babel-polyfill";
 export default {
   data() {
@@ -16,7 +16,7 @@ export default {
     };
   },
   mounted: async function() {
-    const res = await axios.get(`http://localhost:5000/v1/students`, {
+    const res = await axios.get(`/v1/students`, {
       headers: { Authorization: this.student.access_token }
     });
     if (res.status !== 200) {

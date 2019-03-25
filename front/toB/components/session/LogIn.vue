@@ -4,6 +4,7 @@
       <v-flex xs6>
         <template>
           <form @submit.prevent="submit" class="box">
+               <p class="error white--text"> {{error}} </p>
             <h2>Log in</h2>
             <v-text-field
               required
@@ -42,6 +43,7 @@ import "babel-polyfill";
 export default {
   data() {
     return {
+      error: this.$store.state.currentCompany.error,
       valid: false,
       email: "",
       password: "",
@@ -59,7 +61,11 @@ export default {
       ]
     };
   },
-  mounted() {},
+  // async mounted(){
+  //     if (this.$store.state.currentCompany.error){
+  //       this.error = this.$store.state.currentCompany.error
+  //     }
+  // },
   methods: {
     clear() {
       this.email = "";
@@ -73,6 +79,7 @@ export default {
         password: this.password
       });
     },
+
   }
 };
 </script>
@@ -136,7 +143,9 @@ export default {
   transition: 0.5s;
   cursor: pointer;
 }
-
+.error{
+  color: red;
+}
 .box input[type="submit"]:hover {
   background: #2ecc71;
 }

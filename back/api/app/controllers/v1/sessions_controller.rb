@@ -60,12 +60,12 @@ module V1
 
     def invalid_email
       warden.custom_failure!
-      render json: { error: t('invalid_email') }
+      render json: { error: ('メールアドレスが正しくありません') }
     end
 
     def invalid_password
       warden.custom_failure!
-      render json: { error: t('invalid_password') }
+      render json: { error: ('パスワードが正しくありません') }
     end
   end
 end

@@ -1,5 +1,4 @@
-# Ruby on Rails  x Nuxt.js
-  
+# Ruby on Rails  x Nuxt.js  
 > ハッカソンアプリ
 
 ## Build Setup

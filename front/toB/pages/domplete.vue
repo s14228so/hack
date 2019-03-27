@@ -1,7 +1,6 @@
 <template>
   <div>
-    <message>イベント作成が完了しました</message>
-    <br>
+    <message>イベントを削除しました</message>
   </div>
 </template>
 
@@ -14,5 +13,5 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 </style>

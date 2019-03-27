@@ -20,7 +20,7 @@ module V1
 
   def destroy
     @event = Event.find(params[:event_id])
-    binding.pry
+
     @event.destroy
     render json: @event, each_serializer: V1::EventSerializer
   end

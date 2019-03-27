@@ -53,6 +53,9 @@ export default {
       if (res.status !== 200) {
         process.exit();
       }
+      this.$router.push({
+        name: "domplete"
+      });
     },
     async dialog(event) {
       console.log("--onClickOpen");

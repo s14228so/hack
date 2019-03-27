@@ -1,10 +1,11 @@
 <template>
   <div>
-    <div v-for="event in events" :key="event.title">
+    <div v-for="event in events" :key="event.title" class="display">
       <div class="card" @click="showDetail(event)">
-        <p>タイトル: {{event.title}}</p>
+        <h4>タイトル: {{event.title}}</h4>
         <p>日付: {{event.date}}</p>
         <p>内容: {{event.content}}</p>
+        <v-icon @click="alert">delete</v-icon>
       </div>
     </div>
   </div>
@@ -39,16 +40,22 @@ export default {
           event: event
         }
       });
+    },
+    alert() {
+      alert();
     }
   }
 };
 </script>
 
 <style>
+.display {
+  display: inline-block;
+  margin-right: 20px;
+}
 .card {
   cursor: pointer;
   width: 150px;
-  height: 200px;
   padding: 20px;
   border-radius: 5%;
   border: 1px solid gray;

@@ -14,7 +14,7 @@ module V1
 
   def create
      @event = Event.new(event_params)
-     binding.pry
+     @event.save!
      render json: @event, each_serializer: V1::EventSerializer
   end
 

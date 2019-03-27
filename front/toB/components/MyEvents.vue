@@ -48,7 +48,12 @@ export default {
         }
       });
     },
-    deleteEvent() {},
+    async deleteEvent(event) {
+      const res = await axios.delete(`/v1/event/${event.id}`);
+      if (res.status !== 200) {
+        process.exit();
+      }
+    },
     async dialog(event) {
       console.log("--onClickOpen");
       if (

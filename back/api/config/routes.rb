@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     delete "/:event_id/:student_id" => "event_students#destroy"
     get "/myteams" => "teams#show"
     resources :event_students, only: [:create]
-    resources :events, only: [:index , :create, :show] do
+    resources :events, only: [:index , :create, :show, :destroy] do
       get 'join_students', on: :member
       get 'myhacks', on: :collection
     end

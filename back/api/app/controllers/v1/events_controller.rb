@@ -18,6 +18,13 @@ module V1
      render json: @event, each_serializer: V1::EventSerializer
   end
 
+  def destroy
+    @event = Event.find(params[:id])
+    binding.pry
+    @event.destroy
+    render json: @event, each_serializer: V1::EventSerializer
+  end
+
   def myhacks
     student = Student.find(params[:id])
 

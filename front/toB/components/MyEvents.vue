@@ -5,8 +5,11 @@
         <h4>タイトル: {{event.title}}</h4>
         <p>日付: {{event.date}}</p>
         <p>内容: {{event.content}}</p>
-        <v-icon @click="alert">delete</v-icon>
       </div>
+      <v-icon @click="dialog(event)">delete</v-icon>
+    </div>
+    <div>
+      <confirm ref="confirm" @agree="deleteEvent"></confirm>
     </div>
   </div>
 </template>
@@ -14,12 +17,16 @@
 <script>
 import axios from "~/plugins/axios";
 import "babel-polyfill";
+import Confirm from "./alert/Confirm";
 export default {
   data() {
     return {
       company: this.$store.state.currentCompany,
       events: []
     };
+  },
+  components: {
+    Confirm
   },
   async mounted() {
     const res = await axios.get(
@@ -41,14 +48,32 @@ export default {
         }
       });
     },
-    alert() {
-      alert();
+    deleteEvent() {},
+    async dialog(event) {
+      console.log("--onClickOpen");
+      if (
+        await this.$refs.confirm.open(
+          "イベントの削除",
+          "削除しますか？",
+          {
+            color: "red"
+          },
+          event
+        )
+      ) {
+        console.log("--yes");
+      } else {
+        console.log("--no");
+      }
     }
   }
 };
 </script>
 
 <style>
+.v-icon {
+  margin-top: 20px;
+}
 .display {
   display: inline-block;
   margin-right: 20px;

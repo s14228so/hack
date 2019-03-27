@@ -2,7 +2,7 @@ module V1
   class EventsController < ApplicationController
   skip_before_action :authenticate_student_from_token!
   skip_before_action :authenticate_company_from_token!
-  protect_from_forgery :except => [:index, :create, :show, :myhacks, :join_students]
+  protect_from_forgery :except => [:index, :create, :show, :myhacks, :join_students, :destroy]
   def index
      render json: Event.all, each_serializer: V1::EventSerializer
   end
@@ -19,7 +19,7 @@ module V1
   end
 
   def destroy
-    @event = Event.find(params[:id])
+    @event = Event.find(params[:event_id])
     binding.pry
     @event.destroy
     render json: @event, each_serializer: V1::EventSerializer

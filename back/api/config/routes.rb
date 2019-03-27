@@ -17,11 +17,11 @@ Rails.application.routes.draw do
     resources :companies do
       get "events", on: :member
     end
-
+    delete "/company/events/:event_id" => "events#destroy"
     delete "/:event_id/:student_id" => "event_students#destroy"
     get "/myteams" => "teams#show"
     resources :event_students, only: [:create]
-    resources :events, only: [:index , :create, :show, :destroy] do
+    resources :events, only: [:index , :create, :show] do
       get 'join_students', on: :member
       get 'myhacks', on: :collection
     end

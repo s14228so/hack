@@ -49,7 +49,7 @@ export default {
       });
     },
     async deleteEvent(event) {
-      const res = await axios.delete(`/v1/event/${event.id}`);
+      const res = await axios.delete(`/v1/company/events/${event.id}`);
       if (res.status !== 200) {
         process.exit();
       }
@@ -75,7 +75,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .v-icon {
   margin-top: 20px;
 }

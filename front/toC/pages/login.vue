@@ -1,7 +1,7 @@
 <template>
   <v-container mt-2>
     <v-layout row wrap>
-      <v-flex xs6>
+      <v-flex xs12 md6>
         <template>
           <form @submit.prevent="submit" class="box">
             <h2>Log in</h2>
@@ -89,7 +89,6 @@ export default {
 <style scoped>
 .box {
   background: #3d454c;
-  width: 35%;
   padding: 40px;
   border-radius: 20px;
   position: absolute;

@@ -24,6 +24,7 @@ const actions = {
     context.commit("login", payload);
   },
   async signOut(context, access_token) {
+    console.log(access_token);
     try {
       await axios.delete(`/v1/logout`, {
         params: {

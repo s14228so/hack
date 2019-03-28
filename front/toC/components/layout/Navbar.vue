@@ -96,7 +96,9 @@ export default {
     LogIn,
     SignLink
   },
-  mounted() {},
+  mounted() {
+    console.log(this.student.access_token);
+  },
   methods: {
     async signOut() {
       this.$store.dispatch(`signOut`, this.student.access_token);

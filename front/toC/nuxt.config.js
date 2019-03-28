@@ -11,7 +11,7 @@ export default {
 module.exports = {
   mode: "spa",
   env: {
-    baseUrl: process.env.BASE_URL || 'http://localhost:5000'
+    baseUrl: process.env.BASE_URL || 'https://hack-api7.herokuapp.com'
   },
 
   /*

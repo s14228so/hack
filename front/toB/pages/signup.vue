@@ -1,7 +1,16 @@
-<template></template>
+<template>
+  <div>
+      
+  </div>
+</template>
 
 <script>
-export default {};
+import SignUp from "../components/SignUp";
+export default {
+  components: {
+    SignUp
+  }
+};
 </script>
 
 <style>

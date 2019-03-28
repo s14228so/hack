@@ -25,7 +25,7 @@
               name="password"
               label="Password"
             ></v-text-field>
-            <v-checkbox label="Do you agree?" required></v-checkbox>
+            <v-checkbox color="warning" label="Do you agree?" required class="request"></v-checkbox>
             <!-- <input type="submit" @click="submit"> -->
             <input type="submit" value="login">
             <v-btn @click="clear" class="clear">clear</v-btn>
@@ -88,8 +88,10 @@ export default {
 </script>
 <style scoped>
 .box {
+  margin-top: 3%;
   background: #3d454c;
   padding: 40px;
+  width: 38%;
   border-radius: 20px;
   position: absolute;
   top: 50%;
@@ -148,6 +150,49 @@ export default {
 
 .box input[type="submit"]:hover {
   background: #2ecc71;
+}
+@media screen and (max-width: 480px) {
+  /*　画面サイズが480pxからはここを読み込む　*/
+  h2 {
+    font-size: 16px;
+  }
+  .box {
+    padding: 20px;
+    width: 70%;
+    height: 400px;
+    max-height: 460px;
+    z-index: 100;
+  }
+  .box input[type="submit"] {
+    border-radius: 15px;
+    margin: 10px auto;
+    padding: 8px 20px;
+  }
+  .clear {
+    border-radius: 15px;
+    width: 20%;
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+  .request {
+    font-size: 12px;
+  }
+  .request:focus {
+    color: black;
+    background: red;
+  }
+  /* input {
+    width: 20%;
+    height: 20px;
+    font-size: 12px;
+    padding: 10px 8px 25px;
+  }
+  .clear {
+    width: 20%;
+    height: 20px;
+    font-size: 12px;
+    padding: 10px 8px 25px;
+  } */
 }
 </style>
 

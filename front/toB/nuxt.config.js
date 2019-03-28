@@ -10,7 +10,7 @@ export default {
 module.exports = {
   mode: 'spa',
   env: {
-    baseUrl: process.env.BASE_URL || 'https://hack-api7.herokuapp.com'
+    baseUrl: process.env.BASE_URL || 'https://hack-api8.herokuapp.com'
   },
   /*
    ** Headers of the page

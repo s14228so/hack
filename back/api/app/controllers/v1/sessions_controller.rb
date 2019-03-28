@@ -4,7 +4,7 @@ module V1
     skip_before_action :authenticate_student_from_token!
     skip_before_action :authenticate_company_from_token!
  
- 
+
     # POST /v1/login
     def create
       # response.headers['X-CSRF-Token'] = form_authenticity_token
@@ -23,7 +23,6 @@ module V1
 
     def destroy
       @student = Student.find_for_database_authentication(access_token: params[:access_token])
-      binding.pry
       @student.access_token = ""
       render json: @student, serializer: SessionSerializer, root: nil
       @student.save!

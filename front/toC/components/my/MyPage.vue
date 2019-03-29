@@ -62,9 +62,9 @@ import Setting from "../../components/Setting.vue";
 
 export default {
   name: "MyPage",
+  props: ["student"],
   data: function() {
     return {
-      student: this.$store.state.currentStudent,
       infos: ["ユーザ名", "メールアドレス", "大学", "学部", "学年"],
       settingStatus: false,
       // blob_url: blob_url,
@@ -77,9 +77,7 @@ export default {
   components: {
     "setting-comp": Setting
   },
-  async mounted() {
-    this.student = this.$store.state.currentStudent;
-  },
+  async mounted() {},
   methods: {
     showSetting: function() {
       this.settingStatus = true;

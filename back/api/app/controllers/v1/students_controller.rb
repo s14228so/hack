@@ -10,7 +10,8 @@ module V1
     end
 
     def show
-      render json: current_student, each_serializer: V1::CurrentStudentSerializer
+      @student = Student.find(params[:id])
+      render json: @student, each_serializer: V1::CurrentStudentSerializer
     end
 
     def one

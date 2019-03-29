@@ -103,7 +103,7 @@ export default {
         {
           headers: { Authorization: this.student.access_token }
         }
-      );s
+      );
       this.$router.push({
         name: "image"
       });

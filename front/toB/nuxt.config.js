@@ -8,7 +8,7 @@ export default {
   }
 };
 module.exports = {
-  mode: 'spa',
+  mode: 'universal',
   env: {
     baseUrl: process.env.BASE_URL || 'http://localhost:5000'
     // https://hack-api8.herokuapp.com

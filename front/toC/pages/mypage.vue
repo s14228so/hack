@@ -19,9 +19,9 @@ export default {
       return redirect("/");
     }
   },
-  async ounted() {
-    console.log(this.$store.state.currentStudent.student_id);
-    console.log(this.$store.state.currentStudent.student_id);
+  async mounted() {
+    // console.log(this.$store.state.currentStudent.student_id);
+    // console.log(this.$store.state.currentStudent.student_id);
   },
   //ここでcurrentStudentをSSRする
   async asyncData({ store }) {

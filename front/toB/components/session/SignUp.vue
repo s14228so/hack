@@ -85,27 +85,12 @@ export default {
       this.checkbox = false;
     },
     async submit() {
-      // try {
-      //   const response = await axios.post(`/v1/companies`, {
-      //     company: {
-      //       email: this.email,
-      //       password: this.password
-      //     }
-      //   });
-      //   this.currentCompany = response.data;
-      //   var data = [];
-      //   data.push(response.data);
-      //   localStorage.setItem("currentCompany", JSON.stringify(data));
-      //   this.$store.state.currentCompany = response.data;
-      //   this.$store.state.login = true;
       this.$store.dispatch("signUp", {
         email: this.email,
         password: this.password
       });
 
-      // } catch (error) {
-      //   console.log(error);
-      // }
+  
     }
   }
 };

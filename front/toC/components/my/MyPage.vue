@@ -62,9 +62,10 @@ import Setting from "../../components/Setting.vue";
 
 export default {
   name: "MyPage",
-  props: ["student"],
+  props: ["gakusei"],
   data: function() {
     return {
+      student: this.gakusei,
       infos: ["ユーザ名", "メールアドレス", "大学", "学部", "学年"],
       settingStatus: false,
       // blob_url: blob_url,
@@ -74,6 +75,13 @@ export default {
       img_src: require("../../assets/noimg.jpeg")
     };
   },
+  // computed: {
+  //   // 算出 getter 関数
+  //   student: function() {
+  //     // `this` は vm インスタンスを指します
+  //     return this.student;
+  //   }
+  // },
   components: {
     "setting-comp": Setting
   },

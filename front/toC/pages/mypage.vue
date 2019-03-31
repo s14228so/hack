@@ -1,5 +1,5 @@
 <template>
-  <my-page :student="student"></my-page>
+  <my-page :gakusei="student"></my-page>
 </template>
 <script>
 import MyPage from "../components/my/MyPage";

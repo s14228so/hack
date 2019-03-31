@@ -5,18 +5,21 @@ import actions from "./actions";
 import mutations from "./mutations";
 import "babel-polyfill";
 
+
+
 const createStore = () => {
   return new Vuex.Store({
     state: state,
     mutations: mutations,
     actions: actions,
-    plugins: [
-      createPersistedState({
-        key: "app",
-        paths: ["login", "currentStudent"],
-        storage: window.localStorage
-      })
-    ]
+    // plugins: [
+    //   createPersistedState({
+    //     key: "app",
+    //     paths: ["login", "currentStudent"],
+    //     ssr: false,
+    //     storage: window.localStorage
+    //   })
+    // ]
   });
 };
 

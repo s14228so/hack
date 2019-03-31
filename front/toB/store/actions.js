@@ -9,6 +9,29 @@ const actions = {
   async reset(context) {
     context.commit("reset")
   },
+  async signUp(context, {
+    email,
+    password
+  }) {
+    const payload = {
+      company: {}
+    }
+
+    const response = await axios.post(`/v1/companies`, {
+      company: {
+        email: email,
+        password: password
+      }
+    });
+    payload.company = response.data;
+    var data = [];
+    data.push(response.data);
+    localStorage.setItem("currentCompany", JSON.stringify(data));
+    this.$router.push({
+      name: "index"
+    });
+    context.commit("signUp", payload)
+  },
   async getCompany(context, {
     email,
     password

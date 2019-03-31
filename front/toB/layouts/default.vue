@@ -67,7 +67,7 @@ export default {
           title: "マイページ",
           to: "/"
         },
-    
+
         {
           icon: "bubble_chart",
           title: "イベント",
@@ -77,9 +77,9 @@ export default {
           icon: "bubble_chart",
           title: "ログアウト",
           to: "/logout"
-        },
-      ],
+        }
+      ]
     };
-  },
+  }
 };
 </script>

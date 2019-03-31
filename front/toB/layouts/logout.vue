@@ -61,14 +61,18 @@ export default {
       right: true,
       rightDrawer: false,
       title: "Hack",
-      items:
-        [
-           {
-            icon: "apps",
-            title: "ログイン",
-            to: "/login"
-          },
-        ]
+      items: [
+        {
+          icon: "apps",
+          title: "ログイン",
+          to: "/login"
+        },
+        {
+          icon: "bubble_chart",
+          title: "新規登録",
+          to: "/signup"
+        }
+      ]
     };
   }
 };

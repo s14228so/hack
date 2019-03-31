@@ -40,7 +40,7 @@ const actions = {
       this.$router.push({
         name: "login"
       });
-      localStorage.removeItem("currentStudent");
+      localStorage.removeItem("currentCompany");
     } catch (error) {
       console.log(error);
     }
@@ -48,36 +48,36 @@ const actions = {
   },
   async update(context, data) {
     const payload = {
-      student: {}
+      company: {}
     };
-    payload.student = data;
+    payload.company = data;
     context.commit("update", payload);
   },
-  async loadStudent(context, {
-    student_id,
+  async loadcompany(context, {
+    company_id,
     access_token
   }) {
     const payload = {
-      student: {}
+      company: {}
     };
 
-    await axios.get(`/v1/students/${student_id}`, {
+    await axios.get(`/v1/companys/${company_id}`, {
       headers: {
         Authorization: access_token
       }
     }).then(responce => {
       console.log(responce.data);
-      payload.student = responce.data;
-      localStorage.setItem("currentStudent", JSON.stringify(responce.data));
+      payload.company = responce.data;
+      localStorage.setItem("currentcompany", JSON.stringify(responce.data));
     });
-    context.commit("loadStudent", payload);
+    context.commit("loadcompany", payload);
   },
   // async updateImg(context, data) {
   //   const payload = {
-  //     student: {}
+  //     company: {}
   //   };
-  //   payload.student = data;
-  //   console.log(payload.student);
+  //   payload.company = data;
+  //   console.log(payload.company);
   //   console.log("iiii");
   //   context.commit("updateImg", payload);
   // }

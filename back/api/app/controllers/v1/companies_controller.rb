@@ -5,20 +5,20 @@ module V1
     skip_before_action :authenticate_student_from_token!
 
     # def index
-    #   render json: Compnay.all, each_serializer: V1::CompnaySerializer
+    #   render json: company.all, each_serializer: V1::companySerializer
     # end
 
     def show
-      render json: current_compnay, each_serializer: V1::CurrentCompnaySerializer
+      render json: current_company, each_serializer: V1::CurrentcompanySerializer
     end
 
     def one
-      @compnay = Compnay.find(params[:id])
-      render json: @compnay, each_serializer: V1::CurrentCompnaySerializer
+      @company = company.find(params[:id])
+      render json: @company, each_serializer: V1::CurrentcompanySerializer
     end
 
     def current
-      render json: current_compnay.events, each_serializer: V1::CurrentEventsSerializer
+      render json: current_company.events, each_serializer: V1::CurrentEventsSerializer
     end
 
     def events
@@ -27,41 +27,40 @@ module V1
        render json: @events, each_serializer: V1::EventSerializer
     end
 
-    # POST
-    # Create an user
-    def create
-      @Compnay = Company.new company_params
 
-      if @compnay.save!
-        render json: @compnay, serializer: V1::CompanySerializer, root: nil
+    def create
+      @company = Company.new company_params
+      @company.access_token = "c:#{Devise.friendly_token}"
+      if @company.save!
+        render json: @company, serializer: V1::CompanySerializer, root: nil
       else
         render json: { error: t('company_create_error') }, status: :unprocessable_entity
       end
     end
 
     def update
-      @compnay = Company.find(params[:id])
-      if @compnay.update(compnay_params)
-        render json: @compnay, serializer: V1::CompnaySerializer
+      @company = Company.find(params[:id])
+      if @company.update(company_params)
+        render json: @company, serializer: V1::companySerializer
       else
-        render json: { error: t('Compnay_create_error') }, status: :unprocessable_entity
+        render json: { error: t('company_create_error') }, status: :unprocessable_entity
       end
     end
 
     def image
-      @compnay = Compnay.find(params[:id])
-      @compnay.update(image_params)
+      @company = company.find(params[:id])
+      @company.update(image_params)
     end
 
 
     private
 
     def company_params
-      params.require(:compnay).permit(:email, :password)
+      params.require(:company).permit(:email, :password, :name, :access_token)
     end
 
     def image_params
-      params.require(:compnay).permit(:images)
+      params.require(:company).permit(:images)
     end
  end
 end

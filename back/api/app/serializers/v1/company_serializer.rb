@@ -2,7 +2,7 @@ module V1
   class CompanySerializer < ActiveModel::Serializer
     include Rails.application.routes.url_helpers
 
-    attributes :email, :introduction, :access_token, :name, :company_id
+    attributes :email, :introduction, :access_token, :name, :company_id, :token_type
 
     def token_type
       'Bearer'

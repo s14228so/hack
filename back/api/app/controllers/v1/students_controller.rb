@@ -24,8 +24,6 @@ module V1
       render json: student.events, each_serializer: V1::CurrentEventsSerializer
     end
 
-    # POST
-    # Create an user
     def create
       @student = Student.new student_params
 

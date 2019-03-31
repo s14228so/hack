@@ -1,7 +1,9 @@
 <template>
   <transition name="fade">
-    <p v-if="show" title="クリックで非表示" id="login-msg">ログインしました</p>
-    <p v-if="!show" title="クリックで非表示" id="login-msg">ログアウトしました</p>
+    <div v-show="unko" id="login-msg">
+      <p v-show="isLogin" title="クリックで非表示">ログインしました</p>
+      <p v-show="!isLogin" title="クリックで非表示">ログアウトしました</p>
+    </div>
   </transition>
 </template>
 
@@ -9,28 +11,29 @@
 export default {
   data() {
     return {
-      show: this.$store.state.login,
-      message: ""
+      message: "",
+      unko: false
     };
   },
+  computed: {
+    isLogin() {
+      return this.$store.state.login;
+    }
+  },
   watch: {
-    // この関数は question が変わるごとに実行されます。
-    show: function(now, prev) {
-      console.log("changed:", prev, "->", now);
+    // この関数は show が変わるごとに実行されます。
+    isLogin: function(now, prev) {
+      this.unko = !this.unko;
+      console.log("カワッタヨ");
     }
   },
   mounted() {
     var text = document.getElementById("login-msg");
-    text.addEventListener(
-      "click",
-      function() {
-        text.classList.add("fadeout");
-        setTimeout(function() {
-          text.style.display = "none";
-        }, 1000);
-      },
-      false
-    );
+
+    text.classList.add("fadeout");
+    setTimeout(function() {
+      text.style.display = "none";
+    }, 2000);
   },
   methods: {}
 };
@@ -45,7 +48,7 @@ export default {
   cursor: pointer;
 }
 .fadeout {
-  animation: fadeOut 1s;
+  animation: fadeOut 10s;
   animation-fill-mode: both;
 }
 @keyframes fadeOut {

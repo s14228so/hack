@@ -85,6 +85,24 @@ export default {
       var day = hiduke.getDate();
       var current = `${year}-${month}-${day}`;
       return current;
+    },
+    prev() {
+      var hiduke = new Date();
+      var year = hiduke.getFullYear();
+      var month = hiduke.getMonth();
+      var week = hiduke.getDay();
+      var day = hiduke.getDate();
+      var current = `${year}-${month}-${day}`;
+      return current;
+    },
+    next() {
+      var hiduke = new Date();
+      var year = hiduke.getFullYear();
+      var month = hiduke.getMonth() + 2;
+      var week = hiduke.getDay();
+      var day = hiduke.getDate();
+      var current = `${year}-${month}-${day}`;
+      return current;
     }
   },
   async created() {

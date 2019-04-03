@@ -1,5 +1,5 @@
 {
-  "name": "nuxt",
+  "name": "hack-toC",
   "version": "1.0.0",
   "description": "hack nuxt ",
   "author": "satoshi ono",
@@ -7,14 +7,13 @@
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate"
+    "start": "nuxt start"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "cross-env": "^5.2.0",
-    "nuxt": "^2.4.0",
+    "nuxt": "latest",
     "vuetify": "^1.5.0",
     "vuetify-loader": "^1.2.0",
     "vuex-persistedstate": "^2.5.4"

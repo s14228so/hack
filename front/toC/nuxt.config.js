@@ -9,19 +9,19 @@ export default {
 };
 
 module.exports = {
-  mode: "universal",
+  mode: "spa",
   env: {
-    // baseUrl: process.env.BASE_URL || 'http://localhost:5000'
-    baseUrl: process.env.BASE_URL || 'https://hack-api8.herokuapp.com'
-
+    baseUrl: process.env.BASE_URL || "http://localhost:5000"
+    // baseUrl: process.env.BASE_URL || "http://hack-api8.herokuapp.com"
   },
 
   /*
    ** Headers of the page
    */
   head: {
-    titleTemplate: '%s - ハッカソン就活',
-    meta: [{
+    titleTemplate: "%s - ハッカソン就活",
+    meta: [
+      {
         charset: "utf-8"
       },
       {
@@ -34,14 +34,16 @@ module.exports = {
         content: pkg.description
       }
     ],
-    link: [{
+    link: [
+      {
         rel: "icon",
         type: "image/x-icon",
         href: "/favicon.ico"
       },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"
+        href:
+          "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"
       }
     ]
   },
@@ -62,14 +64,12 @@ module.exports = {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    "@/plugins/vuetify", {
-      src: '~/plugins/localStorage.js',
+    "@/plugins/vuetify",
+    {
+      src: "~/plugins/localStorage.js",
       ssr: false
-    },
+    }
   ],
-
-
-
 
   /*
    ** Nuxt.js modules

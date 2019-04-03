@@ -9,7 +9,6 @@ module V1
     def create
       # response.headers['X-CSRF-Token'] = form_authenticity_token
       @student = Student.find_for_database_authentication(email: params[:email])
-      binding.pry
       return invalid_email unless @student
 
       if @student.valid_password?(params[:password])
